@@ -34,7 +34,7 @@
 | 24 | [What is Single Sign-On (SSO) and Multi-Factor Authentication (MFA)?](#24-what-is-single-sign-on-sso-and-multi-factor-authentication-mfa) |
 | 25 | [How would you design multi-tenancy into an application?](#25-how-would-you-design-multi-tenancy-into-an-application) |
 | 26 | [What is an Anti-Forgery Token?](#26-what-is-an-anti-forgery-token) |
-| 27 | [How does `[Authorize]` work, and how do you build custom authorization?](#27-how-does-authorize-work-and-how-do-you-build-custom-authorization) |
+| 27 | [How does the `Authorize` attribute work, and how do you build custom authorization?](#27-how-does-the-authorize-attribute-work-and-how-do-you-build-custom-authorization) |
 | 28 | [What is Model Binding, and what are Data Annotations?](#28-what-is-model-binding-and-what-are-data-annotations) |
 | 29 | [How do you implement global exception handling in ASP.NET Core?](#29-how-do-you-implement-global-exception-handling-in-aspnet-core) |
 | 30 | [How does routing resolve internally in ASP.NET Core?](#30-how-does-routing-resolve-internally-in-aspnet-core) |
@@ -42,7 +42,7 @@
 | 32 | [`Session.Abandon()` vs `Session.Clear()`](#32-sessionabandon-vs-sessionclear) |
 | 33 | [Design a secure, scalable Web API — what do you actually check?](#33-design-a-secure-scalable-web-api--what-do-you-actually-check) |
 | 34 | [Design a REST endpoint to create an account — controller/service/repository](#34-design-a-rest-endpoint-to-create-an-account--controllerservicerepository) |
-| 35 | [What does `[FromBody]` do?](#35-what-does-frombody-do) |
+| 35 | [What does the `FromBody` attribute do?](#35-what-does-the-frombody-attribute-do) |
 | 36 | [What's new in .NET 6?](#36-whats-new-in-net-6) |
 | 37 | [Benefits of `async`/`await` in C#](#37-benefits-of-asyncawait-in-c) |
 
@@ -442,7 +442,7 @@ auto-submitting form on another site can't perform actions as the logged-in user
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 27. How does `[Authorize]` work, and how do you build custom authorization?
+## 27. How does the `Authorize` attribute work, and how do you build custom authorization?
 
 `[Authorize]` short-circuits the pipeline with a `401`/`403` unless the current
 principal satisfies the requirement — by default just "is authenticated", but you
@@ -581,7 +581,7 @@ touching the controller or business logic.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 35. What does `[FromBody]` do?
+## 35. What does the `FromBody` attribute do?
 
 It tells model binding to deserialize the action parameter from the **request
 body** (typically JSON) rather than from route values or the query string. Only
