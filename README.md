@@ -8,6 +8,29 @@ underlying concepts. Unlike a plain question dump, every topic file explains the
 strong verbal answer sounds like — so you can actually study from this, not just
 skim questions the night before.
 
+## Practice quiz
+
+[**Open the drill app →**](https://sachinbarthwal.github.io/interview-prep/) (live once
+GitHub Pages is enabled on this repo — see below)
+
+All 260 questions above are also playable as spaced-repetition flashcards: flip a
+card, self-rate "Still learning" or "Got it", and missed cards resurface sooner
+than ones you know cold. It tracks a daily streak, XP, and a per-topic mastery bar
+— all stored only in your browser (`localStorage`), nothing leaves your device.
+
+**To enable it** (one-time): repo → **Settings** → **Pages** → under "Build and
+deployment", set **Source** to "Deploy from a branch", **Branch** to `main` /
+`docs`, then save. The site publishes at `https://<your-username>.github.io/interview-prep/`.
+
+**To regenerate it** after editing any file in `topics/`, run:
+
+```bash
+python scripts/build_quiz.py
+```
+
+This re-parses every topic file straight into `docs/index.html` — the quiz content
+always mirrors the reference docs, so you only ever edit the Markdown.
+
 ## How to use this
 
 1. **A week or more out:** read a topic file top to bottom. The "Core Concepts"
