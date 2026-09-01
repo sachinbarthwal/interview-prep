@@ -58,6 +58,7 @@
 | 47 | [.NET Framework vs .NET Core](#47-net-framework-vs-net-core) |
 | 48 | [What are the ASP.NET page life-cycle events?](#48-what-are-the-aspnet-page-life-cycle-events) |
 | 49 | [How do you force all validation controls to run?](#49-how-do-you-force-all-validation-controls-to-run) |
+| 50 | [IEnumerable vs List — deferred execution vs eager loading](#50-ienumerable-vs-list--deferred-execution-vs-eager-loading) |
 
 ## 1. What are the four pillars of OOP?
 
@@ -177,6 +178,25 @@ A a2 = new B(); a2.Show();      // "Derived!"  <- virtual dispatch, runtime type
 - **Overriding** — same signature, subclass replaces base behavior, resolved at
   **runtime**, requires `virtual`/`override` (or `abstract`).
 
+```csharp
+class Calculator
+{
+    // Overloading: same name "Add", different parameter lists — picked at compile time
+    public int Add(int a, int b) => a + b;
+    public double Add(double a, double b) => a + b;
+}
+
+class Shape
+{
+    public virtual double Area() => 0;
+}
+class Circle : Shape
+{
+    // Overriding: same signature as base, replaces behavior — picked at runtime
+    public override double Area() => 3.14 * 5 * 5;
+}
+```
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ## 7. What is a sealed class?
@@ -186,6 +206,12 @@ isn't meant to be extended (immutable value-like types, or a small performance w
 the JIT can devirtualize calls on sealed types slightly more aggressively). `sealed`
 can also be applied to an individual `override` to stop further overriding in a
 deeper subclass.
+
+```csharp
+public sealed class DiscountCalculator { /* ... */ }
+
+// public class BetterDiscountCalculator : DiscountCalculator { } // compile error — sealed
+```
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -198,6 +224,17 @@ deeper subclass.
 | Can hold a computed value | No — must be a compile-time literal | Yes | Yes |
 | Gotcha | Changing a `const` in a referenced library requires recompiling *every* consumer, since the value is baked in | None of that problem | — |
 
+```csharp
+public class Config
+{
+    public const int MaxRetries = 3;                 // fixed forever, baked into IL
+    public static readonly DateTime StartedAt = DateTime.UtcNow; // set once, at runtime
+    public readonly string InstanceId;                // set once per instance, in the constructor
+
+    public Config() { InstanceId = Guid.NewGuid().ToString(); }
+}
+```
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ## 9. Static class vs a class with static methods
@@ -207,6 +244,19 @@ static members — good for pure helper/utility functions with no state
 (`Math`, `Console`-style APIs). A regular class can simply *have* static methods
 alongside instance methods; that's a design choice for utility methods that don't
 need instance state, not a language restriction.
+
+```csharp
+public static class MathUtils           // can never be instantiated
+{
+    public static int Square(int x) => x * x;
+}
+
+public class OrderService              // a normal class, but with one static helper
+{
+    public static bool IsValidOrderNumber(string s) => s.StartsWith("ORD-");
+    public void Process(Order order) { /* uses instance state */ }
+}
+```
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -222,6 +272,18 @@ They solve different problems and get confused constantly:
 when I need exactly one instance of something that has state or needs to satisfy an
 interface — e.g. a configuration cache — because it stays testable and DI-friendly
 in a way a static class never can."
+
+```csharp
+public static class MathUtils { public static int Square(int x) => x * x; } // no instance, ever
+
+public interface IConfigCache { string Get(string key); }
+public sealed class ConfigCache : IConfigCache      // a Singleton — still an object
+{
+    private static readonly Lazy<ConfigCache> _instance = new(() => new ConfigCache());
+    public static ConfigCache Instance => _instance.Value;
+    public string Get(string key) => "value";       // could be mocked via IConfigCache in tests
+}
+```
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -252,6 +314,22 @@ To prevent external instantiation — the classic use case is the Singleton patt
 or a class that should only be created through a static factory method (so the
 factory can validate, cache, or pool instances).
 
+```csharp
+public class DatabaseConnection
+{
+    private DatabaseConnection(string connStr) { /* ... */ }
+
+    // callers can only get an instance through this validated factory method
+    public static DatabaseConnection Create(string connStr)
+    {
+        if (string.IsNullOrWhiteSpace(connStr)) throw new ArgumentException("Connection string required");
+        return new DatabaseConnection(connStr);
+    }
+}
+// var db = new DatabaseConnection("..."); // compile error — constructor is private
+var db = DatabaseConnection.Create("Server=...");
+```
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ## 13. What is constructor chaining?
@@ -280,6 +358,28 @@ class Person
 `MemberwiseClone()` gives a shallow copy. A copy constructor is the typical way to
 implement a deep copy explicitly, field by field.
 
+```csharp
+public class Address { public string City; }
+public class Person
+{
+    public string Name;
+    public Address Home;
+
+    public Person ShallowCopy() => (Person)MemberwiseClone(); // Home is SHARED with the copy
+
+    public Person DeepCopy() => new Person
+    {
+        Name = Name,
+        Home = new Address { City = Home.City } // a genuinely separate Address
+    };
+}
+
+var p1 = new Person { Name = "Sam", Home = new Address { City = "Delhi" } };
+var shallow = p1.ShallowCopy();
+shallow.Home.City = "Mumbai";
+Console.WriteLine(p1.Home.City); // "Mumbai" — shallow copy shared the same Address object!
+```
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ## 15. Copying an array vs cloning it
@@ -288,6 +388,18 @@ Assignment (`arr2 = arr1`) just copies the reference — both variables point at
 same array. `arr.Clone()` produces a genuinely new array object, but it's still a
 **shallow** copy of the elements — reference-type elements in the cloned array still
 point at the same underlying objects as the original.
+
+```csharp
+int[] original = { 1, 2, 3 };
+
+int[] alias = original;       // same array — mutating one mutates both
+alias[0] = 99;
+Console.WriteLine(original[0]); // 99
+
+int[] copy = (int[])original.Clone(); // a genuinely new array
+copy[0] = 5;
+Console.WriteLine(original[0]);       // still 99 — unaffected
+```
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -314,6 +426,20 @@ whatever contains them) and are copied by value on assignment. Reference types
 (`class`, arrays, delegates, strings) live on the heap, and the variable holds a
 reference — assignment copies the reference, not the object.
 
+```csharp
+// Value type: assignment copies the data
+int x = 5;
+int y = x;
+y = 10;
+Console.WriteLine(x); // 5 — x is untouched
+
+// Reference type: assignment copies the pointer, not the object
+List<int> a = new List<int> { 1, 2, 3 };
+List<int> b = a;      // b and a now point at the exact same List in memory
+a.Add(4);
+Console.WriteLine(string.Join(",", b)); // "1,2,3,4" — b sees the change made through a
+```
+
 **Gotcha worth mentioning:** `string` is a reference type but *behaves* immutably —
 every "mutation" produces a new string, so equality comparisons use value semantics
 even though it's heap-allocated.
@@ -337,6 +463,15 @@ defers type resolution to **runtime** via the **DLR (Dynamic Language Runtime)**
 the compiler emits a call site that resolves the actual member/operator at runtime
 using reflection-like binding, which is slower and loses compile-time safety, but is
 useful for interop (COM, dynamic JSON, `ExpandoObject`).
+
+```csharp
+var name = "Sam";        // compiler infers `string` — still fully type-checked
+// name = 5;             // compile error: cannot convert int to string
+
+dynamic value = "Sam";   // type resolved at runtime
+value = 5;               // fine — dynamic can hold anything
+value.NonExistentMethod(); // compiles! but throws a RuntimeBinderException when it runs
+```
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -376,6 +511,15 @@ finally
 stack trace, the latter resets it to the current line, hiding where the exception
 actually originated.
 
+```csharp
+catch (Exception ex)
+{
+    Logger.Log(ex);
+    throw ex;   // BAD  — stack trace now starts here, you lose where it really failed
+    throw;      // GOOD — original stack trace (exact file/line of the real failure) is kept
+}
+```
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ## 22. What is a delegate?
@@ -401,6 +545,23 @@ int result = add(3, 4); // 7
   to only `+=`/`-=` (subscribe/unsubscribe) — it can't be invoked or reassigned from
   outside the declaring class, which is what makes it safe for the classic
   publisher/subscriber pattern.
+
+```csharp
+Action<string> print = msg => Console.WriteLine(msg);   // takes a string, returns void
+print("hello");                                          // prints "hello"
+
+Func<int, int, int> add = (a, b) => a + b;               // takes two ints, returns an int
+int sum = add(2, 3);                                      // 5
+
+public class Button
+{
+    public event Action Clicked;             // external code can only += / -= this
+    public void SimulateClick() => Clicked?.Invoke();
+}
+var btn = new Button();
+btn.Clicked += () => Console.WriteLine("Clicked!");
+btn.SimulateClick(); // "Clicked!"
+```
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -481,6 +642,24 @@ method — the compiler rewrites the method into a state machine implementing
 is how you get lazy, streaming enumeration instead of building a full list up
 front.
 
+```csharp
+public static IEnumerable<int> GetNumbersUpTo(int max)
+{
+    for (int i = 1; i <= max; i++)
+    {
+        Console.WriteLine($"producing {i}");
+        yield return i; // pauses here, resumes on the next MoveNext()
+    }
+}
+
+foreach (var n in GetNumbersUpTo(3))
+{
+    Console.WriteLine($"consuming {n}");
+}
+// Output interleaves: producing 1, consuming 1, producing 2, consuming 2, producing 3, consuming 3
+// (a `return List<int>` version would print all three "producing" lines up front instead)
+```
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ## 30. What are record types?
@@ -546,6 +725,39 @@ The standard pattern: implement `IDisposable`, and have the finalizer call the s
 cleanup as a backstop, guarded by `GC.SuppressFinalize(this)` in `Dispose()` so the
 finalizer doesn't run twice.
 
+```csharp
+public class ResourceHolder : IDisposable
+{
+    private bool _disposed;
+    public void Dispose()
+    {
+        if (_disposed) return;
+        // release unmanaged resource here (file handle, socket, etc.)
+        _disposed = true;
+        GC.SuppressFinalize(this); // finalizer no longer needed, we already cleaned up
+    }
+    ~ResourceHolder() { Dispose(); } // safety net if someone forgets to call Dispose()
+}
+```
+
+**Why do you still need the `using` statement if `IDisposable` already exists?**
+Because `Dispose()` only runs if something actually calls it — `using` guarantees
+that call happens automatically, wrapped in a hidden `try`/`finally`, even if an
+exception is thrown partway through the block:
+
+```csharp
+using (var stream = new FileStream("file.txt", FileMode.Open))
+{
+    // read the file — stream.Dispose() runs automatically here,
+    // even if an exception is thrown above
+}
+
+// equivalent to what the compiler actually generates:
+var stream2 = new FileStream("file.txt", FileMode.Open);
+try { /* read the file */ }
+finally { stream2.Dispose(); }
+```
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ## 35. Hashtable vs Dictionary, and how do they work internally?
@@ -586,6 +798,16 @@ if (dict.TryGetValue("key", out var value)) { /* use value */ }
 EF, then accidentally calling `.AsEnumerable()` or `.ToList()` too early — every
 filter after that point runs in application memory instead of the database, pulling
 far more rows across the wire than intended.
+
+```csharp
+IQueryable<Order> query = dbContext.Orders;        // nothing has run yet
+query = query.Where(o => o.Status == "Pending");   // still just building an expression tree
+var results = query.ToList();                       // NOW it runs — translated to one SQL query:
+                                                      // SELECT * FROM Orders WHERE Status = 'Pending'
+
+IEnumerable<Order> inMemory = dbContext.Orders.ToList(); // pulls ALL rows into memory here
+inMemory = inMemory.Where(o => o.Status == "Pending");   // filters in C#, not in SQL
+```
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -724,5 +946,36 @@ Call `Page.Validate()` explicitly (optionally with a specific `ValidationGroup`)
 make sure the triggering button's `ValidationGroup` matches the validators you want
 to run — a button with `CausesValidation="false"` will skip validation entirely,
 which is a common source of "why didn't my validators fire" bugs.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 50. IEnumerable vs List — deferred execution vs eager loading
+
+`List<T>` is a concrete, fully-materialized collection sitting in memory right now.
+`IEnumerable<T>` is a *sequence* that may not have produced any values yet — LINQ
+methods like `.Where()`/`.Select()` on an `IEnumerable<T>` build up a **query
+definition** that only actually runs when you enumerate it (`foreach`, `.ToList()`,
+`.Count()`, etc.). This is called **deferred execution**, and it causes a genuinely
+surprising bug if you're not expecting it:
+
+```csharp
+List<int> numbers = new List<int> { 1, 2, 3 };
+
+IEnumerable<int> query = numbers.Where(n => n > 1); // NOT executed yet — just a definition
+numbers.Add(4);                                      // mutate the source before enumerating
+
+foreach (var n in query) Console.WriteLine(n);
+// Prints 2, 3, 4 — the "4" is included because the filter only ran just now,
+// during the foreach, against the list's CURRENT contents.
+
+List<int> eager = numbers.Where(n => n > 1).ToList(); // executes immediately, snapshot taken now
+numbers.Add(5);
+// `eager` still only has {2, 3, 4} — it was materialized before the Add(5)
+```
+
+**How to phrase it:** "`IEnumerable` queries are lazy — nothing runs until you
+enumerate them, which is efficient but means the results can change if the
+underlying source changes before you do. Calling `.ToList()` forces immediate,
+eager execution and locks in a snapshot at that exact moment."
 
 **[⬆ Back to Top](#table-of-contents)**

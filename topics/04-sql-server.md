@@ -101,6 +101,25 @@ directly into a `SELECT`/`WHERE` clause — at the cost that scalar functions
 called per-row can be a serious performance trap since they often can't use
 indexes and get invoked once per row.
 
+```sql
+-- Stored procedure: can INSERT, can't be used inside a SELECT
+CREATE PROCEDURE GetHighEarners @MinSalary DECIMAL
+AS
+BEGIN
+    SELECT * FROM Employee WHERE Salary >= @MinSalary;
+END
+EXEC GetHighEarners @MinSalary = 50000;
+
+-- Scalar function: must return a value, CAN be used inside a SELECT
+CREATE FUNCTION dbo.YearsEmployed(@HireDate DATE)
+RETURNS INT
+AS
+BEGIN
+    RETURN DATEDIFF(YEAR, @HireDate, GETDATE());
+END
+SELECT Name, dbo.YearsEmployed(HireDate) AS Years FROM Employee;
+```
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ## 5. How do you optimize a slow stored procedure?
@@ -191,6 +210,17 @@ whether to use an index based on selectivity, statistics, and the query's `WHERE
 `JOIN`/`ORDER BY` columns — an index that doesn't match how the table is actually
 queried just adds write overhead without ever getting used.
 
+```sql
+-- Without an index: SQL Server scans every row in Employee to find matches
+SELECT * FROM Employee WHERE Department = 'Engineering';
+
+-- Add an index on the column used in WHERE/JOIN/ORDER BY
+CREATE INDEX IX_Employee_Department ON Employee(Department);
+
+-- Now the same query can SEEK directly to matching rows instead of scanning all of them
+SELECT * FROM Employee WHERE Department = 'Engineering';
+```
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ## 10. Filtered index vs non-clustered index
@@ -252,6 +282,17 @@ returned individually.
 | Transaction behavior | Not rolled back by an outer transaction rollback | Rolled back along with the transaction |
 | Best for | Small row counts, simple logic | Larger intermediate result sets, anything needing real indexing |
 
+```sql
+-- Table variable
+DECLARE @Temp TABLE (Id INT, Name NVARCHAR(50));
+INSERT INTO @Temp VALUES (1, 'Sam');
+
+-- Temp table
+CREATE TABLE #Temp (Id INT, Name NVARCHAR(50));
+INSERT INTO #Temp VALUES (1, 'Sam');
+CREATE INDEX IX_Temp_Id ON #Temp(Id); -- full indexing support, unlike most @table variables
+```
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ## 15. What is a CTE?
@@ -284,6 +325,17 @@ consumers, to present a restricted/security-filtered slice of a table, or to kee
 a stable interface over a schema that changes underneath it. They can hurt if
 layered many views deep, since the optimizer has to unravel the whole nested
 definition to build a plan.
+
+```sql
+CREATE VIEW vw_ActiveEmployees AS
+SELECT e.EmpId, e.Name, d.DeptName
+FROM Employee e
+JOIN Department d ON e.DeptId = d.DeptId
+WHERE e.IsActive = 1;
+
+-- consumers query it exactly like a table, without repeating the join every time
+SELECT * FROM vw_ActiveEmployees WHERE DeptName = 'Engineering';
+```
 
 **[⬆ Back to Top](#table-of-contents)**
 

@@ -146,6 +146,29 @@ wrap the external dependency behind a thin interface first (an "adapter"), which
 is often the very first refactor needed before legacy code becomes testable at
 all.
 
+```csharp
+// 1. Wrap the external call behind an interface
+public interface IExternalApiService { Task<string> GetDataAsync(); }
+
+public class MyService
+{
+    private readonly IExternalApiService _api;
+    public MyService(IExternalApiService api) => _api = api; // injected, not `new`-ed up inside
+
+    public async Task<string> GetGreetingAsync() => "Hello, " + await _api.GetDataAsync();
+}
+
+// 2. Unit test with Moq — no real HTTP call ever happens
+var mockApi = new Mock<IExternalApiService>();
+mockApi.Setup(x => x.GetDataAsync()).ReturnsAsync("Sam");
+
+var service = new MyService(mockApi.Object);
+var result = await service.GetGreetingAsync();
+
+Assert.Equal("Hello, Sam", result);
+mockApi.Verify(x => x.GetDataAsync(), Times.Once); // confirms it was actually called
+```
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ## 10. Integration tests vs unit tests

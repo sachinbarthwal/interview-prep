@@ -45,6 +45,7 @@
 | 35 | [What does the `FromBody` attribute do?](#35-what-does-the-frombody-attribute-do) |
 | 36 | [What's new in .NET 6?](#36-whats-new-in-net-6) |
 | 37 | [Benefits of `async`/`await` in C#](#37-benefits-of-asyncawait-in-c) |
+| 38 | [IOptions vs IOptionsSnapshot vs IOptionsMonitor — configuration lifetimes](#38-ioptions-vs-ioptionssnapshot-vs-ioptionsmonitor--configuration-lifetimes) |
 
 ## 1. Walk through the ASP.NET MVC request life cycle
 
@@ -108,6 +109,21 @@ handle URL structures a plain convention can't express.
 | `ViewBag` | `dynamic` wrapper over `ViewData` | Current request only | Same store as `ViewData`, nicer syntax, no casting |
 | `TempData` | `Dictionary<string, object>`, backed by session/cookie | Survives **one** redirect | Used to pass data across a `RedirectToAction` (e.g. a "saved successfully" message) |
 
+```csharp
+public IActionResult Details()
+{
+    ViewData["Title"] = "Order Details";        // read in the view as @ViewData["Title"]
+    ViewBag.Title = "Order Details";              // same store, read as @ViewBag.Title
+    TempData["Message"] = "Order saved!";        // survives exactly one redirect
+    return RedirectToAction("Index");
+}
+public IActionResult Index()
+{
+    var msg = TempData["Message"]; // still available here, gone after this request
+    return View();
+}
+```
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ## 5. 3-tier vs n-tier architecture
@@ -170,6 +186,12 @@ model validation or auditing a particular endpoint.
 | `AddTransient` | A new instance every time it's requested | Lightweight, stateless services |
 | `AddScoped` | One instance per HTTP request (or per scope) | `DbContext`, per-request unit-of-work services |
 | `AddSingleton` | One instance for the lifetime of the app | Stateless services, in-memory caches, configuration objects |
+
+```csharp
+builder.Services.AddTransient<IEmailValidator, EmailValidator>(); // new one every injection
+builder.Services.AddScoped<IOrderContext, OrderContext>();        // one per HTTP request
+builder.Services.AddSingleton<IAppCache, AppCache>();              // one for the app's whole life
+```
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -440,6 +462,17 @@ MVC, automatic in Razor Pages) to prevent **Cross-Site Request Forgery** — an
 attacker's page can't forge a valid token for your session, so a malicious
 auto-submitting form on another site can't perform actions as the logged-in user.
 
+```csharp
+[HttpPost]
+[ValidateAntiForgeryToken] // rejects the POST unless the form included a valid token
+public IActionResult DeleteAccount(int id) { /* ... */ }
+```
+```html
+<form asp-action="DeleteAccount" method="post">
+    @Html.AntiForgeryToken() <!-- renders the hidden token field the filter checks -->
+</form>
+```
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ## 27. How does the `Authorize` attribute work, and how do you build custom authorization?
@@ -588,6 +621,17 @@ body** (typically JSON) rather than from route values or the query string. Only
 one parameter per action can use `[FromBody]`, since the body can only be read
 once.
 
+```csharp
+[HttpPost("{id}")]
+public IActionResult UpdateStatus(
+    int id,                          // [FromRoute] is inferred — comes from the URL segment
+    [FromBody] StatusUpdate update,  // comes from the JSON request body
+    [FromQuery] bool notify = false) // comes from a ?notify=true query string parameter
+{
+    // ...
+}
+```
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ## 36. What's new in .NET 6?
@@ -607,5 +651,52 @@ requests with the same thread pool. It also keeps asynchronous code readable —
 sequential-looking code instead of nested callbacks — while still giving you
 structured exception handling (a regular `try/catch` around an `await`) and easy
 composition of multiple async operations (`Task.WhenAll`, `Task.WhenAny`).
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 38. IOptions vs IOptionsSnapshot vs IOptionsMonitor — configuration lifetimes
+
+All three give you strongly-typed access to a section of `appsettings.json`, but
+they differ in **when** they read the configuration:
+
+| | Lifetime | Re-reads config? |
+|---|---|---|
+| `IOptions<T>` | Singleton | No — loaded once at startup, never changes for the app's lifetime |
+| `IOptionsSnapshot<T>` | Scoped | Yes — re-reads once per request/scope, so a config file change shows up on the next request |
+| `IOptionsMonitor<T>` | Singleton | Yes — re-reads live, and can notify you via `OnChange` the instant the file changes, even inside a singleton |
+
+```csharp
+builder.Services.Configure<MySettings>(builder.Configuration.GetSection("MySettings"));
+
+public class MyService
+{
+    public MyService(IOptions<MySettings> options)
+    {
+        var value = options.Value.SomeSetting; // fixed for the app's entire lifetime
+    }
+}
+
+public class MyScopedService
+{
+    public MyScopedService(IOptionsSnapshot<MySettings> options)
+    {
+        var value = options.Value.SomeSetting; // fresh on every HTTP request
+    }
+}
+
+public class MyMonitoringService
+{
+    public MyMonitoringService(IOptionsMonitor<MySettings> options)
+    {
+        options.OnChange(updated => Console.WriteLine($"Config changed: {updated.SomeSetting}"));
+    }
+}
+```
+
+**How to phrase it:** "`IOptions` is a singleton snapshot taken once at startup —
+fine for settings that never change while the app runs. `IOptionsSnapshot` is
+scoped, so it's for settings you want to pick up per request without restarting
+the app. `IOptionsMonitor` is for the same live-reload need but from inside a
+singleton, plus it gives you a change notification callback."
 
 **[⬆ Back to Top](#table-of-contents)**

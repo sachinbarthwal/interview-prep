@@ -73,10 +73,19 @@ SQL and raw speed matter more than ORM convenience.
   (or a small fixed number of queries), via `.Include()`:
 
 ```csharp
-var orders = context.Orders
-    .Include(o => o.Customer)
-    .Include(o => o.Items)
-    .ToList();
+// BAD: the N+1 problem — 1 query for authors, then N more queries, one per author
+var authors = context.Authors.ToList();
+foreach (var author in authors)
+{
+    Console.WriteLine(author.Books.Count); // lazy-loads a fresh query EVERY iteration
+}
+
+// GOOD: fetch parents and children in ONE query using a SQL JOIN
+var authors2 = context.Authors.Include(a => a.Books).ToList();
+foreach (var author in authors2)
+{
+    Console.WriteLine(author.Books.Count); // no extra DB calls — already loaded
+}
 ```
 
 Default to eager loading when you know you'll need the related data; reach for

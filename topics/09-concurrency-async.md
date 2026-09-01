@@ -34,6 +34,14 @@ want `Task`, not a raw `Thread` — reach for `Thread` only when you specificall
 need a dedicated, long-lived, foreground/background-controlled thread outside the
 pool.
 
+```csharp
+Thread t = new Thread(() => Console.WriteLine("Raw OS thread"));
+t.Start(); // you manage this thread's lifecycle yourself
+
+Task task = Task.Run(() => Console.WriteLine("Runs on a pooled thread"));
+await task; // the runtime schedules and reuses threads for you
+```
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ## 2. Ways to create a thread in C#
@@ -95,6 +103,18 @@ using fine-grained internal locking (or lock-free techniques) rather than a
 single global lock. Use it instead of wrapping a plain `Dictionary` in your own
 `lock` whenever multiple threads genuinely need concurrent read/write access; for
 single-threaded or externally-synchronized access, a plain `Dictionary` is faster.
+
+```csharp
+var counts = new ConcurrentDictionary<string, int>();
+
+// safe to call from many threads at once, no manual lock needed
+Parallel.For(0, 1000, i =>
+{
+    counts.AddOrUpdate("hits", 1, (key, oldValue) => oldValue + 1);
+});
+
+Console.WriteLine(counts["hits"]); // reliably 1000 — a plain Dictionary here would corrupt or throw
+```
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -164,6 +184,14 @@ context that's currently blocked waiting for it. Modern ASP.NET Core doesn't hav
 that particular `SynchronizationContext` trap, but blocking on async code still
 wastes a pool thread and hurts scalability either way — the fix is almost always
 "make the caller async too," not to force synchronicity.
+
+```csharp
+// BAD: blocking on async code can deadlock in web/UI apps, and always wastes a thread
+string data = GetDataAsync().Result;
+
+// GOOD: await all the way up the call stack instead
+string data = await GetDataAsync();
+```
 
 **[⬆ Back to Top](#table-of-contents)**
 
