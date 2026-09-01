@@ -20,7 +20,7 @@ than ones you know cold. It tracks a daily streak, XP, and a per-topic mastery b
 
 **To enable it** (one-time): repo → **Settings** → **Pages** → under "Build and
 deployment", set **Source** to "Deploy from a branch", **Branch** to `main` /
-`docs`, then save. The site publishes at `https://<your-username>.github.io/interview-prep/`.
+`/ (root)`, then save. The site publishes at `https://<your-username>.github.io/interview-prep/`.
 
 **To regenerate it** after editing any file in `topics/`, run:
 
@@ -28,8 +28,11 @@ deployment", set **Source** to "Deploy from a branch", **Branch** to `main` /
 python scripts/build_quiz.py
 ```
 
-This re-parses every topic file straight into `docs/index.html` — the quiz content
-always mirrors the reference docs, so you only ever edit the Markdown.
+This re-parses every topic file straight into `index.html` at the repo root — the
+quiz content always mirrors the reference docs, so you only ever edit the Markdown.
+(It lives at the repo root rather than in `/docs` because GitHub Pages' root-folder
+option has proven the reliable one to configure — `index.html` at the root takes
+priority over `README.md` for the published site either way.)
 
 ## How to use this
 

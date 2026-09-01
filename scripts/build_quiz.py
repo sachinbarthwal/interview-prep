@@ -198,9 +198,7 @@ def main():
 
     output_html = template.replace('__CARD_DATA_JSON__', data_json)
 
-    docs_dir = os.path.join(repo_root, 'docs')
-    os.makedirs(docs_dir, exist_ok=True)
-    out_path = os.path.join(docs_dir, 'index.html')
+    out_path = os.path.join(repo_root, 'index.html')
     with open(out_path, 'w', encoding='utf-8') as f:
         f.write(output_html)
     print('Wrote', out_path, f'({len(output_html)} bytes)')
