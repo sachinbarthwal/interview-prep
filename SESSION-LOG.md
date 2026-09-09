@@ -20,7 +20,18 @@ https://claude.ai/code/artifact/42b87175-17db-43d5-bb04-cc6fe238da4b
   `ActionResult<T>` and why `async IActionResult` won't compile, `IQueryable`
   vs `IEnumerable`, EF Core async methods.
 
-## Live mock interview — state
+## RBC screener happened — 9 Sep 2026
+
+Cleared the screener. Full write-up of every question asked + model answers:
+`screeners/2026-09-09-rbc-senior-dotnet-screener.md`.
+
+**Next:** proctored technical assessment (~90 min, multiple programming
+questions, no AI), then a final round. Priority now = drilling coding
+fundamentals cold (binary search + variants, two-pointer, sliding window,
+hash map / HashSet, sorting/searching, small OOP design), stating time/space
+complexity out loud. The `Practice/` kata in `C:\GitHub\Prep` is the drill.
+
+## Live mock interview — state (pre-screener, superseded above)
 
 Format: interviewer asks one question, evaluates, pushes on shallow answers.
 
