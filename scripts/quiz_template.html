@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Interview Drill</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎯</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper: #f3f4f6; --surface: #ffffff; --surface-2: #eceef1;
+  --ink: #1c2430; --ink-soft: #5b6472; --ink-faint: #838d9c;
+  --line: #dadfe5; --line-strong: #c3c9d2;
+  --accent: #b5502f; --accent-ink: #ffffff; --accent-soft: #f1dcd1;
+  --good: #3f7d4a; --good-soft: #e1efe3;
+  --bad: #b5502f; --bad-soft: #f1dcd1;
+  --shadow: 0 1px 2px rgba(28,36,48,0.05), 0 10px 28px -14px rgba(28,36,48,0.18);
+  --font-head: "Barlow Semi Condensed", "Arial Narrow", sans-serif;
+  --font-body: "Source Serif 4", Georgia, serif;
+  --font-mono: "IBM Plex Mono", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper: #12161d; --surface: #191f29; --surface-2: #1f2631;
+    --ink: #e7e9ee; --ink-soft: #9aa3b2; --ink-faint: #6c7484;
+    --line: #2b3342; --line-strong: #3a4356;
+    --accent: #e08a64; --accent-ink: #14181f; --accent-soft: rgba(224,138,100,0.16);
+    --good: #6fbf7d; --good-soft: rgba(111,191,125,0.14);
+    --bad: #e08a64; --bad-soft: rgba(224,138,100,0.16);
+    --shadow: 0 1px 2px rgba(0,0,0,0.35), 0 14px 34px -16px rgba(0,0,0,0.6);
+  }
+}
+*{ box-sizing:border-box; }
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:var(--font-body); line-height:1.5; min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{ max-width:920px; margin:0 auto; padding:20px 18px 60px; }
+a{ color:var(--accent); }
+
+/* header */
+.topbar{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:6px 0 20px; gap:12px; flex-wrap:wrap;
+}
+.brand{ font-family:var(--font-head); font-weight:800; font-size:22px; display:flex; align-items:center; gap:8px; }
+.brand .tag{ font-family:var(--font-mono); font-size:10px; color:var(--ink-faint); border:1px solid var(--line); border-radius:5px; padding:2px 6px; letter-spacing:.05em; }
+.stat-pills{ display:flex; gap:10px; flex-wrap:wrap; }
+.pill{
+  display:flex; align-items:center; gap:6px; background:var(--surface);
+  border:1px solid var(--line); border-radius:20px; padding:6px 12px;
+  font-family:var(--font-mono); font-size:13px; box-shadow:var(--shadow);
+}
+.pill b{ font-variant-numeric:tabular-nums; }
+.pill.streak{ color: #c96a2e; }
+:root:not([data-theme="light"]) .pill.streak{ color:#e08a64; }
+
+/* dashboard */
+.hero-card{
+  background:var(--surface); border:1px solid var(--line); border-radius:16px;
+  padding:22px 24px; margin-bottom:22px; box-shadow:var(--shadow);
+  display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap;
+}
+.hero-left h1{ font-family:var(--font-head); font-size:26px; margin:0 0 6px; text-wrap:balance; }
+.hero-left p{ margin:0; color:var(--ink-soft); font-size:14.5px; max-width:44ch; }
+.btn{
+  font-family:var(--font-head); font-weight:700; font-size:16px; letter-spacing:.01em;
+  border:none; border-radius:10px; padding:13px 22px; cursor:pointer;
+  background:var(--accent); color:var(--accent-ink); box-shadow:var(--shadow);
+  transition:transform .08s ease;
+}
+.btn:hover{ transform:translateY(-1px); }
+.btn:active{ transform:translateY(0); }
+.btn.ghost{ background:transparent; color:var(--ink); border:1px solid var(--line-strong); }
+.btn.big{ font-size:18px; padding:16px 28px; }
+.btn:disabled{ opacity:.5; cursor:not-allowed; transform:none; }
+
+.cat-grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(230px,1fr)); gap:14px; }
+.cat-card{
+  background:var(--surface); border:1px solid var(--line); border-radius:12px;
+  padding:16px 16px 14px; cursor:pointer; box-shadow:var(--shadow); text-align:left;
+  font-family:var(--font-body); color:var(--ink); border-top:3px solid var(--cat, var(--accent));
+}
+.cat-card:hover{ border-color:var(--line-strong); }
+.cat-card .name{ font-family:var(--font-head); font-weight:700; font-size:16.5px; margin-bottom:2px; }
+.cat-card .count{ font-family:var(--font-mono); font-size:11.5px; color:var(--ink-faint); margin-bottom:10px; }
+.bar{ height:7px; border-radius:4px; background:var(--surface-2); overflow:hidden; }
+.bar > div{ height:100%; background:var(--cat, var(--accent)); border-radius:4px; transition:width .3s ease; }
+.cat-card .due{ margin-top:8px; font-size:12px; color:var(--ink-soft); font-family:var(--font-mono); }
+
+/* study view */
+#study{ display:none; }
+.session-bar{
+  display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; gap:10px;
+  font-family:var(--font-mono); font-size:12.5px; color:var(--ink-soft);
+}
+.session-track{ flex:1; height:6px; background:var(--surface-2); border-radius:3px; overflow:hidden; margin:0 12px; }
+.session-track > div{ height:100%; background:var(--accent); border-radius:3px; transition:width .25s ease; }
+
+.card-shell{ perspective:1600px; margin-bottom:18px; }
+.flashcard{
+  background:var(--surface); border:1px solid var(--line); border-radius:18px;
+  box-shadow:var(--shadow); padding:30px 30px 26px; min-height:280px;
+  display:flex; flex-direction:column;
+}
+.card-cat-tag{
+  align-self:flex-start; font-family:var(--font-mono); font-size:11px;
+  color:var(--cat, var(--accent)); background:color-mix(in srgb, var(--cat, var(--accent)) 14%, transparent);
+  border:1px solid color-mix(in srgb, var(--cat, var(--accent)) 40%, transparent);
+  padding:3px 9px; border-radius:6px; margin-bottom:16px; letter-spacing:.02em;
+}
+.card-q{ font-family:var(--font-head); font-weight:700; font-size:24px; line-height:1.3; text-wrap:balance; }
+.card-a{ margin-top:18px; padding-top:18px; border-top:1px dashed var(--line); font-size:16px; display:none; }
+.card-a.show{ display:block; }
+.card-a p{ margin:0 0 12px; }
+.card-a p:last-child{ margin-bottom:0; }
+.card-a strong{ color:var(--ink); }
+.card-a code{ background:var(--surface-2); border:1px solid var(--line); padding:0 4px; border-radius:4px; font-family:var(--font-mono); font-size:.88em; }
+.card-a pre{ background:var(--surface-2); border:1px solid var(--line); border-radius:10px; padding:14px 16px; overflow-x:auto; margin:0 0 14px; }
+.card-a pre code{ background:none; border:none; padding:0; font-size:13.5px; line-height:1.55; }
+.card-a ul, .card-a ol{ margin:0 0 12px; padding-left:22px; }
+.card-a li{ margin-bottom:4px; }
+.card-a blockquote{ margin:0 0 12px; padding:8px 14px; border-left:3px solid var(--accent); background:var(--surface-2); border-radius:0 8px 8px 0; color:var(--ink-soft); }
+.tbl-wrap{ overflow-x:auto; margin-bottom:14px; }
+.card-a table{ border-collapse:collapse; width:100%; font-size:14px; }
+.card-a th, .card-a td{ border:1px solid var(--line); padding:7px 10px; text-align:left; vertical-align:top; }
+.card-a th{ background:var(--surface-2); font-family:var(--font-head); font-weight:600; }
+
+.reveal-row{ display:flex; justify-content:center; }
+.rate-row{ display:flex; gap:12px; }
+.rate-row .btn{ flex:1; font-size:16px; }
+.btn.rate-bad{ background:var(--bad-soft); color:var(--bad); border:1px solid color-mix(in srgb, var(--bad) 35%, transparent); }
+.btn.rate-good{ background:var(--good-soft); color:var(--good); border:1px solid color-mix(in srgb, var(--good) 35%, transparent); }
+
+/* summary */
+#summary{ display:none; text-align:center; padding:40px 20px; }
+#summary .big-emoji{ font-size:52px; margin-bottom:6px; }
+#summary h2{ font-family:var(--font-head); font-size:28px; margin:0 0 6px; }
+#summary p{ color:var(--ink-soft); margin:0 0 26px; }
+.summary-stats{ display:flex; justify-content:center; gap:28px; margin-bottom:30px; flex-wrap:wrap; }
+.summary-stats div{ text-align:center; }
+.summary-stats b{ display:block; font-family:var(--font-head); font-size:28px; font-variant-numeric:tabular-nums; }
+.summary-stats span{ font-family:var(--font-mono); font-size:11px; color:var(--ink-faint); text-transform:uppercase; letter-spacing:.05em; }
+
+.toast{
+  position:fixed; bottom:22px; left:50%; transform:translateX(-50%) translateY(20px);
+  background:var(--ink); color:var(--paper); font-family:var(--font-head); font-weight:600;
+  padding:12px 22px; border-radius:30px; box-shadow:var(--shadow); opacity:0; transition:all .3s ease;
+  pointer-events:none; z-index:50; font-size:15px;
+}
+:root:not([data-theme="light"]) .toast{ background:var(--surface); color:var(--ink); border:1px solid var(--line-strong); }
+.toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
+
+.back-link{ display:inline-block; margin-bottom:14px; font-family:var(--font-mono); font-size:13px; color:var(--ink-soft); text-decoration:none; cursor:pointer; }
+.back-link:hover{ color:var(--ink); }
+
+footer{ text-align:center; margin-top:30px; color:var(--ink-faint); font-size:12px; font-family:var(--font-mono); }
+footer a{ color:var(--ink-faint); }
+
+@media (max-width:560px){
+  .card-q{ font-size:20px; }
+  .flashcard{ padding:22px 18px 20px; }
+  .hero-card{ flex-direction:column; align-items:flex-start; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <div class="brand">🎯 Interview Drill <span class="tag">interview-prep</span></div>
+    <div class="stat-pills">
+      <div class="pill streak">🔥 <b id="stat-streak">0</b> day streak</div>
+      <div class="pill">⭐ <b id="stat-points">0</b> XP</div>
+      <div class="pill">✅ <b id="stat-mastered">0</b>/<span id="stat-total">0</span> mastered</div>
+    </div>
+  </div>
+
+  <div id="dashboard">
+    <div class="hero-card">
+      <div class="hero-left">
+        <h1 id="due-headline">Loading…</h1>
+        <p>Cards resurface on a spaced-repetition schedule — mark what you know so time goes to what you don't.</p>
+      </div>
+      <button class="btn big" id="btn-practice-due">Practice due cards</button>
+    </div>
+
+    <div class="cat-grid" id="cat-grid"></div>
+  </div>
+
+  <div id="study">
+    <a class="back-link" id="btn-exit">&larr; Back to dashboard</a>
+    <div class="session-bar">
+      <span id="session-pos">1 / 10</span>
+      <div class="session-track"><div id="session-progress" style="width:0%"></div></div>
+      <span id="session-score">+0 XP</span>
+    </div>
+
+    <div class="card-shell">
+      <div class="flashcard">
+        <div class="card-cat-tag" id="card-cat-tag">Category</div>
+        <div class="card-q" id="card-q">Question text</div>
+        <div class="card-a" id="card-a"></div>
+      </div>
+    </div>
+
+    <div class="reveal-row" id="reveal-row">
+      <button class="btn big" id="btn-reveal">Show answer</button>
+    </div>
+    <div class="rate-row" id="rate-row" style="display:none;">
+      <button class="btn rate-bad" id="btn-again">😵 Still learning</button>
+      <button class="btn rate-good" id="btn-good">✅ Got it</button>
+    </div>
+  </div>
+
+  <div id="summary">
+    <div class="big-emoji" id="summary-emoji">🎉</div>
+    <h2 id="summary-title">Session complete</h2>
+    <p id="summary-sub">Nice work.</p>
+    <div class="summary-stats">
+      <div><b id="sum-reviewed">0</b><span>Reviewed</span></div>
+      <div><b id="sum-got">0</b><span>Got it</span></div>
+      <div><b id="sum-xp">0</b><span>XP earned</span></div>
+      <div><b id="sum-streak">0</b><span>Day streak</span></div>
+    </div>
+    <button class="btn big" id="btn-continue">Keep going</button>
+    <button class="btn ghost" id="btn-done" style="margin-left:10px;">Back to dashboard</button>
+  </div>
+
+  <footer>Data lives in <a href="https://github.com/sachinbarthwal/interview-prep" target="_blank" rel="noopener">interview-prep</a> · progress is stored only in this browser</footer>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+window.CARD_DATA = __CARD_DATA_JSON__;
+</script>
+<script>
+(function(){
+  "use strict";
+  const DATA = window.CARD_DATA;
+  const CARDS = DATA.cards;
+  const CATS = DATA.categories;
+  const CARD_BY_ID = Object.fromEntries(CARDS.map(c => [c.id, c]));
+  const STORAGE_KEY = 'ipq_progress_v1';
+  const BOX_INTERVAL_DAYS = [0, 1, 2, 4, 8, 16]; // index = box (0..5), box>=5 => mastered
+
+  function todayStr(){ return new Date().toISOString().slice(0,10); }
+  function daysBetween(a, b){ return Math.round((b - a) / 86400000); }
+
+  function loadProgress(){
+    try{
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) return JSON.parse(raw);
+    } catch(e){}
+    return { cards:{}, streak:0, totalPoints:0, lastPracticeDate:null };
+  }
+  function saveProgress(){ try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(progress)); } catch(e){} }
+
+  let progress = loadProgress();
+
+  function getCardState(id){
+    if (!progress.cards[id]) progress.cards[id] = { box:0, nextReview:0 };
+    return progress.cards[id];
+  }
+
+  function isDue(id){
+    const st = getCardState(id);
+    return st.box === 0 || st.nextReview <= Date.now();
+  }
+
+  function rateCard(id, good){
+    const st = getCardState(id);
+    if (good){
+      st.box = Math.min(st.box + 1, 5);
+    } else {
+      st.box = 1;
+    }
+    const days = BOX_INTERVAL_DAYS[st.box] ?? 16;
+    st.nextReview = Date.now() + days * 86400000;
+
+    const pts = good ? 10 : 2;
+    progress.totalPoints += pts;
+
+    // streak bookkeeping: first rating of a new calendar day
+    const today = todayStr();
+    if (progress.lastPracticeDate !== today){
+      if (progress.lastPracticeDate){
+        const gap = daysBetween(new Date(progress.lastPracticeDate), new Date(today));
+        progress.streak = (gap === 1) ? progress.streak + 1 : 1;
+      } else {
+        progress.streak = 1;
+      }
+      progress.lastPracticeDate = today;
+      showToast('🔥 ' + progress.streak + '-day streak!');
+    }
+    saveProgress();
+    return pts;
+  }
+
+  function masteredCount(catKey){
+    const list = catKey ? CARDS.filter(c => c.cat === catKey) : CARDS;
+    return list.filter(c => getCardState(c.id).box >= 5).length;
+  }
+  function dueCount(catKey){
+    const list = catKey ? CARDS.filter(c => c.cat === catKey) : CARDS;
+    return list.filter(c => isDue(c.id)).length;
+  }
+
+  function shuffle(arr){
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--){
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  function catColor(key){
+    const c = CATS.find(c => c.key === key);
+    return c ? c.color : '#b5502f';
+  }
+  function catLabel(key){
+    const c = CATS.find(c => c.key === key);
+    return c ? c.label : key;
+  }
+
+  // ---------- dashboard rendering ----------
+  const els = {
+    dashboard: document.getElementById('dashboard'),
+    study: document.getElementById('study'),
+    summary: document.getElementById('summary'),
+    catGrid: document.getElementById('cat-grid'),
+    dueHeadline: document.getElementById('due-headline'),
+    btnPracticeDue: document.getElementById('btn-practice-due'),
+    statStreak: document.getElementById('stat-streak'),
+    statPoints: document.getElementById('stat-points'),
+    statMastered: document.getElementById('stat-mastered'),
+    statTotal: document.getElementById('stat-total'),
+  };
+
+  function updateStatPills(){
+    els.statStreak.textContent = progress.streak || 0;
+    els.statPoints.textContent = progress.totalPoints || 0;
+    els.statMastered.textContent = masteredCount(null);
+    els.statTotal.textContent = CARDS.length;
+  }
+
+  function renderDashboard(){
+    const totalDue = dueCount(null);
+    els.dueHeadline.textContent = totalDue > 0
+      ? totalDue + ' card' + (totalDue === 1 ? '' : 's') + ' due for review'
+      : "You're all caught up 🎉";
+    els.btnPracticeDue.textContent = totalDue > 0 ? 'Practice due cards (' + totalDue + ')' : 'Review anyway';
+    updateStatPills();
+
+    els.catGrid.innerHTML = '';
+    CATS.forEach(cat => {
+      const mastered = masteredCount(cat.key);
+      const due = dueCount(cat.key);
+      const pct = Math.round((mastered / cat.count) * 100);
+      const card = document.createElement('button');
+      card.className = 'cat-card';
+      card.style.setProperty('--cat', cat.color);
+      card.innerHTML =
+        '<div class="name">' + cat.label + '</div>' +
+        '<div class="count">' + mastered + ' / ' + cat.count + ' mastered</div>' +
+        '<div class="bar"><div style="width:' + pct + '%"></div></div>' +
+        '<div class="due">' + (due > 0 ? due + ' due now' : 'nothing due') + '</div>';
+      card.addEventListener('click', () => startSession(cat.key, false));
+      els.catGrid.appendChild(card);
+    });
+  }
+
+  // ---------- study session ----------
+  let session = null; // { queue: [ids], pos, reviewed, got, xp }
+
+  function startSession(catKey, dueOnly){
+    let pool = catKey ? CARDS.filter(c => c.cat === catKey) : CARDS;
+    let queue;
+    if (dueOnly){
+      queue = pool.filter(c => isDue(c.id));
+      if (queue.length === 0){
+        // nothing due -> fall back to a light review of already-seen cards
+        queue = shuffle(pool).slice(0, Math.min(10, pool.length));
+      }
+    } else {
+      queue = shuffle(pool.slice());
+    }
+    queue = shuffle(queue).map(c => c.id).slice(0, 30);
+
+    session = { queue, pos:0, reviewed:0, got:0, xp:0 };
+    els.dashboard.style.display = 'none';
+    els.summary.style.display = 'none';
+    els.study.style.display = 'block';
+    showCard();
+  }
+
+  const se = {
+    pos: document.getElementById('session-pos'),
+    progress: document.getElementById('session-progress'),
+    score: document.getElementById('session-score'),
+    catTag: document.getElementById('card-cat-tag'),
+    q: document.getElementById('card-q'),
+    a: document.getElementById('card-a'),
+    revealRow: document.getElementById('reveal-row'),
+    rateRow: document.getElementById('rate-row'),
+    btnReveal: document.getElementById('btn-reveal'),
+    btnAgain: document.getElementById('btn-again'),
+    btnGood: document.getElementById('btn-good'),
+  };
+
+  function showCard(){
+    if (session.pos >= session.queue.length){ return finishSession(); }
+    const card = CARD_BY_ID[session.queue[session.pos]];
+    se.pos.textContent = (session.pos + 1) + ' / ' + session.queue.length;
+    se.progress.style.width = Math.round((session.pos / session.queue.length) * 100) + '%';
+    se.score.textContent = '+' + session.xp + ' XP';
+    se.catTag.textContent = catLabel(card.cat);
+    se.catTag.parentElement.style.setProperty('--cat', catColor(card.cat));
+    document.querySelector('.card-cat-tag').style.setProperty('--cat', catColor(card.cat));
+    se.q.innerHTML = card.q;
+    se.a.innerHTML = card.a;
+    se.a.classList.remove('show');
+    se.revealRow.style.display = 'flex';
+    se.rateRow.style.display = 'none';
+  }
+
+  se.btnReveal.addEventListener('click', () => {
+    se.a.classList.add('show');
+    se.revealRow.style.display = 'none';
+    se.rateRow.style.display = 'flex';
+  });
+
+  function rateAndAdvance(good){
+    const id = session.queue[session.pos];
+    const pts = rateCard(id, good);
+    session.reviewed++;
+    session.xp += pts;
+    if (good) session.got++;
+    session.pos++;
+    updateStatPills();
+    showCard();
+  }
+  se.btnAgain.addEventListener('click', () => rateAndAdvance(false));
+  se.btnGood.addEventListener('click', () => rateAndAdvance(true));
+
+  document.getElementById('btn-exit').addEventListener('click', () => {
+    els.study.style.display = 'none';
+    els.dashboard.style.display = 'block';
+    renderDashboard();
+  });
+
+  function finishSession(){
+    els.study.style.display = 'none';
+    els.summary.style.display = 'block';
+    const s = session;
+    document.getElementById('sum-reviewed').textContent = s.reviewed;
+    document.getElementById('sum-got').textContent = s.got;
+    document.getElementById('sum-xp').textContent = s.xp;
+    document.getElementById('sum-streak').textContent = progress.streak || 0;
+    document.getElementById('summary-emoji').textContent = s.got === s.reviewed && s.reviewed > 0 ? '🏆' : '🎉';
+    document.getElementById('summary-sub').textContent =
+      s.reviewed === 0 ? 'No cards in this batch.' :
+      (s.got / s.reviewed >= 0.8 ? "Strong round — that's sticking." : 'Good rep — the missed ones will resurface sooner.');
+  }
+
+  document.getElementById('btn-done').addEventListener('click', () => {
+    els.summary.style.display = 'none';
+    els.dashboard.style.display = 'block';
+    renderDashboard();
+  });
+  document.getElementById('btn-continue').addEventListener('click', () => {
+    startSession(null, true);
+  });
+
+  els.btnPracticeDue.addEventListener('click', () => startSession(null, true));
+
+  // ---------- toast ----------
+  let toastTimer = null;
+  function showToast(msg){
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
+  }
+
+  renderDashboard();
+})();
+</script>
+</body>
+</html>
