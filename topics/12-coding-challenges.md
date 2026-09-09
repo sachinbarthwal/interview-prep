@@ -27,6 +27,9 @@
 | 17 | [The "minimum cut" puzzle](#17-the-minimum-cut-puzzle) |
 | 18 | [Reconciling data from two different sources](#18-reconciling-data-from-two-different-sources) |
 | 19 | [Approach to planning a data migration](#19-approach-to-planning-a-data-migration) |
+| 20 | [Binary search a sorted array and return the index (no built-ins)](#20-binary-search-a-sorted-array-and-return-the-index-no-built-ins) |
+| 21 | [Move all zeros to the front of a 0/1 array in O(n) — two pointers](#21-move-all-zeros-to-the-front-of-a-01-array-in-on--two-pointers) |
+| 22 | [Two related lists (country names + dialling codes) — store and look them up](#22-two-related-lists-country-names--dialling-codes--store-and-look-them-up) |
 
 ## 1. Design an LRU Cache with O(1) get/put
 
@@ -401,5 +404,124 @@ read.
    to be re-run.
 6. **Validate post-migration** with automated checks, not just "it looked right
    during a manual spot check."
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 20. Binary search a sorted array and return the index (no built-ins)
+
+**Problem (RBC screener):** a sorted `int[]` with ~1,000,000 elements. Given a
+target, return its index, or `-1` if it's not present. No `Array.BinarySearch`,
+no LINQ.
+
+The word **sorted** is the whole answer: binary search — look at the middle,
+throw away half the array each step. **O(log n)** (~20 comparisons for a million)
+versus **O(n)** for a linear scan.
+
+```csharp
+static int BinarySearch(int[] arr, int target)
+{
+    int low = 0, high = arr.Length - 1;
+
+    while (low <= high)
+    {
+        int mid = low + (high - low) / 2;   // not (low + high) / 2 — that can overflow int
+
+        if (arr[mid] == target) return mid;         // found — return the index
+        if (arr[mid] < target)  low  = mid + 1;     // target is in the right half
+        else                    high = mid - 1;     // target is in the left half
+    }
+    return -1;                                       // not found
+}
+```
+
+**Talk track:** "Sorted input means binary search. O(log n) time, O(1) space. I use
+`low + (high - low) / 2` so the midpoint can't overflow on large indices. If the
+array has duplicates and they want the *first* match, don't return on the first
+hit — record it and keep searching the left half."
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 21. Move all zeros to the front of a 0/1 array in O(n) — two pointers
+
+**Problem (RBC screener):** an `int[]` of ~1,000,000 values, each `0` or `1`, in
+random order. Move every `0` to the front and every `1` to the back, in place, no
+`Array.Sort`. Is it O(n) or O(n²)?
+
+**Two pointers, one from each end. Swap a mismatched pair. O(n) time, O(1) space.**
+
+```csharp
+static void MoveZerosToFront(int[] arr)
+{
+    int left = 0, right = arr.Length - 1;
+
+    while (left < right)
+    {
+        if (arr[left] == 0)         left++;      // already in the right place
+        else if (arr[right] == 1)   right--;     // already in the right place
+        else                                     // arr[left] == 1 && arr[right] == 0 → swap
+        {
+            (arr[left], arr[right]) = (arr[right], arr[left]);
+            left++;
+            right--;
+        }
+    }
+}
+```
+
+**Why it's O(n), not O(n²):** `left` and `right` only ever move toward each other.
+Every iteration advances at least one of them, so the total work is at most `n` —
+no restart, no nested loop, regardless of how many zeros there are.
+
+**Alternative ("or even less"):** count the zeros in one pass, then overwrite the
+array with that many `0`s followed by `1`s. Same O(n) time, fewer writes. Mention
+both; the two-pointer version is the expected answer.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 22. Two related lists (country names + dialling codes) — store and look them up
+
+**Problem (RBC screener):** you have ~250 country names and their international
+dialling codes (India → 91, US → 1, Canada → 1). Write a function that returns the
+code for a country. All in memory. How do you organise the data?
+
+**Use a `Dictionary<string, string>`, not two parallel `List`s.**
+
+```csharp
+public interface ICountryCodeProvider
+{
+    bool TryGetCode(string country, out string code);
+}
+
+public class CountryCodeProvider : ICountryCodeProvider
+{
+    private static readonly Dictionary<string, string> _codes =
+        new(StringComparer.OrdinalIgnoreCase)
+        {
+            ["India"]         = "91",
+            ["United States"] = "1",
+            ["Canada"]        = "1",
+            // ...
+        };
+
+    public bool TryGetCode(string country, out string code)
+        => _codes.TryGetValue(country, out code!);
+}
+```
+
+**Why a Dictionary beats two Lists:**
+
+| | Two `List`s (`names[]`, `codes[]`) | `Dictionary<string,string>` |
+|---|---|---|
+| Look up a code | find the name's index — **O(n)** scan — then read `codes[index]` | hash the key, jump straight to it — **O(1)** average |
+| Correctness | the two lists must stay aligned by index; easy to break | key and value are one entry; can't drift apart |
+| Missing country | manual bounds/`-1` check | `TryGetValue` returns `false`, no exception |
+
+**Details that score points:** register it as a **singleton** (data is static and
+read-only, and dictionary reads are thread-safe); use
+`StringComparer.OrdinalIgnoreCase` so `"india"` matches `"India"`; use
+`TryGetValue` rather than `ContainsKey` + indexer (one lookup, not two).
+
+**When a `List` is still the right choice:** you need ordering, you need
+duplicates, or you only ever iterate — never look up by key.
 
 **[⬆ Back to Top](#table-of-contents)**

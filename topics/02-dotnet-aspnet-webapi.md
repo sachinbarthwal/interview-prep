@@ -46,6 +46,7 @@
 | 36 | [What's new in .NET 6?](#36-whats-new-in-net-6) |
 | 37 | [Benefits of `async`/`await` in C#](#37-benefits-of-asyncawait-in-c) |
 | 38 | [IOptions vs IOptionsSnapshot vs IOptionsMonitor — configuration lifetimes](#38-ioptions-vs-ioptionssnapshot-vs-ioptionsmonitor--configuration-lifetimes) |
+| 39 | [You wrote a class other projects in the same solution need — how do you share it?](#39-you-wrote-a-class-other-projects-in-the-same-solution-need-to-use--how-do-you-share-it) |
 
 ## 1. Walk through the ASP.NET MVC request life cycle
 
@@ -698,5 +699,56 @@ fine for settings that never change while the app runs. `IOptionsSnapshot` is
 scoped, so it's for settings you want to pick up per request without restarting
 the app. `IOptionsMonitor` is for the same live-reload need but from inside a
 singleton, plus it gives you a change notification callback."
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 39. You wrote a class other projects in the same solution need to use — how do you share it?
+
+**Problem (RBC screener):** one ASP.NET Core solution, several projects, one team.
+You wrote a class (for example a country → dialling-code lookup) and want the
+other projects and devs to use it. Not a NuGet package — same solution.
+
+**Progression the interviewer walked through** (he rejected each early answer):
+
+1. **Static class** — fine for a pure, dependency-free helper, but: can't be
+   mocked in tests, can't be swapped for another implementation, can't hold
+   injected dependencies, can't vary by environment or config. Rejected.
+2. **What he wanted:**
+   - put the class in a **shared class-library project** (`Company.Common`,
+     `Infrastructure`, `Domain`…); the other projects add a **project reference**;
+   - expose the behaviour through an **interface**;
+   - **register it in DI** — in each app's `Program.cs`, or via a shared
+     `AddCommonServices(this IServiceCollection)` extension method;
+   - other devs **inject the interface** in their constructors — no `new`, no
+     dependency on your concrete type.
+
+```csharp
+// in the shared library project
+public interface ICountryCodeProvider
+{
+    bool TryGetCode(string country, out string code);
+}
+
+// a shared extension method the other projects just call
+public static class CommonServiceCollectionExtensions
+{
+    public static IServiceCollection AddCommonServices(this IServiceCollection services)
+    {
+        services.AddSingleton<ICountryCodeProvider, CountryCodeProvider>();
+        return services;
+    }
+}
+
+// consumer in any project
+public class SignupService(ICountryCodeProvider countryCodes)
+{
+    public string BuildDiallingPrefix(string country)
+        => countryCodes.TryGetCode(country, out var code) ? $"+{code}" : "";
+}
+```
+
+**Why this beats a static class:** testable (inject a fake `ICountryCodeProvider`),
+swappable (change the registration, not every call site), and the container owns
+its lifetime. It's Dependency Inversion — the "D" in SOLID — in practice.
 
 **[⬆ Back to Top](#table-of-contents)**
