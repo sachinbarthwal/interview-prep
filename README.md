@@ -13,7 +13,7 @@ skim questions the night before.
 [**Open the drill app →**](https://sachinbarthwal.github.io/interview-prep/) (live once
 GitHub Pages is enabled on this repo — see below)
 
-All 260 questions above are also playable as spaced-repetition flashcards: flip a
+All 379 questions above are also playable as spaced-repetition flashcards: flip a
 card, self-rate "Still learning" or "Got it", and missed cards resurface sooner
 than ones you know cold. It tracks a daily streak, XP, and a per-topic mastery bar
 — all stored only in your browser (`localStorage`), nothing leaves your device.
@@ -63,6 +63,7 @@ priority over `README.md` for the published site either way.)
 | 11 | [DevOps, Git & Agile](topics/11-devops-git-agile.md) | CI/CD pipelines, git conflict resolution, Agile/Scrum in practice |
 | 12 | [Coding & Algorithm Challenges](topics/12-coding-challenges.md) | LRU cache, array/string problems, SQL algorithmic queries, worked solutions |
 | 13 | [Scenario-Based & Behavioral](topics/13-scenario-behavioral.md) | Production-incident scenarios, system-design prompts, STAR-format behavioral answers |
+| 14 | [RBC Final Round](topics/14-rbc-final-round.md) | Senior .NET final-round drill: project stories, screener follow-ups, Kafka, Redis, .NET, SQL, security, testing, OpenShift, system design, behavioral |
 
 ## A study plan if you have 2 weeks
 
