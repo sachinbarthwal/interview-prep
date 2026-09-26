@@ -15,6 +15,7 @@ TOPIC_FILES = [
     ("devops",      "DevOps, Git & Agile",                 "#5a6b3a"),
     ("coding",      "Coding & Algorithm Challenges",       "#5a3a7a"),
     ("scenario",    "Scenario & Behavioral",                "#8c5a3a"),
+    ("rbc",         "RBC Final Round",                      "#1d6b58"),
 ]
 
 FILE_ORDER = [
@@ -31,6 +32,7 @@ FILE_ORDER = [
     "11-devops-git-agile.md",
     "12-coding-challenges.md",
     "13-scenario-behavioral.md",
+    "14-rbc-final-round.md",
 ]
 
 def inline_md(text):
