@@ -184,30 +184,33 @@
 | 174 | System design | [How would you build a microservice?](#174-how-would-you-build-a-microservice) |
 | 175 | System design | [A client clicks 'Buy 100 shares'. Design what happens until the order reaches the market.](#175-a-client-clicks-buy-100-shares-design-what-happens-until-the-order-reaches-the-market) |
 | 176 | System design | [Does the Direct Investing platform match buyers and sellers?](#176-does-the-direct-investing-platform-match-buyers-and-sellers) |
-| 177 | System design | [Why return 202 Accepted instead of waiting for the market?](#177-why-return-202-accepted-instead-of-waiting-for-the-market) |
-| 178 | System design | [Kafka is down when an order is placed. What happens?](#178-kafka-is-down-when-an-order-is-placed-what-happens) |
-| 179 | System design | [How would a regulator reconstruct what happened to one order?](#179-how-would-a-regulator-reconstruct-what-happened-to-one-order) |
-| 180 | System design | [How do you keep data consistent across microservices?](#180-how-do-you-keep-data-consistent-across-microservices) |
-| 181 | System design | [Circuit breaker vs retry vs bulkhead?](#181-circuit-breaker-vs-retry-vs-bulkhead) |
-| 182 | System design | [How would you push live price or order updates to the UI?](#182-how-would-you-push-live-price-or-order-updates-to-the-ui) |
-| 183 | System design | [How does your design scale?](#183-how-does-your-design-scale) |
-| 184 | Frontend | [Frontend: how do you position yourself if they go deep?](#184-frontend-how-do-you-position-yourself-if-they-go-deep) |
-| 185 | Frontend | [Angular: component vs service? Lifecycle hooks?](#185-angular-component-vs-service-lifecycle-hooks) |
-| 186 | Frontend | [Angular: Observables, the async pipe and switchMap?](#186-angular-observables-the-async-pipe-and-switchmap) |
-| 187 | Frontend | [Angular: HTTP interceptor and route guard?](#187-angular-http-interceptor-and-route-guard) |
-| 188 | Frontend | [Angular: change detection, OnPush, and modern Angular?](#188-angular-change-detection-onpush-and-modern-angular) |
-| 189 | Frontend | [React: props vs state, useState, useEffect, virtual DOM?](#189-react-props-vs-state-usestate-useeffect-virtual-dom) |
-| 190 | Behavioural | [Tell me about a disagreement with a teammate.](#190-tell-me-about-a-disagreement-with-a-teammate) |
-| 191 | Behavioural | [Tell me about a production incident or a hard problem you solved.](#191-tell-me-about-a-production-incident-or-a-hard-problem-you-solved) |
-| 192 | Behavioural | [How do you mentor other developers?](#192-how-do-you-mentor-other-developers) |
-| 193 | Behavioural | [Why RBC, and why this role?](#193-why-rbc-and-why-this-role) |
-| 194 | Behavioural | [You're okay with contract-to-hire?](#194-youre-okay-with-contract-to-hire) |
-| 195 | Behavioural | [What questions do you have for us?](#195-what-questions-do-you-have-for-us) |
-| 196 | CodeSignal | [Walk me through your banking solution, level by level.](#196-walk-me-through-your-banking-solution-level-by-level) |
-| 197 | CodeSignal | [Level 3: show the transfer and the traps.](#197-level-3-show-the-transfer-and-the-traps) |
-| 198 | CodeSignal | [Level 4: top spenders, and the traps.](#198-level-4-top-spenders-and-the-traps) |
-| 199 | CodeSignal | [How would you have implemented the scheduled transfer?](#199-how-would-you-have-implemented-the-scheduled-transfer) |
-| 200 | CodeSignal | [How would you improve your CodeSignal solution?](#200-how-would-you-improve-your-codesignal-solution) |
+| 177 | System design | [Broker domain terms: exchange, market vs limit order, fill, buying power?](#177-broker-domain-terms-exchange-market-vs-limit-order-fill-buying-power) |
+| 178 | System design | [Draw the journey of one 'Buy 100 AAPL' order.](#178-draw-the-journey-of-one-buy-100-aapl-order) |
+| 179 | System design | [Order follow-ups: partial fill, client cancel, exchange reject?](#179-order-follow-ups-partial-fill-client-cancel-exchange-reject) |
+| 180 | System design | [Why return 202 Accepted instead of waiting for the market?](#180-why-return-202-accepted-instead-of-waiting-for-the-market) |
+| 181 | System design | [Kafka is down when an order is placed. What happens?](#181-kafka-is-down-when-an-order-is-placed-what-happens) |
+| 182 | System design | [How would a regulator reconstruct what happened to one order?](#182-how-would-a-regulator-reconstruct-what-happened-to-one-order) |
+| 183 | System design | [How do you keep data consistent across microservices?](#183-how-do-you-keep-data-consistent-across-microservices) |
+| 184 | System design | [Circuit breaker vs retry vs bulkhead?](#184-circuit-breaker-vs-retry-vs-bulkhead) |
+| 185 | System design | [How would you push live price or order updates to the UI?](#185-how-would-you-push-live-price-or-order-updates-to-the-ui) |
+| 186 | System design | [How does your design scale?](#186-how-does-your-design-scale) |
+| 187 | Frontend | [Frontend: how do you position yourself if they go deep?](#187-frontend-how-do-you-position-yourself-if-they-go-deep) |
+| 188 | Frontend | [Angular: component vs service? Lifecycle hooks?](#188-angular-component-vs-service-lifecycle-hooks) |
+| 189 | Frontend | [Angular: Observables, the async pipe and switchMap?](#189-angular-observables-the-async-pipe-and-switchmap) |
+| 190 | Frontend | [Angular: HTTP interceptor and route guard?](#190-angular-http-interceptor-and-route-guard) |
+| 191 | Frontend | [Angular: change detection, OnPush, and modern Angular?](#191-angular-change-detection-onpush-and-modern-angular) |
+| 192 | Frontend | [React: props vs state, useState, useEffect, virtual DOM?](#192-react-props-vs-state-usestate-useeffect-virtual-dom) |
+| 193 | Behavioural | [Tell me about a disagreement with a teammate.](#193-tell-me-about-a-disagreement-with-a-teammate) |
+| 194 | Behavioural | [Tell me about a production incident or a hard problem you solved.](#194-tell-me-about-a-production-incident-or-a-hard-problem-you-solved) |
+| 195 | Behavioural | [How do you mentor other developers?](#195-how-do-you-mentor-other-developers) |
+| 196 | Behavioural | [Why RBC, and why this role?](#196-why-rbc-and-why-this-role) |
+| 197 | Behavioural | [You're okay with contract-to-hire?](#197-youre-okay-with-contract-to-hire) |
+| 198 | Behavioural | [What questions do you have for us?](#198-what-questions-do-you-have-for-us) |
+| 199 | CodeSignal | [Walk me through your banking solution, level by level.](#199-walk-me-through-your-banking-solution-level-by-level) |
+| 200 | CodeSignal | [Level 3: show the transfer and the traps.](#200-level-3-show-the-transfer-and-the-traps) |
+| 201 | CodeSignal | [Level 4: top spenders, and the traps.](#201-level-4-top-spenders-and-the-traps) |
+| 202 | CodeSignal | [How would you have implemented the scheduled transfer?](#202-how-would-you-have-implemented-the-scheduled-transfer) |
+| 203 | CodeSignal | [How would you improve your CodeSignal solution?](#203-how-would-you-improve-your-codesignal-solution) |
 
 ## 1. Tell me about yourself.
 
@@ -2349,7 +2352,63 @@ Client -> Gateway -> Order API
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 177. Why return 202 Accepted instead of waiting for the market?
+## 177. Broker domain terms: exchange, market vs limit order, fill, buying power?
+
+*System design*
+
+- **Exchange** (TSX, NYSE): where buyers and sellers are matched. RBC doesn't run one.
+- **Broker** (RBC Direct Investing): takes the client's order, checks it, sends it to the exchange, updates the account when done.
+- **Market order**: buy now at the current price. Usually fills in seconds.
+- **Limit order**: buy only at $180 or less. Might fill hours later, or never.
+- **Fill / execution report**: the exchange's reply, "Filled 100 at $182.50". Can be partial (60 of 100).
+- **Buying power**: cash available to trade with.
+- **FIX protocol**: the industry-standard message format between brokers and exchanges.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 178. Draw the journey of one 'Buy 100 AAPL' order.
+
+*System design*
+
+```csharp
+PART 1: THE CLICK (synchronous)
+Client --POST /orders (Idempotency-Key)--> APIM --> Order API
+  1. Validate: logged in, own account, valid symbol, market open
+  2. ONE transaction:
+     - reserve cash: UPDATE Accounts SET Reserved = Reserved + @cost
+                     WHERE Id = @acct AND Cash - Reserved >= @cost
+     - INSERT Orders (Accepted)
+     - INSERT Outbox (OrderAccepted)
+  3. Return 202 + orderId
+
+PART 2: AFTER THE CLICK (asynchronous)
+Outbox worker --> Kafka "orders" (key = AccountId)
+  --> Order Router --> EXCHANGE (matching happens here)
+  <-- execution report "Filled 100 @ 182.50"
+  Fill consumer, ONE transaction:
+     Order -> Filled, Positions +100, Cash -18,250, release reservation
+  --> SignalR push: client sees "Filled"
+```
+
+> "The click only reserves money and records the order. Everything involving the market happens afterwards, through events."
+
+**Follow-up:** Why reserve instead of charging at fill? Two orders can't spend the same cash, and the money stays held however long a limit order takes to fill.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 179. Order follow-ups: partial fill, client cancel, exchange reject?
+
+*System design*
+
+- **Partial fill (60 of 100):** status PartiallyFilled, positions +60, charge for 60, keep the other 40 reserved until they fill or the order is cancelled.
+- **Client cancels while at the exchange:** send a cancel request, mark CancelPending. Only when the exchange confirms: Cancelled and release cash, because it might fill in the meantime.
+- **Exchange rejects:** status Rejected, release the reservation, notify the client.
+- **How does the router talk to the exchange?** Usually FIX: translate our order into FIX messages and read execution reports back.
+- **Where's Redis?** Quotes and the portfolio screen. Reservations and positions always come from SQL.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 180. Why return 202 Accepted instead of waiting for the market?
 
 *System design*
 
@@ -2357,7 +2416,7 @@ Client -> Gateway -> Order API
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 178. Kafka is down when an order is placed. What happens?
+## 181. Kafka is down when an order is placed. What happens?
 
 *System design*
 
@@ -2365,7 +2424,7 @@ Client -> Gateway -> Order API
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 179. How would a regulator reconstruct what happened to one order?
+## 182. How would a regulator reconstruct what happened to one order?
 
 *System design*
 
@@ -2373,7 +2432,7 @@ Client -> Gateway -> Order API
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 180. How do you keep data consistent across microservices?
+## 183. How do you keep data consistent across microservices?
 
 *System design*
 
@@ -2381,7 +2440,7 @@ Client -> Gateway -> Order API
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 181. Circuit breaker vs retry vs bulkhead?
+## 184. Circuit breaker vs retry vs bulkhead?
 
 *System design*
 
@@ -2393,7 +2452,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 182. How would you push live price or order updates to the UI?
+## 185. How would you push live price or order updates to the UI?
 
 *System design*
 
@@ -2401,7 +2460,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 183. How does your design scale?
+## 186. How does your design scale?
 
 *System design*
 
@@ -2409,7 +2468,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 184. Frontend: how do you position yourself if they go deep?
+## 187. Frontend: how do you position yourself if they go deep?
 
 *Frontend*
 
@@ -2417,7 +2476,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 185. Angular: component vs service? Lifecycle hooks?
+## 188. Angular: component vs service? Lifecycle hooks?
 
 *Frontend*
 
@@ -2426,7 +2485,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 186. Angular: Observables, the async pipe and switchMap?
+## 189. Angular: Observables, the async pipe and switchMap?
 
 *Frontend*
 
@@ -2436,7 +2495,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 187. Angular: HTTP interceptor and route guard?
+## 190. Angular: HTTP interceptor and route guard?
 
 *Frontend*
 
@@ -2445,7 +2504,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 188. Angular: change detection, OnPush, and modern Angular?
+## 191. Angular: change detection, OnPush, and modern Angular?
 
 *Frontend*
 
@@ -2454,7 +2513,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 189. React: props vs state, useState, useEffect, virtual DOM?
+## 192. React: props vs state, useState, useEffect, virtual DOM?
 
 *Frontend*
 
@@ -2464,7 +2523,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 190. Tell me about a disagreement with a teammate.
+## 193. Tell me about a disagreement with a teammate.
 
 *Behavioural*
 
@@ -2480,7 +2539,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 191. Tell me about a production incident or a hard problem you solved.
+## 194. Tell me about a production incident or a hard problem you solved.
 
 *Behavioural*
 
@@ -2496,7 +2555,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 192. How do you mentor other developers?
+## 195. How do you mentor other developers?
 
 *Behavioural*
 
@@ -2504,7 +2563,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 193. Why RBC, and why this role?
+## 196. Why RBC, and why this role?
 
 *Behavioural*
 
@@ -2512,7 +2571,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 194. You're okay with contract-to-hire?
+## 197. You're okay with contract-to-hire?
 
 *Behavioural*
 
@@ -2522,7 +2581,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 195. What questions do you have for us?
+## 198. What questions do you have for us?
 
 *Behavioural*
 
@@ -2533,7 +2592,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 196. Walk me through your banking solution, level by level.
+## 199. Walk me through your banking solution, level by level.
 
 *CodeSignal*
 
@@ -2549,7 +2608,7 @@ Every method takes a timestamp first; the caller supplies the account id.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 197. Level 3: show the transfer and the traps.
+## 200. Level 3: show the transfer and the traps.
 
 *CodeSignal*
 
@@ -2578,7 +2637,7 @@ private int? TryTransfer(string sourceId, string targetId, int amount)
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 198. Level 4: top spenders, and the traps.
+## 201. Level 4: top spenders, and the traps.
 
 *CodeSignal*
 
@@ -2597,7 +2656,7 @@ return string.Join(",", top);     // "acct5{10},acct3{8},acct4{7}"
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 199. How would you have implemented the scheduled transfer?
+## 202. How would you have implemented the scheduled transfer?
 
 *CodeSignal*
 
@@ -2649,7 +2708,7 @@ public override bool CancelTransfer(int timestamp, string transferId)
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 200. How would you improve your CodeSignal solution?
+## 203. How would you improve your CodeSignal solution?
 
 *CodeSignal*
 
