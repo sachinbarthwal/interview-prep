@@ -2370,7 +2370,7 @@ public override bool CancelTransfer(int timestamp, string transferId)
 }
 ```
 
-**Follow-up:** Due at 14, GetBalance at 14? The transfer runs FIRST, because ProcessDue runs before the operation. Cancel after execution? False, it's no longer pending. Invalid schedule doesn't use an id: increment only after validation. Why .ToList()? A copy, so removing inside the loop is safe. Why a List? Simple and correct; a PriorityQueue for thousands.
+**Follow-up:** Due at 14, GetBalance at 14? The transfer runs FIRST, because ProcessDue runs before the operation. Cancel after execution? False, it's no longer pending. Invalid schedule doesn't use an id: increment only after validation. Why .ToList()? A copy, so removing inside the loop is safe. Why a List? Simple and correct; a PriorityQueue for thousands. Delay or exact time? Unsure which the real one used: only ExecuteAt changes (timestamp + delay vs the given time); everything else stays the same.
 
 **[⬆ Back to Top](#table-of-contents)**
 
