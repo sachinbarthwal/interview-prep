@@ -1413,27 +1413,35 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 *CodeSignal*
 
-> "Every operation takes a timestamp, so the key rule is: before handling any operation at time T, first execute every scheduled transfer due at or before T, in order. I'd store them in a PriorityQueue ordered by execution time, with creation order as the tie-break, plus a Dictionary by transfer id. When one is due, I reuse the Level 3 transfer logic and check the balance at execution time, not at scheduling. A failure is marked failed, not retried. Cancel marks it cancelled and it's skipped when dequeued, because a PriorityQueue can't remove from the middle."
+> "Every operation takes a timestamp, so the key rule is: before handling any operation at time T, first execute every scheduled transfer due at or before T, in order. I keep them in a simple List. When one is due, I reuse the Level 3 transfer logic and check the balance at execution time, not at scheduling. Cancel just removes it from the list."
 
 ```csharp
 private void ProcessDue(int now)
 {
-    while (_queue.Count > 0 && _queue.Peek().ExecuteAt <= now)
+    List<ScheduledTransfer> due = _scheduled
+        .Where(t => t.ExecuteAt <= now)
+        .OrderBy(t => t.ExecuteAt)      // earliest first
+        .ThenBy(t => t.Sequence)        // same time: created first goes first
+        .ToList();
+
+    foreach (ScheduledTransfer transfer in due)
     {
-        ScheduledTransfer transfer = _queue.Dequeue();
-        _scheduled.Remove(transfer.Id);
-
-        if (transfer.Cancelled)
-            continue;
-
+        _scheduled.Remove(transfer);
         TryTransfer(transfer.From, transfer.To, transfer.Amount);   // balance checked NOW
     }
 }
+
+public bool CancelTransfer(int timestamp, string transferId)
+{
+    ProcessDue(timestamp);
+    int removed = _scheduled.RemoveAll(t => t.Id == transferId);
+    return removed > 0;
+}
 ```
 
-Priority is a pair `(ExecuteAt, sequence)`: sorted by time, then by creation order. Every public method calls `ProcessDue(timestamp)` first.
+Every public method calls `ProcessDue(timestamp)` first.
 
-**Follow-up:** Why check the balance at execution? The client may have more or less money by then. Why ProcessDue first in every method? So every operation sees the correct balances for its timestamp.
+**Follow-up:** Why .ToList()? It copies the due items, so removing from the original list inside the loop doesn't throw 'Collection was modified'. Efficiency: 'I'd start with a List because it's simple and clearly correct; with thousands of transfers I'd switch to a PriorityQueue ordered by time.'
 
 **[⬆ Back to Top](#table-of-contents)**
 
