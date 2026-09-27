@@ -2,6 +2,7 @@
 import re, glob, json, os, html
 
 TOPIC_FILES = [
+    ("rbc",         "RBC Final Round",                      "#1d6b58"),
     ("csharp",      "C# & OOP Fundamentals",              "#b5502f"),
     ("dotnet",      ".NET Core, ASP.NET & Web API",        "#2f6f6b"),
     ("ef",          "Entity Framework & Data Access",      "#3a7a8c"),
@@ -15,10 +16,11 @@ TOPIC_FILES = [
     ("devops",      "DevOps, Git & Agile",                 "#5a6b3a"),
     ("coding",      "Coding & Algorithm Challenges",       "#5a3a7a"),
     ("scenario",    "Scenario & Behavioral",                "#8c5a3a"),
-    ("rbc",         "RBC Final Round",                      "#1d6b58"),
+
 ]
 
 FILE_ORDER = [
+    "14-rbc-final-round.md",
     "01-csharp-oop.md",
     "02-dotnet-aspnet-webapi.md",
     "03-entity-framework-data-access.md",
@@ -32,7 +34,7 @@ FILE_ORDER = [
     "11-devops-git-agile.md",
     "12-coding-challenges.md",
     "13-scenario-behavioral.md",
-    "14-rbc-final-round.md",
+
 ]
 
 def inline_md(text):
