@@ -47,80 +47,83 @@
 | 37 | Redis | [How do you invalidate the cache when data changes?](#37-how-do-you-invalidate-the-cache-when-data-changes) |
 | 38 | Redis | [What's a cache stampede, and how do you prevent it?](#38-whats-a-cache-stampede-and-how-do-you-prevent-it) |
 | 39 | Redis | [Redis goes down. What happens to your API?](#39-redis-goes-down-what-happens-to-your-api) |
-| 40 | Redis | [Why shouldn't Redis be the source of truth for an account balance?](#40-why-shouldnt-redis-be-the-source-of-truth-for-an-account-balance) |
-| 41 | Redis | [IMemoryCache vs Redis?](#41-imemorycache-vs-redis) |
-| 42 | Redis | [What else is Redis used for besides caching?](#42-what-else-is-redis-used-for-besides-caching) |
-| 43 | Redis | [What happens when Redis runs out of memory?](#43-what-happens-when-redis-runs-out-of-memory) |
-| 44 | .NET core | [Transient vs Scoped vs Singleton?](#44-transient-vs-scoped-vs-singleton) |
-| 45 | .NET core | [Why can't you inject a Scoped service into a Singleton?](#45-why-cant-you-inject-a-scoped-service-into-a-singleton) |
-| 46 | .NET core | [How do you keep a Singleton thread-safe?](#46-how-do-you-keep-a-singleton-thread-safe) |
-| 47 | .NET core | [What does async/await actually do? Does it create a thread?](#47-what-does-asyncawait-actually-do-does-it-create-a-thread) |
-| 48 | .NET core | [Why is async void dangerous?](#48-why-is-async-void-dangerous) |
-| 49 | .NET core | [What's wrong with .Result or .Wait()?](#49-whats-wrong-with-result-or-wait) |
-| 50 | .NET core | [How do you run three independent calls in parallel?](#50-how-do-you-run-three-independent-calls-in-parallel) |
-| 51 | .NET core | [Why use IHttpClientFactory?](#51-why-use-ihttpclientfactory) |
-| 52 | .NET core | [IEnumerable vs IQueryable?](#52-ienumerable-vs-iqueryable) |
-| 53 | .NET core | [What is middleware in ASP.NET Core?](#53-what-is-middleware-in-aspnet-core) |
-| 54 | .NET core | [How do you handle exceptions globally in an API?](#54-how-do-you-handle-exceptions-globally-in-an-api) |
-| 55 | .NET core | [How do you reduce memory allocations on large data?](#55-how-do-you-reduce-memory-allocations-on-large-data) |
-| 56 | .NET core | [record vs class?](#56-record-vs-class) |
-| 57 | EF Core & SQL | [What's the N+1 problem? How do you fix it?](#57-whats-the-n1-problem-how-do-you-fix-it) |
-| 58 | EF Core & SQL | [What does AsNoTracking do, and when does it hurt?](#58-what-does-asnotracking-do-and-when-does-it-hurt) |
-| 59 | EF Core & SQL | [Two users update the same balance at once. How do you stop a lost update?](#59-two-users-update-the-same-balance-at-once-how-do-you-stop-a-lost-update) |
-| 60 | EF Core & SQL | [How do you deploy database changes safely?](#60-how-do-you-deploy-database-changes-safely) |
-| 61 | EF Core & SQL | [Clustered vs nonclustered index? What's a key lookup?](#61-clustered-vs-nonclustered-index-whats-a-key-lookup) |
-| 62 | EF Core & SQL | [Why would SQL Server ignore an index you created?](#62-why-would-sql-server-ignore-an-index-you-created) |
-| 63 | EF Core & SQL | [What's parameter sniffing?](#63-whats-parameter-sniffing) |
-| 64 | EF Core & SQL | [Two orders try to reserve the last unit at the same moment. How do you stop both succeeding?](#64-two-orders-try-to-reserve-the-last-unit-at-the-same-moment-how-do-you-stop-both-succeeding) |
-| 65 | EF Core & SQL | [Does SQL Server lock rows by itself?](#65-does-sql-server-lock-rows-by-itself) |
-| 66 | EF Core & SQL | [How do you prevent deadlocks in money transfers?](#66-how-do-you-prevent-deadlocks-in-money-transfers) |
-| 67 | EF Core & SQL | [Add a NOT NULL column to a 50-million-row table without downtime.](#67-add-a-not-null-column-to-a-50-million-row-table-without-downtime) |
-| 68 | EF Core & SQL | [Where should business logic live: stored procedures or C#?](#68-where-should-business-logic-live-stored-procedures-or-c) |
-| 69 | EF Core & SQL | [Isolation levels, in one breath.](#69-isolation-levels-in-one-breath) |
-| 70 | API & security | [What makes a RESTful API well designed?](#70-what-makes-a-restful-api-well-designed) |
-| 71 | API & security | [POST vs PUT vs PATCH, and which are idempotent?](#71-post-vs-put-vs-patch-and-which-are-idempotent) |
-| 72 | API & security | [Which status codes do you use, and when?](#72-which-status-codes-do-you-use-and-when) |
-| 73 | API & security | [A client retries a timed-out order. How do you prevent a duplicate trade?](#73-a-client-retries-a-timed-out-order-how-do-you-prevent-a-duplicate-trade) |
-| 74 | API & security | [How do you version an API?](#74-how-do-you-version-an-api) |
-| 75 | API & security | [OAuth2 vs JWT?](#75-oauth2-vs-jwt) |
-| 76 | API & security | [A partner system calls your API through APIM. Walk me through how it's secured.](#76-a-partner-system-calls-your-api-through-apim-walk-me-through-how-its-secured) |
-| 77 | API & security | [How do users log in through the UI and call your API?](#77-how-do-users-log-in-through-the-ui-and-call-your-api) |
-| 78 | API & security | [How does your API validate a JWT?](#78-how-does-your-api-validate-a-jwt) |
-| 79 | API & security | [Name an OWASP risk you've mitigated.](#79-name-an-owasp-risk-youve-mitigated) |
-| 80 | API & security | [How do you protect customer data and privacy?](#80-how-do-you-protect-customer-data-and-privacy) |
-| 81 | API & security | [Where do secrets like connection strings go?](#81-where-do-secrets-like-connection-strings-go) |
-| 82 | API & security | [What do you know about WCAG accessibility?](#82-what-do-you-know-about-wcag-accessibility) |
-| 83 | Testing | [How do you test a service that consumes events and writes to a database?](#83-how-do-you-test-a-service-that-consumes-events-and-writes-to-a-database) |
-| 84 | Testing | [Unit test vs integration test: where's the line?](#84-unit-test-vs-integration-test-wheres-the-line) |
-| 85 | Testing | [How do you unit test a class that publishes to Kafka?](#85-how-do-you-unit-test-a-class-that-publishes-to-kafka) |
-| 86 | Testing | [How do you test an API end to end?](#86-how-do-you-test-an-api-end-to-end) |
-| 87 | Testing | [What makes a good unit test?](#87-what-makes-a-good-unit-test) |
-| 88 | Testing | [Mock vs stub vs fake?](#88-mock-vs-stub-vs-fake) |
-| 89 | Testing | [Do you practise TDD?](#89-do-you-practise-tdd) |
-| 90 | Docker & OpenShift | [Image vs container vs Docker?](#90-image-vs-container-vs-docker) |
-| 91 | Docker & OpenShift | [How do you write a Dockerfile for a .NET API?](#91-how-do-you-write-a-dockerfile-for-a-net-api) |
-| 92 | Docker & OpenShift | [Explain the core Kubernetes objects.](#92-explain-the-core-kubernetes-objects) |
-| 93 | Docker & OpenShift | [OpenShift vs Kubernetes?](#93-openshift-vs-kubernetes) |
-| 94 | Docker & OpenShift | [Liveness vs readiness probe?](#94-liveness-vs-readiness-probe) |
-| 95 | Docker & OpenShift | [Walk me through a CI/CD pipeline you've built.](#95-walk-me-through-a-cicd-pipeline-youve-built) |
-| 96 | Docker & OpenShift | [How do you handle config per environment?](#96-how-do-you-handle-config-per-environment) |
-| 97 | System design | [Design order placement for our Direct Investing platform.](#97-design-order-placement-for-our-direct-investing-platform) |
-| 98 | System design | [Why return 202 Accepted instead of waiting for the market?](#98-why-return-202-accepted-instead-of-waiting-for-the-market) |
-| 99 | System design | [Kafka is down when an order is placed. What happens?](#99-kafka-is-down-when-an-order-is-placed-what-happens) |
-| 100 | System design | [How would a regulator reconstruct what happened to one order?](#100-how-would-a-regulator-reconstruct-what-happened-to-one-order) |
-| 101 | System design | [How do you keep data consistent across microservices?](#101-how-do-you-keep-data-consistent-across-microservices) |
-| 102 | System design | [Circuit breaker vs retry vs bulkhead?](#102-circuit-breaker-vs-retry-vs-bulkhead) |
-| 103 | System design | [How would you push live price or order updates to the UI?](#103-how-would-you-push-live-price-or-order-updates-to-the-ui) |
-| 104 | System design | [How does your design scale?](#104-how-does-your-design-scale) |
-| 105 | Behavioural | [Tell me about a disagreement with a teammate.](#105-tell-me-about-a-disagreement-with-a-teammate) |
-| 106 | Behavioural | [Tell me about a production incident or a hard problem you solved.](#106-tell-me-about-a-production-incident-or-a-hard-problem-you-solved) |
-| 107 | Behavioural | [How do you mentor other developers?](#107-how-do-you-mentor-other-developers) |
-| 108 | Behavioural | [Why RBC, and why this role?](#108-why-rbc-and-why-this-role) |
-| 109 | Behavioural | [You're okay with contract-to-hire?](#109-youre-okay-with-contract-to-hire) |
-| 110 | Behavioural | [What questions do you have for us?](#110-what-questions-do-you-have-for-us) |
-| 111 | CodeSignal | [Walk me through your banking solution.](#111-walk-me-through-your-banking-solution) |
-| 112 | CodeSignal | [How would you have implemented the scheduled transfer?](#112-how-would-you-have-implemented-the-scheduled-transfer) |
-| 113 | CodeSignal | [What would you do differently on the assessment?](#113-what-would-you-do-differently-on-the-assessment) |
+| 40 | Redis | [In a trading platform, where would you use Redis, and what would you never trust a cache for?](#40-in-a-trading-platform-where-would-you-use-redis-and-what-would-you-never-trust-a-cache-for) |
+| 41 | Redis | [Why shouldn't Redis be the source of truth for an account balance?](#41-why-shouldnt-redis-be-the-source-of-truth-for-an-account-balance) |
+| 42 | Redis | [IMemoryCache vs Redis?](#42-imemorycache-vs-redis) |
+| 43 | Redis | [What else is Redis used for besides caching?](#43-what-else-is-redis-used-for-besides-caching) |
+| 44 | Redis | [What happens when Redis runs out of memory?](#44-what-happens-when-redis-runs-out-of-memory) |
+| 45 | .NET core | [Transient vs Scoped vs Singleton?](#45-transient-vs-scoped-vs-singleton) |
+| 46 | .NET core | [Why can't you inject a Scoped service into a Singleton?](#46-why-cant-you-inject-a-scoped-service-into-a-singleton) |
+| 47 | .NET core | [How do you keep a Singleton thread-safe?](#47-how-do-you-keep-a-singleton-thread-safe) |
+| 48 | .NET core | [What does async/await actually do? Does it create a thread?](#48-what-does-asyncawait-actually-do-does-it-create-a-thread) |
+| 49 | .NET core | [Why is async void dangerous?](#49-why-is-async-void-dangerous) |
+| 50 | .NET core | [What's wrong with .Result or .Wait()?](#50-whats-wrong-with-result-or-wait) |
+| 51 | .NET core | [How do you run three independent calls in parallel?](#51-how-do-you-run-three-independent-calls-in-parallel) |
+| 52 | .NET core | [Why use IHttpClientFactory?](#52-why-use-ihttpclientfactory) |
+| 53 | .NET core | [IEnumerable vs IQueryable?](#53-ienumerable-vs-iqueryable) |
+| 54 | .NET core | [What is middleware in ASP.NET Core?](#54-what-is-middleware-in-aspnet-core) |
+| 55 | .NET core | [How do you handle exceptions globally in an API?](#55-how-do-you-handle-exceptions-globally-in-an-api) |
+| 56 | .NET core | [How do you reduce memory allocations on large data?](#56-how-do-you-reduce-memory-allocations-on-large-data) |
+| 57 | .NET core | [record vs class?](#57-record-vs-class) |
+| 58 | EF Core & SQL | [What's the N+1 problem? How do you fix it?](#58-whats-the-n1-problem-how-do-you-fix-it) |
+| 59 | EF Core & SQL | [What does AsNoTracking do, and when does it hurt?](#59-what-does-asnotracking-do-and-when-does-it-hurt) |
+| 60 | EF Core & SQL | [Two users update the same balance at once. How do you stop a lost update?](#60-two-users-update-the-same-balance-at-once-how-do-you-stop-a-lost-update) |
+| 61 | EF Core & SQL | [How do you deploy database changes safely?](#61-how-do-you-deploy-database-changes-safely) |
+| 62 | EF Core & SQL | [Clustered vs nonclustered index? What's a key lookup?](#62-clustered-vs-nonclustered-index-whats-a-key-lookup) |
+| 63 | EF Core & SQL | [Why would SQL Server ignore an index you created?](#63-why-would-sql-server-ignore-an-index-you-created) |
+| 64 | EF Core & SQL | [What's parameter sniffing?](#64-whats-parameter-sniffing) |
+| 65 | EF Core & SQL | [Two orders try to reserve the last unit at the same moment. How do you stop both succeeding?](#65-two-orders-try-to-reserve-the-last-unit-at-the-same-moment-how-do-you-stop-both-succeeding) |
+| 66 | EF Core & SQL | [Does SQL Server lock rows by itself?](#66-does-sql-server-lock-rows-by-itself) |
+| 67 | EF Core & SQL | [How do you prevent deadlocks in money transfers?](#67-how-do-you-prevent-deadlocks-in-money-transfers) |
+| 68 | EF Core & SQL | [Add a NOT NULL column to a 50-million-row table without downtime.](#68-add-a-not-null-column-to-a-50-million-row-table-without-downtime) |
+| 69 | EF Core & SQL | [Where should business logic live: stored procedures or C#?](#69-where-should-business-logic-live-stored-procedures-or-c) |
+| 70 | EF Core & SQL | [Isolation levels, in one breath.](#70-isolation-levels-in-one-breath) |
+| 71 | API & security | [What makes a RESTful API well designed?](#71-what-makes-a-restful-api-well-designed) |
+| 72 | API & security | [POST vs PUT vs PATCH, and which are idempotent?](#72-post-vs-put-vs-patch-and-which-are-idempotent) |
+| 73 | API & security | [Which status codes do you use, and when?](#73-which-status-codes-do-you-use-and-when) |
+| 74 | API & security | [A client retries a timed-out order. How do you prevent a duplicate trade?](#74-a-client-retries-a-timed-out-order-how-do-you-prevent-a-duplicate-trade) |
+| 75 | API & security | [How do you version an API?](#75-how-do-you-version-an-api) |
+| 76 | API & security | [OAuth2 vs JWT?](#76-oauth2-vs-jwt) |
+| 77 | API & security | [A partner system calls your API through APIM. Walk me through how it's secured.](#77-a-partner-system-calls-your-api-through-apim-walk-me-through-how-its-secured) |
+| 78 | API & security | [How do users log in through the UI and call your API?](#78-how-do-users-log-in-through-the-ui-and-call-your-api) |
+| 79 | API & security | [What does rotating secrets mean?](#79-what-does-rotating-secrets-mean) |
+| 80 | API & security | [How do you implement authorization in .NET?](#80-how-do-you-implement-authorization-in-net) |
+| 81 | API & security | [How does your API validate a JWT?](#81-how-does-your-api-validate-a-jwt) |
+| 82 | API & security | [Name an OWASP risk you've mitigated.](#82-name-an-owasp-risk-youve-mitigated) |
+| 83 | API & security | [How do you protect customer data and privacy?](#83-how-do-you-protect-customer-data-and-privacy) |
+| 84 | API & security | [Where do secrets like connection strings go?](#84-where-do-secrets-like-connection-strings-go) |
+| 85 | API & security | [What do you know about WCAG accessibility?](#85-what-do-you-know-about-wcag-accessibility) |
+| 86 | Testing | [How do you test a service that consumes events and writes to a database?](#86-how-do-you-test-a-service-that-consumes-events-and-writes-to-a-database) |
+| 87 | Testing | [Unit test vs integration test: where's the line?](#87-unit-test-vs-integration-test-wheres-the-line) |
+| 88 | Testing | [How do you unit test a class that publishes to Kafka?](#88-how-do-you-unit-test-a-class-that-publishes-to-kafka) |
+| 89 | Testing | [How do you test an API end to end?](#89-how-do-you-test-an-api-end-to-end) |
+| 90 | Testing | [What makes a good unit test?](#90-what-makes-a-good-unit-test) |
+| 91 | Testing | [Mock vs stub vs fake?](#91-mock-vs-stub-vs-fake) |
+| 92 | Testing | [Do you practise TDD?](#92-do-you-practise-tdd) |
+| 93 | Docker & OpenShift | [Image vs container vs Docker?](#93-image-vs-container-vs-docker) |
+| 94 | Docker & OpenShift | [How do you write a Dockerfile for a .NET API?](#94-how-do-you-write-a-dockerfile-for-a-net-api) |
+| 95 | Docker & OpenShift | [Explain the core Kubernetes objects.](#95-explain-the-core-kubernetes-objects) |
+| 96 | Docker & OpenShift | [OpenShift vs Kubernetes?](#96-openshift-vs-kubernetes) |
+| 97 | Docker & OpenShift | [Liveness vs readiness probe?](#97-liveness-vs-readiness-probe) |
+| 98 | Docker & OpenShift | [Walk me through a CI/CD pipeline you've built.](#98-walk-me-through-a-cicd-pipeline-youve-built) |
+| 99 | Docker & OpenShift | [How do you handle config per environment?](#99-how-do-you-handle-config-per-environment) |
+| 100 | System design | [Design order placement for our Direct Investing platform.](#100-design-order-placement-for-our-direct-investing-platform) |
+| 101 | System design | [Why return 202 Accepted instead of waiting for the market?](#101-why-return-202-accepted-instead-of-waiting-for-the-market) |
+| 102 | System design | [Kafka is down when an order is placed. What happens?](#102-kafka-is-down-when-an-order-is-placed-what-happens) |
+| 103 | System design | [How would a regulator reconstruct what happened to one order?](#103-how-would-a-regulator-reconstruct-what-happened-to-one-order) |
+| 104 | System design | [How do you keep data consistent across microservices?](#104-how-do-you-keep-data-consistent-across-microservices) |
+| 105 | System design | [Circuit breaker vs retry vs bulkhead?](#105-circuit-breaker-vs-retry-vs-bulkhead) |
+| 106 | System design | [How would you push live price or order updates to the UI?](#106-how-would-you-push-live-price-or-order-updates-to-the-ui) |
+| 107 | System design | [How does your design scale?](#107-how-does-your-design-scale) |
+| 108 | Behavioural | [Tell me about a disagreement with a teammate.](#108-tell-me-about-a-disagreement-with-a-teammate) |
+| 109 | Behavioural | [Tell me about a production incident or a hard problem you solved.](#109-tell-me-about-a-production-incident-or-a-hard-problem-you-solved) |
+| 110 | Behavioural | [How do you mentor other developers?](#110-how-do-you-mentor-other-developers) |
+| 111 | Behavioural | [Why RBC, and why this role?](#111-why-rbc-and-why-this-role) |
+| 112 | Behavioural | [You're okay with contract-to-hire?](#112-youre-okay-with-contract-to-hire) |
+| 113 | Behavioural | [What questions do you have for us?](#113-what-questions-do-you-have-for-us) |
+| 114 | CodeSignal | [Walk me through your banking solution.](#114-walk-me-through-your-banking-solution) |
+| 115 | CodeSignal | [How would you have implemented the scheduled transfer?](#115-how-would-you-have-implemented-the-scheduled-transfer) |
+| 116 | CodeSignal | [What would you do differently on the assessment?](#116-what-would-you-do-differently-on-the-assessment) |
 
 ## 1. Tell me about yourself.
 
@@ -538,7 +541,21 @@ In .NET: `IDistributedCache` or `StackExchange.Redis`. In .NET 9+, `HybridCache`
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 40. Why shouldn't Redis be the source of truth for an account balance?
+## 40. In a trading platform, where would you use Redis, and what would you never trust a cache for?
+
+*Redis*
+
+**Rule: Redis for display, the source of truth for decisions.**
+
+> "I'd use Redis for data that's read constantly where a tiny delay is fine: user profiles and preferences, reference data like instrument details, and live quotes for display, which the market data feed pushes into Redis on every tick so it's always current.
+
+> What I'd never rely on a cache for is anything that moves money: buying power and balances when approving an order, positions when checking whether a client can sell, and order status transitions. Those come from the source of truth, and the execution price comes from the market at trade time, not a cached quote."
+
+**Follow-up:** Common mistake: saying you'd never cache stock prices. Live quotes are a classic Redis use; the point is not to make trading decisions from them. Holdings can be cached for the portfolio screen, invalidated by fill events, but the sell check reads the database.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 41. Why shouldn't Redis be the source of truth for an account balance?
 
 *Redis*
 
@@ -546,7 +563,7 @@ In .NET: `IDistributedCache` or `StackExchange.Redis`. In .NET 9+, `HybridCache`
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 41. IMemoryCache vs Redis?
+## 42. IMemoryCache vs Redis?
 
 *Redis*
 
@@ -554,7 +571,7 @@ In .NET: `IDistributedCache` or `StackExchange.Redis`. In .NET 9+, `HybridCache`
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 42. What else is Redis used for besides caching?
+## 43. What else is Redis used for besides caching?
 
 *Redis*
 
@@ -566,7 +583,7 @@ In .NET: `IDistributedCache` or `StackExchange.Redis`. In .NET 9+, `HybridCache`
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 43. What happens when Redis runs out of memory?
+## 44. What happens when Redis runs out of memory?
 
 *Redis*
 
@@ -574,7 +591,7 @@ In .NET: `IDistributedCache` or `StackExchange.Redis`. In .NET 9+, `HybridCache`
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 44. Transient vs Scoped vs Singleton?
+## 45. Transient vs Scoped vs Singleton?
 
 *.NET core*
 
@@ -586,7 +603,7 @@ In .NET: `IDistributedCache` or `StackExchange.Redis`. In .NET 9+, `HybridCache`
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 45. Why can't you inject a Scoped service into a Singleton?
+## 46. Why can't you inject a Scoped service into a Singleton?
 
 *.NET core*
 
@@ -596,7 +613,7 @@ In .NET: `IDistributedCache` or `StackExchange.Redis`. In .NET 9+, `HybridCache`
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 46. How do you keep a Singleton thread-safe?
+## 47. How do you keep a Singleton thread-safe?
 
 *.NET core*
 
@@ -606,7 +623,7 @@ In .NET: `IDistributedCache` or `StackExchange.Redis`. In .NET 9+, `HybridCache`
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 47. What does async/await actually do? Does it create a thread?
+## 48. What does async/await actually do? Does it create a thread?
 
 *.NET core*
 
@@ -614,7 +631,7 @@ In .NET: `IDistributedCache` or `StackExchange.Redis`. In .NET 9+, `HybridCache`
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 48. Why is async void dangerous?
+## 49. Why is async void dangerous?
 
 *.NET core*
 
@@ -622,7 +639,7 @@ In .NET: `IDistributedCache` or `StackExchange.Redis`. In .NET 9+, `HybridCache`
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 49. What's wrong with .Result or .Wait()?
+## 50. What's wrong with .Result or .Wait()?
 
 *.NET core*
 
@@ -630,7 +647,7 @@ In .NET: `IDistributedCache` or `StackExchange.Redis`. In .NET 9+, `HybridCache`
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 50. How do you run three independent calls in parallel?
+## 51. How do you run three independent calls in parallel?
 
 *.NET core*
 
@@ -638,7 +655,7 @@ In .NET: `IDistributedCache` or `StackExchange.Redis`. In .NET 9+, `HybridCache`
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 51. Why use IHttpClientFactory?
+## 52. Why use IHttpClientFactory?
 
 *.NET core*
 
@@ -646,7 +663,7 @@ In .NET: `IDistributedCache` or `StackExchange.Redis`. In .NET 9+, `HybridCache`
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 52. IEnumerable vs IQueryable?
+## 53. IEnumerable vs IQueryable?
 
 *.NET core*
 
@@ -656,7 +673,7 @@ In .NET: `IDistributedCache` or `StackExchange.Redis`. In .NET 9+, `HybridCache`
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 53. What is middleware in ASP.NET Core?
+## 54. What is middleware in ASP.NET Core?
 
 *.NET core*
 
@@ -664,7 +681,7 @@ In .NET: `IDistributedCache` or `StackExchange.Redis`. In .NET 9+, `HybridCache`
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 54. How do you handle exceptions globally in an API?
+## 55. How do you handle exceptions globally in an API?
 
 *.NET core*
 
@@ -672,7 +689,7 @@ In .NET: `IDistributedCache` or `StackExchange.Redis`. In .NET 9+, `HybridCache`
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 55. How do you reduce memory allocations on large data?
+## 56. How do you reduce memory allocations on large data?
 
 *.NET core*
 
@@ -687,7 +704,7 @@ Fewer allocations mean less GC work and fewer pauses.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 56. record vs class?
+## 57. record vs class?
 
 *.NET core*
 
@@ -695,7 +712,7 @@ Fewer allocations mean less GC work and fewer pauses.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 57. What's the N+1 problem? How do you fix it?
+## 58. What's the N+1 problem? How do you fix it?
 
 *EF Core & SQL*
 
@@ -703,7 +720,7 @@ Fewer allocations mean less GC work and fewer pauses.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 58. What does AsNoTracking do, and when does it hurt?
+## 59. What does AsNoTracking do, and when does it hurt?
 
 *EF Core & SQL*
 
@@ -711,7 +728,7 @@ Fewer allocations mean less GC work and fewer pauses.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 59. Two users update the same balance at once. How do you stop a lost update?
+## 60. Two users update the same balance at once. How do you stop a lost update?
 
 *EF Core & SQL*
 
@@ -721,7 +738,7 @@ Fewer allocations mean less GC work and fewer pauses.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 60. How do you deploy database changes safely?
+## 61. How do you deploy database changes safely?
 
 *EF Core & SQL*
 
@@ -729,7 +746,7 @@ Fewer allocations mean less GC work and fewer pauses.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 61. Clustered vs nonclustered index? What's a key lookup?
+## 62. Clustered vs nonclustered index? What's a key lookup?
 
 *EF Core & SQL*
 
@@ -737,7 +754,7 @@ Fewer allocations mean less GC work and fewer pauses.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 62. Why would SQL Server ignore an index you created?
+## 63. Why would SQL Server ignore an index you created?
 
 *EF Core & SQL*
 
@@ -747,7 +764,7 @@ Fewer allocations mean less GC work and fewer pauses.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 63. What's parameter sniffing?
+## 64. What's parameter sniffing?
 
 *EF Core & SQL*
 
@@ -755,7 +772,7 @@ Fewer allocations mean less GC work and fewer pauses.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 64. Two orders try to reserve the last unit at the same moment. How do you stop both succeeding?
+## 65. Two orders try to reserve the last unit at the same moment. How do you stop both succeeding?
 
 *EF Core & SQL*
 
@@ -775,7 +792,7 @@ WHERE Sku = @sku AND Qty >= 1
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 65. Does SQL Server lock rows by itself?
+## 66. Does SQL Server lock rows by itself?
 
 *EF Core & SQL*
 
@@ -783,7 +800,7 @@ WHERE Sku = @sku AND Qty >= 1
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 66. How do you prevent deadlocks in money transfers?
+## 67. How do you prevent deadlocks in money transfers?
 
 *EF Core & SQL*
 
@@ -791,7 +808,7 @@ WHERE Sku = @sku AND Qty >= 1
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 67. Add a NOT NULL column to a 50-million-row table without downtime.
+## 68. Add a NOT NULL column to a 50-million-row table without downtime.
 
 *EF Core & SQL*
 
@@ -802,7 +819,7 @@ WHERE Sku = @sku AND Qty >= 1
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 68. Where should business logic live: stored procedures or C#?
+## 69. Where should business logic live: stored procedures or C#?
 
 *EF Core & SQL*
 
@@ -810,7 +827,7 @@ WHERE Sku = @sku AND Qty >= 1
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 69. Isolation levels, in one breath.
+## 70. Isolation levels, in one breath.
 
 *EF Core & SQL*
 
@@ -818,7 +835,7 @@ WHERE Sku = @sku AND Qty >= 1
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 70. What makes a RESTful API well designed?
+## 71. What makes a RESTful API well designed?
 
 *API & security*
 
@@ -830,7 +847,7 @@ WHERE Sku = @sku AND Qty >= 1
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 71. POST vs PUT vs PATCH, and which are idempotent?
+## 72. POST vs PUT vs PATCH, and which are idempotent?
 
 *API & security*
 
@@ -838,7 +855,7 @@ WHERE Sku = @sku AND Qty >= 1
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 72. Which status codes do you use, and when?
+## 73. Which status codes do you use, and when?
 
 *API & security*
 
@@ -851,7 +868,7 @@ WHERE Sku = @sku AND Qty >= 1
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 73. A client retries a timed-out order. How do you prevent a duplicate trade?
+## 74. A client retries a timed-out order. How do you prevent a duplicate trade?
 
 *API & security*
 
@@ -859,7 +876,7 @@ WHERE Sku = @sku AND Qty >= 1
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 74. How do you version an API?
+## 75. How do you version an API?
 
 *API & security*
 
@@ -867,7 +884,7 @@ WHERE Sku = @sku AND Qty >= 1
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 75. OAuth2 vs JWT?
+## 76. OAuth2 vs JWT?
 
 *API & security*
 
@@ -875,7 +892,7 @@ WHERE Sku = @sku AND Qty >= 1
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 76. A partner system calls your API through APIM. Walk me through how it's secured.
+## 77. A partner system calls your API through APIM. Walk me through how it's secured.
 
 *API & security*
 
@@ -894,7 +911,7 @@ Secrets are rotated and stored in Key Vault, never in code.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 77. How do users log in through the UI and call your API?
+## 78. How do users log in through the UI and call your API?
 
 *API & security*
 
@@ -911,7 +928,58 @@ Refresh token stored server-side and encrypted. If the access token is in a cook
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 78. How does your API validate a JWT?
+## 79. What does rotating secrets mean?
+
+*API & security*
+
+A client secret is like a password and expires in Entra. Rotating means replacing it on a schedule, before it expires or leaks:
+
+1. Create a new secret (an app can hold two at once).
+1. Put it in Key Vault and switch the client to it.
+1. Delete the old one.
+
+> "Two valid secrets during the switch means no downtime. Better still: certificates or managed identity, so there's no secret to leak."
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 80. How do you implement authorization in .NET?
+
+*API & security*
+
+**Authentication** = who are you. **Authorization** = what may you do. Three layers:
+
+**1. Role or policy based** (can this caller use this endpoint?):
+
+```csharp
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("CanPlaceOrders", policy => policy.RequireRole("Orders.Write"));
+});
+
+[Authorize(Policy = "CanPlaceOrders")]
+[HttpPost("orders")]
+public async Task<IActionResult> PlaceOrder(OrderRequest request) { ... }
+```
+
+Roles are Entra ID app roles, arriving in the token's `roles` claim.
+
+**2. Resource based** (can this user touch THIS account?):
+
+```csharp
+string userId = User.FindFirst("oid").Value;
+Account account = await _repo.GetAccountAsync(accountId);
+
+if (account.OwnerId != userId)
+    return Forbid();   // 403
+```
+
+**3. Deny by default:** a fallback policy requires authentication on every endpoint, so a forgotten [Authorize] doesn't leave one open.
+
+**Follow-up:** Skipping layer 2 is broken access control, the #1 OWASP risk: change /accounts/123 to /accounts/124 and read someone else's account.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 81. How does your API validate a JWT?
 
 *API & security*
 
@@ -922,7 +990,7 @@ Refresh token stored server-side and encrypted. If the access token is in a cook
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 79. Name an OWASP risk you've mitigated.
+## 82. Name an OWASP risk you've mitigated.
 
 *API & security*
 
@@ -930,7 +998,7 @@ Refresh token stored server-side and encrypted. If the access token is in a cook
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 80. How do you protect customer data and privacy?
+## 83. How do you protect customer data and privacy?
 
 *API & security*
 
@@ -941,7 +1009,7 @@ Refresh token stored server-side and encrypted. If the access token is in a cook
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 81. Where do secrets like connection strings go?
+## 84. Where do secrets like connection strings go?
 
 *API & security*
 
@@ -949,7 +1017,7 @@ Refresh token stored server-side and encrypted. If the access token is in a cook
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 82. What do you know about WCAG accessibility?
+## 85. What do you know about WCAG accessibility?
 
 *API & security*
 
@@ -957,7 +1025,7 @@ Refresh token stored server-side and encrypted. If the access token is in a cook
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 83. How do you test a service that consumes events and writes to a database?
+## 86. How do you test a service that consumes events and writes to a database?
 
 *Testing*
 
@@ -982,7 +1050,7 @@ publisher.Verify(p => p.SendAsync(It.Is<B2BProduct>(b => b.Colour == "Blue")), T
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 84. Unit test vs integration test: where's the line?
+## 87. Unit test vs integration test: where's the line?
 
 *Testing*
 
@@ -990,7 +1058,7 @@ publisher.Verify(p => p.SendAsync(It.Is<B2BProduct>(b => b.Colour == "Blue")), T
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 85. How do you unit test a class that publishes to Kafka?
+## 88. How do you unit test a class that publishes to Kafka?
 
 *Testing*
 
@@ -1007,7 +1075,7 @@ publisher.Verify(p => p.PublishAsync(It.IsAny<ShipmentEvent>()), Times.Once);
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 86. How do you test an API end to end?
+## 89. How do you test an API end to end?
 
 *Testing*
 
@@ -1015,7 +1083,7 @@ publisher.Verify(p => p.PublishAsync(It.IsAny<ShipmentEvent>()), Times.Once);
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 87. What makes a good unit test?
+## 90. What makes a good unit test?
 
 *Testing*
 
@@ -1026,7 +1094,7 @@ publisher.Verify(p => p.PublishAsync(It.IsAny<ShipmentEvent>()), Times.Once);
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 88. Mock vs stub vs fake?
+## 91. Mock vs stub vs fake?
 
 *Testing*
 
@@ -1034,7 +1102,7 @@ publisher.Verify(p => p.PublishAsync(It.IsAny<ShipmentEvent>()), Times.Once);
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 89. Do you practise TDD?
+## 92. Do you practise TDD?
 
 *Testing*
 
@@ -1042,7 +1110,7 @@ publisher.Verify(p => p.PublishAsync(It.IsAny<ShipmentEvent>()), Times.Once);
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 90. Image vs container vs Docker?
+## 93. Image vs container vs Docker?
 
 *Docker & OpenShift*
 
@@ -1050,7 +1118,7 @@ publisher.Verify(p => p.PublishAsync(It.IsAny<ShipmentEvent>()), Times.Once);
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 91. How do you write a Dockerfile for a .NET API?
+## 94. How do you write a Dockerfile for a .NET API?
 
 *Docker & OpenShift*
 
@@ -1058,7 +1126,7 @@ publisher.Verify(p => p.PublishAsync(It.IsAny<ShipmentEvent>()), Times.Once);
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 92. Explain the core Kubernetes objects.
+## 95. Explain the core Kubernetes objects.
 
 *Docker & OpenShift*
 
@@ -1071,7 +1139,7 @@ publisher.Verify(p => p.PublishAsync(It.IsAny<ShipmentEvent>()), Times.Once);
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 93. OpenShift vs Kubernetes?
+## 96. OpenShift vs Kubernetes?
 
 *Docker & OpenShift*
 
@@ -1079,7 +1147,7 @@ publisher.Verify(p => p.PublishAsync(It.IsAny<ShipmentEvent>()), Times.Once);
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 94. Liveness vs readiness probe?
+## 97. Liveness vs readiness probe?
 
 *Docker & OpenShift*
 
@@ -1087,7 +1155,7 @@ publisher.Verify(p => p.PublishAsync(It.IsAny<ShipmentEvent>()), Times.Once);
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 95. Walk me through a CI/CD pipeline you've built.
+## 98. Walk me through a CI/CD pipeline you've built.
 
 *Docker & OpenShift*
 
@@ -1100,7 +1168,7 @@ The same image moves through every environment; only configuration changes.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 96. How do you handle config per environment?
+## 99. How do you handle config per environment?
 
 *Docker & OpenShift*
 
@@ -1108,7 +1176,7 @@ The same image moves through every environment; only configuration changes.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 97. Design order placement for our Direct Investing platform.
+## 100. Design order placement for our Direct Investing platform.
 
 *System design*
 
@@ -1129,7 +1197,7 @@ Client -> APIM -> Order API
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 98. Why return 202 Accepted instead of waiting for the market?
+## 101. Why return 202 Accepted instead of waiting for the market?
 
 *System design*
 
@@ -1137,7 +1205,7 @@ Client -> APIM -> Order API
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 99. Kafka is down when an order is placed. What happens?
+## 102. Kafka is down when an order is placed. What happens?
 
 *System design*
 
@@ -1145,7 +1213,7 @@ Client -> APIM -> Order API
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 100. How would a regulator reconstruct what happened to one order?
+## 103. How would a regulator reconstruct what happened to one order?
 
 *System design*
 
@@ -1153,7 +1221,7 @@ Client -> APIM -> Order API
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 101. How do you keep data consistent across microservices?
+## 104. How do you keep data consistent across microservices?
 
 *System design*
 
@@ -1161,7 +1229,7 @@ Client -> APIM -> Order API
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 102. Circuit breaker vs retry vs bulkhead?
+## 105. Circuit breaker vs retry vs bulkhead?
 
 *System design*
 
@@ -1173,7 +1241,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 103. How would you push live price or order updates to the UI?
+## 106. How would you push live price or order updates to the UI?
 
 *System design*
 
@@ -1181,7 +1249,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 104. How does your design scale?
+## 107. How does your design scale?
 
 *System design*
 
@@ -1189,7 +1257,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 105. Tell me about a disagreement with a teammate.
+## 108. Tell me about a disagreement with a teammate.
 
 *Behavioural*
 
@@ -1205,7 +1273,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 106. Tell me about a production incident or a hard problem you solved.
+## 109. Tell me about a production incident or a hard problem you solved.
 
 *Behavioural*
 
@@ -1221,7 +1289,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 107. How do you mentor other developers?
+## 110. How do you mentor other developers?
 
 *Behavioural*
 
@@ -1229,7 +1297,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 108. Why RBC, and why this role?
+## 111. Why RBC, and why this role?
 
 *Behavioural*
 
@@ -1237,7 +1305,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 109. You're okay with contract-to-hire?
+## 112. You're okay with contract-to-hire?
 
 *Behavioural*
 
@@ -1247,7 +1315,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 110. What questions do you have for us?
+## 113. What questions do you have for us?
 
 *Behavioural*
 
@@ -1258,7 +1326,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 111. Walk me through your banking solution.
+## 114. Walk me through your banking solution.
 
 *CodeSignal*
 
@@ -1269,7 +1337,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 112. How would you have implemented the scheduled transfer?
+## 115. How would you have implemented the scheduled transfer?
 
 *CodeSignal*
 
@@ -1279,7 +1347,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 113. What would you do differently on the assessment?
+## 116. What would you do differently on the assessment?
 
 *CodeSignal*
 
