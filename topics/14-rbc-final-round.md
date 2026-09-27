@@ -196,7 +196,8 @@
 | 186 | CodeSignal | [Walk me through your banking solution.](#186-walk-me-through-your-banking-solution) |
 | 187 | CodeSignal | [How would you have implemented the scheduled transfer?](#187-how-would-you-have-implemented-the-scheduled-transfer) |
 | 188 | CodeSignal | [In your scheduled transfer design, where does the money actually move?](#188-in-your-scheduled-transfer-design-where-does-the-money-actually-move) |
-| 189 | CodeSignal | [What would you do differently on the assessment?](#189-what-would-you-do-differently-on-the-assessment) |
+| 189 | CodeSignal | [How would you improve your CodeSignal solution?](#189-how-would-you-improve-your-codesignal-solution) |
+| 190 | CodeSignal | [What would you do differently on the assessment?](#190-what-would-you-do-differently-on-the-assessment) |
 
 ## 1. Tell me about yourself.
 
@@ -2351,7 +2352,30 @@ Timeline: t=10 schedule $50 with delay 20 (ExecuteAt 30). t=25 nothing due. t=35
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 189. What would you do differently on the assessment?
+## 189. How would you improve your CodeSignal solution?
+
+*CodeSignal*
+
+> "In the assessment I kept adding separate dictionaries for each new requirement: balances, then spending, then scheduled transfers. By Level 4 every change was slow and error-prone. Now I'd model an Account class from the start, holding owner, balance and total spent, in one Dictionary<int, Account>. Each new level just adds a field or method instead of another parallel dictionary to keep in sync."
+
+```csharp
+public class Account
+{
+    public int Id { get; set; }
+    public string Owner { get; set; } = "";
+    public int Balance { get; set; }
+    public int TotalSpent { get; set; }
+}
+
+private readonly Dictionary<int, Account> _accounts = new Dictionary<int, Account>();
+private int _nextId = 1;
+```
+
+**Follow-up:** Same idea as the country question: parallel collections that must stay in sync are fragile; one structure holding related data together is solid. It also explains honestly why Level 5 ran out of time.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 190. What would you do differently on the assessment?
 
 *CodeSignal*
 
