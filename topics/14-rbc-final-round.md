@@ -2267,7 +2267,7 @@ Every method takes a timestamp first; the caller supplies the account id.
 - **L1 CreateAccount / GetBalance:** Dictionary<string, Account>, false on a duplicate id, null for unknown.
 - **L2 Deposit:** TryGetValue, reject amount <= 0, return the new balance.
 - **L3 Transfer:** ALL checks first (same account, amount, both exist, enough balance), THEN move money and add to TotalSpent. Returns the source balance.
-- **L4 TopSpenders:** LINQ: Where TotalSpent > 0, OrderByDescending, ThenBy id, Take(n), then string.Join of "id{total}".
+- **L4 TopSpenders:** LINQ: Where TotalSpent > 0, OrderByDescending, ThenBy id, Take(n), then string.Join(",", ...) of "id{total}", like "acct5{10},acct3{8}".
 - **L5 Schedule / Cancel:** scheduling only records it; every method calls ProcessDue(timestamp) first, which executes due transfers through the same TryTransfer.
 
 **Follow-up:** Why Dictionary of Account objects? O(1) lookups, and each level adds a field instead of another dictionary to keep in sync. Why return false on a duplicate instead of throwing? It's an expected case, and the spec says so.
@@ -2315,7 +2315,7 @@ IEnumerable<string> top = _accounts.Values
     .Take(n)
     .Select(a => a.Id + "{" + a.TotalSpent + "}");
 
-return string.Join("", top);      // "acc2{300}acc1{100}"
+return string.Join(",", top);     // "acct5{10},acct3{8},acct4{7}"
 ```
 
 **Follow-up:** Why StringComparer.Ordinal? A plain character-by-character sort, the same on every machine. Big-O? O(n log n) for the sort; fine here, a sorted structure if called constantly on huge data. Why a running TotalSpent? O(1) to update instead of re-scanning every transfer.
