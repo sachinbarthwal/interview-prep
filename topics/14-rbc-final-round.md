@@ -896,7 +896,7 @@ public static string ReverseWords(string sentence)
 
 > "I walk the sentence backwards; each time I hit a space I append the word after it to a StringBuilder, then add the first word at the end. O(n). StringBuilder because string concatenation in a loop is O(n squared)."
 
-**Follow-up:** Traps: looping over characters reverses letters ('gnidoc evol I'); i > 0 skips index 0, use i >= 0. Zero extra memory: reverse the whole char array, then reverse each word back in place (two pointers).
+**Follow-up:** Lead with the practical version: string.Join(" ", sentence.Split(' ').Reverse()), which is O(n) (three single passes, no nested loop). If no built-ins: Split, then swap words with two pointers (like the 0/1 problem), then Join. Reverse the word ORDER only, not the letters. Traps: i > 0 skips index 0; string += in a loop is O(n squared).
 
 **[⬆ Back to Top](#table-of-contents)**
 
