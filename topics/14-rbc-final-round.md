@@ -83,42 +83,44 @@
 | 73 | API & security | [A client retries a timed-out order. How do you prevent a duplicate trade?](#73-a-client-retries-a-timed-out-order-how-do-you-prevent-a-duplicate-trade) |
 | 74 | API & security | [How do you version an API?](#74-how-do-you-version-an-api) |
 | 75 | API & security | [OAuth2 vs JWT?](#75-oauth2-vs-jwt) |
-| 76 | API & security | [How does your API validate a JWT?](#76-how-does-your-api-validate-a-jwt) |
-| 77 | API & security | [Name an OWASP risk you've mitigated.](#77-name-an-owasp-risk-youve-mitigated) |
-| 78 | API & security | [How do you protect customer data and privacy?](#78-how-do-you-protect-customer-data-and-privacy) |
-| 79 | API & security | [Where do secrets like connection strings go?](#79-where-do-secrets-like-connection-strings-go) |
-| 80 | API & security | [What do you know about WCAG accessibility?](#80-what-do-you-know-about-wcag-accessibility) |
-| 81 | Testing | [How do you test a service that consumes events and writes to a database?](#81-how-do-you-test-a-service-that-consumes-events-and-writes-to-a-database) |
-| 82 | Testing | [Unit test vs integration test: where's the line?](#82-unit-test-vs-integration-test-wheres-the-line) |
-| 83 | Testing | [How do you unit test a class that publishes to Kafka?](#83-how-do-you-unit-test-a-class-that-publishes-to-kafka) |
-| 84 | Testing | [How do you test an API end to end?](#84-how-do-you-test-an-api-end-to-end) |
-| 85 | Testing | [What makes a good unit test?](#85-what-makes-a-good-unit-test) |
-| 86 | Testing | [Mock vs stub vs fake?](#86-mock-vs-stub-vs-fake) |
-| 87 | Testing | [Do you practise TDD?](#87-do-you-practise-tdd) |
-| 88 | Docker & OpenShift | [Image vs container vs Docker?](#88-image-vs-container-vs-docker) |
-| 89 | Docker & OpenShift | [How do you write a Dockerfile for a .NET API?](#89-how-do-you-write-a-dockerfile-for-a-net-api) |
-| 90 | Docker & OpenShift | [Explain the core Kubernetes objects.](#90-explain-the-core-kubernetes-objects) |
-| 91 | Docker & OpenShift | [OpenShift vs Kubernetes?](#91-openshift-vs-kubernetes) |
-| 92 | Docker & OpenShift | [Liveness vs readiness probe?](#92-liveness-vs-readiness-probe) |
-| 93 | Docker & OpenShift | [Walk me through a CI/CD pipeline you've built.](#93-walk-me-through-a-cicd-pipeline-youve-built) |
-| 94 | Docker & OpenShift | [How do you handle config per environment?](#94-how-do-you-handle-config-per-environment) |
-| 95 | System design | [Design order placement for our Direct Investing platform.](#95-design-order-placement-for-our-direct-investing-platform) |
-| 96 | System design | [Why return 202 Accepted instead of waiting for the market?](#96-why-return-202-accepted-instead-of-waiting-for-the-market) |
-| 97 | System design | [Kafka is down when an order is placed. What happens?](#97-kafka-is-down-when-an-order-is-placed-what-happens) |
-| 98 | System design | [How would a regulator reconstruct what happened to one order?](#98-how-would-a-regulator-reconstruct-what-happened-to-one-order) |
-| 99 | System design | [How do you keep data consistent across microservices?](#99-how-do-you-keep-data-consistent-across-microservices) |
-| 100 | System design | [Circuit breaker vs retry vs bulkhead?](#100-circuit-breaker-vs-retry-vs-bulkhead) |
-| 101 | System design | [How would you push live price or order updates to the UI?](#101-how-would-you-push-live-price-or-order-updates-to-the-ui) |
-| 102 | System design | [How does your design scale?](#102-how-does-your-design-scale) |
-| 103 | Behavioural | [Tell me about a disagreement with a teammate.](#103-tell-me-about-a-disagreement-with-a-teammate) |
-| 104 | Behavioural | [Tell me about a production incident or a hard problem you solved.](#104-tell-me-about-a-production-incident-or-a-hard-problem-you-solved) |
-| 105 | Behavioural | [How do you mentor other developers?](#105-how-do-you-mentor-other-developers) |
-| 106 | Behavioural | [Why RBC, and why this role?](#106-why-rbc-and-why-this-role) |
-| 107 | Behavioural | [You're okay with contract-to-hire?](#107-youre-okay-with-contract-to-hire) |
-| 108 | Behavioural | [What questions do you have for us?](#108-what-questions-do-you-have-for-us) |
-| 109 | CodeSignal | [Walk me through your banking solution.](#109-walk-me-through-your-banking-solution) |
-| 110 | CodeSignal | [How would you have implemented the scheduled transfer?](#110-how-would-you-have-implemented-the-scheduled-transfer) |
-| 111 | CodeSignal | [What would you do differently on the assessment?](#111-what-would-you-do-differently-on-the-assessment) |
+| 76 | API & security | [A partner system calls your API through APIM. Walk me through how it's secured.](#76-a-partner-system-calls-your-api-through-apim-walk-me-through-how-its-secured) |
+| 77 | API & security | [How do users log in through the UI and call your API?](#77-how-do-users-log-in-through-the-ui-and-call-your-api) |
+| 78 | API & security | [How does your API validate a JWT?](#78-how-does-your-api-validate-a-jwt) |
+| 79 | API & security | [Name an OWASP risk you've mitigated.](#79-name-an-owasp-risk-youve-mitigated) |
+| 80 | API & security | [How do you protect customer data and privacy?](#80-how-do-you-protect-customer-data-and-privacy) |
+| 81 | API & security | [Where do secrets like connection strings go?](#81-where-do-secrets-like-connection-strings-go) |
+| 82 | API & security | [What do you know about WCAG accessibility?](#82-what-do-you-know-about-wcag-accessibility) |
+| 83 | Testing | [How do you test a service that consumes events and writes to a database?](#83-how-do-you-test-a-service-that-consumes-events-and-writes-to-a-database) |
+| 84 | Testing | [Unit test vs integration test: where's the line?](#84-unit-test-vs-integration-test-wheres-the-line) |
+| 85 | Testing | [How do you unit test a class that publishes to Kafka?](#85-how-do-you-unit-test-a-class-that-publishes-to-kafka) |
+| 86 | Testing | [How do you test an API end to end?](#86-how-do-you-test-an-api-end-to-end) |
+| 87 | Testing | [What makes a good unit test?](#87-what-makes-a-good-unit-test) |
+| 88 | Testing | [Mock vs stub vs fake?](#88-mock-vs-stub-vs-fake) |
+| 89 | Testing | [Do you practise TDD?](#89-do-you-practise-tdd) |
+| 90 | Docker & OpenShift | [Image vs container vs Docker?](#90-image-vs-container-vs-docker) |
+| 91 | Docker & OpenShift | [How do you write a Dockerfile for a .NET API?](#91-how-do-you-write-a-dockerfile-for-a-net-api) |
+| 92 | Docker & OpenShift | [Explain the core Kubernetes objects.](#92-explain-the-core-kubernetes-objects) |
+| 93 | Docker & OpenShift | [OpenShift vs Kubernetes?](#93-openshift-vs-kubernetes) |
+| 94 | Docker & OpenShift | [Liveness vs readiness probe?](#94-liveness-vs-readiness-probe) |
+| 95 | Docker & OpenShift | [Walk me through a CI/CD pipeline you've built.](#95-walk-me-through-a-cicd-pipeline-youve-built) |
+| 96 | Docker & OpenShift | [How do you handle config per environment?](#96-how-do-you-handle-config-per-environment) |
+| 97 | System design | [Design order placement for our Direct Investing platform.](#97-design-order-placement-for-our-direct-investing-platform) |
+| 98 | System design | [Why return 202 Accepted instead of waiting for the market?](#98-why-return-202-accepted-instead-of-waiting-for-the-market) |
+| 99 | System design | [Kafka is down when an order is placed. What happens?](#99-kafka-is-down-when-an-order-is-placed-what-happens) |
+| 100 | System design | [How would a regulator reconstruct what happened to one order?](#100-how-would-a-regulator-reconstruct-what-happened-to-one-order) |
+| 101 | System design | [How do you keep data consistent across microservices?](#101-how-do-you-keep-data-consistent-across-microservices) |
+| 102 | System design | [Circuit breaker vs retry vs bulkhead?](#102-circuit-breaker-vs-retry-vs-bulkhead) |
+| 103 | System design | [How would you push live price or order updates to the UI?](#103-how-would-you-push-live-price-or-order-updates-to-the-ui) |
+| 104 | System design | [How does your design scale?](#104-how-does-your-design-scale) |
+| 105 | Behavioural | [Tell me about a disagreement with a teammate.](#105-tell-me-about-a-disagreement-with-a-teammate) |
+| 106 | Behavioural | [Tell me about a production incident or a hard problem you solved.](#106-tell-me-about-a-production-incident-or-a-hard-problem-you-solved) |
+| 107 | Behavioural | [How do you mentor other developers?](#107-how-do-you-mentor-other-developers) |
+| 108 | Behavioural | [Why RBC, and why this role?](#108-why-rbc-and-why-this-role) |
+| 109 | Behavioural | [You're okay with contract-to-hire?](#109-youre-okay-with-contract-to-hire) |
+| 110 | Behavioural | [What questions do you have for us?](#110-what-questions-do-you-have-for-us) |
+| 111 | CodeSignal | [Walk me through your banking solution.](#111-walk-me-through-your-banking-solution) |
+| 112 | CodeSignal | [How would you have implemented the scheduled transfer?](#112-how-would-you-have-implemented-the-scheduled-transfer) |
+| 113 | CodeSignal | [What would you do differently on the assessment?](#113-what-would-you-do-differently-on-the-assessment) |
 
 ## 1. Tell me about yourself.
 
@@ -873,7 +875,43 @@ WHERE Sku = @sku AND Qty >= 1
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 76. How does your API validate a JWT?
+## 76. A partner system calls your API through APIM. Walk me through how it's secured.
+
+*API & security*
+
+**OAuth2 client credentials flow** (a system calling, not a person).
+
+1. We register the client in Entra ID and give it a client ID plus a secret, or preferably a certificate.
+1. The client sends them to **Entra's token endpoint** with our API's scope and gets a short-lived **access token (JWT)**, about an hour.
+1. **No refresh token** in this flow: the client caches the token and requests a new one when it expires.
+1. The client calls APIM with `Authorization: Bearer `.
+1. APIM's **validate-jwt** policy checks signature (Entra public keys), issuer, audience, expiry and app roles, and applies rate limiting.
+1. The API validates again (defence in depth) and checks the role per endpoint.
+
+Secrets are rotated and stored in Key Vault, never in code.
+
+**Follow-up:** Common mistake: saying client credentials get a refresh token. They don't; refresh tokens only exist when a user logged in.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 77. How do users log in through the UI and call your API?
+
+*API & security*
+
+**Authorization code flow with PKCE**, through Entra ID.
+
+1. The UI redirects the user to **Microsoft's login page**. Our app never sees the password; MFA and lockout are handled by Entra.
+1. Entra redirects back with a **one-time authorization code**.
+1. The app exchanges the code for three tokens: an **ID token** (who the user is, for the UI), an **access token** (sent to the API), and a **refresh token** (gets new access tokens without logging in again).
+1. Every API call carries the access token; the API validates it and checks roles.
+
+Refresh token stored server-side and encrypted. If the access token is in a cookie, the cookie is **HttpOnly, Secure, SameSite**. The ID token is never sent to the API.
+
+**Follow-up:** PKCE: the app sends a hashed random secret with the login, then proves it has the original when exchanging the code, so a stolen code is useless. Why not localStorage? Any script can read it, so one XSS bug leaks the token.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 78. How does your API validate a JWT?
 
 *API & security*
 
@@ -884,7 +922,7 @@ WHERE Sku = @sku AND Qty >= 1
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 77. Name an OWASP risk you've mitigated.
+## 79. Name an OWASP risk you've mitigated.
 
 *API & security*
 
@@ -892,7 +930,7 @@ WHERE Sku = @sku AND Qty >= 1
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 78. How do you protect customer data and privacy?
+## 80. How do you protect customer data and privacy?
 
 *API & security*
 
@@ -903,7 +941,7 @@ WHERE Sku = @sku AND Qty >= 1
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 79. Where do secrets like connection strings go?
+## 81. Where do secrets like connection strings go?
 
 *API & security*
 
@@ -911,7 +949,7 @@ WHERE Sku = @sku AND Qty >= 1
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 80. What do you know about WCAG accessibility?
+## 82. What do you know about WCAG accessibility?
 
 *API & security*
 
@@ -919,7 +957,7 @@ WHERE Sku = @sku AND Qty >= 1
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 81. How do you test a service that consumes events and writes to a database?
+## 83. How do you test a service that consumes events and writes to a database?
 
 *Testing*
 
@@ -944,7 +982,7 @@ publisher.Verify(p => p.SendAsync(It.Is<B2BProduct>(b => b.Colour == "Blue")), T
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 82. Unit test vs integration test: where's the line?
+## 84. Unit test vs integration test: where's the line?
 
 *Testing*
 
@@ -952,7 +990,7 @@ publisher.Verify(p => p.SendAsync(It.Is<B2BProduct>(b => b.Colour == "Blue")), T
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 83. How do you unit test a class that publishes to Kafka?
+## 85. How do you unit test a class that publishes to Kafka?
 
 *Testing*
 
@@ -969,7 +1007,7 @@ publisher.Verify(p => p.PublishAsync(It.IsAny<ShipmentEvent>()), Times.Once);
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 84. How do you test an API end to end?
+## 86. How do you test an API end to end?
 
 *Testing*
 
@@ -977,7 +1015,7 @@ publisher.Verify(p => p.PublishAsync(It.IsAny<ShipmentEvent>()), Times.Once);
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 85. What makes a good unit test?
+## 87. What makes a good unit test?
 
 *Testing*
 
@@ -988,7 +1026,7 @@ publisher.Verify(p => p.PublishAsync(It.IsAny<ShipmentEvent>()), Times.Once);
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 86. Mock vs stub vs fake?
+## 88. Mock vs stub vs fake?
 
 *Testing*
 
@@ -996,7 +1034,7 @@ publisher.Verify(p => p.PublishAsync(It.IsAny<ShipmentEvent>()), Times.Once);
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 87. Do you practise TDD?
+## 89. Do you practise TDD?
 
 *Testing*
 
@@ -1004,7 +1042,7 @@ publisher.Verify(p => p.PublishAsync(It.IsAny<ShipmentEvent>()), Times.Once);
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 88. Image vs container vs Docker?
+## 90. Image vs container vs Docker?
 
 *Docker & OpenShift*
 
@@ -1012,7 +1050,7 @@ publisher.Verify(p => p.PublishAsync(It.IsAny<ShipmentEvent>()), Times.Once);
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 89. How do you write a Dockerfile for a .NET API?
+## 91. How do you write a Dockerfile for a .NET API?
 
 *Docker & OpenShift*
 
@@ -1020,7 +1058,7 @@ publisher.Verify(p => p.PublishAsync(It.IsAny<ShipmentEvent>()), Times.Once);
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 90. Explain the core Kubernetes objects.
+## 92. Explain the core Kubernetes objects.
 
 *Docker & OpenShift*
 
@@ -1033,7 +1071,7 @@ publisher.Verify(p => p.PublishAsync(It.IsAny<ShipmentEvent>()), Times.Once);
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 91. OpenShift vs Kubernetes?
+## 93. OpenShift vs Kubernetes?
 
 *Docker & OpenShift*
 
@@ -1041,7 +1079,7 @@ publisher.Verify(p => p.PublishAsync(It.IsAny<ShipmentEvent>()), Times.Once);
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 92. Liveness vs readiness probe?
+## 94. Liveness vs readiness probe?
 
 *Docker & OpenShift*
 
@@ -1049,7 +1087,7 @@ publisher.Verify(p => p.PublishAsync(It.IsAny<ShipmentEvent>()), Times.Once);
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 93. Walk me through a CI/CD pipeline you've built.
+## 95. Walk me through a CI/CD pipeline you've built.
 
 *Docker & OpenShift*
 
@@ -1062,7 +1100,7 @@ The same image moves through every environment; only configuration changes.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 94. How do you handle config per environment?
+## 96. How do you handle config per environment?
 
 *Docker & OpenShift*
 
@@ -1070,7 +1108,7 @@ The same image moves through every environment; only configuration changes.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 95. Design order placement for our Direct Investing platform.
+## 97. Design order placement for our Direct Investing platform.
 
 *System design*
 
@@ -1091,7 +1129,7 @@ Client -> APIM -> Order API
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 96. Why return 202 Accepted instead of waiting for the market?
+## 98. Why return 202 Accepted instead of waiting for the market?
 
 *System design*
 
@@ -1099,7 +1137,7 @@ Client -> APIM -> Order API
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 97. Kafka is down when an order is placed. What happens?
+## 99. Kafka is down when an order is placed. What happens?
 
 *System design*
 
@@ -1107,7 +1145,7 @@ Client -> APIM -> Order API
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 98. How would a regulator reconstruct what happened to one order?
+## 100. How would a regulator reconstruct what happened to one order?
 
 *System design*
 
@@ -1115,7 +1153,7 @@ Client -> APIM -> Order API
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 99. How do you keep data consistent across microservices?
+## 101. How do you keep data consistent across microservices?
 
 *System design*
 
@@ -1123,7 +1161,7 @@ Client -> APIM -> Order API
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 100. Circuit breaker vs retry vs bulkhead?
+## 102. Circuit breaker vs retry vs bulkhead?
 
 *System design*
 
@@ -1135,7 +1173,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 101. How would you push live price or order updates to the UI?
+## 103. How would you push live price or order updates to the UI?
 
 *System design*
 
@@ -1143,7 +1181,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 102. How does your design scale?
+## 104. How does your design scale?
 
 *System design*
 
@@ -1151,7 +1189,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 103. Tell me about a disagreement with a teammate.
+## 105. Tell me about a disagreement with a teammate.
 
 *Behavioural*
 
@@ -1167,7 +1205,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 104. Tell me about a production incident or a hard problem you solved.
+## 106. Tell me about a production incident or a hard problem you solved.
 
 *Behavioural*
 
@@ -1183,7 +1221,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 105. How do you mentor other developers?
+## 107. How do you mentor other developers?
 
 *Behavioural*
 
@@ -1191,7 +1229,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 106. Why RBC, and why this role?
+## 108. Why RBC, and why this role?
 
 *Behavioural*
 
@@ -1199,7 +1237,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 107. You're okay with contract-to-hire?
+## 109. You're okay with contract-to-hire?
 
 *Behavioural*
 
@@ -1209,7 +1247,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 108. What questions do you have for us?
+## 110. What questions do you have for us?
 
 *Behavioural*
 
@@ -1220,7 +1258,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 109. Walk me through your banking solution.
+## 111. Walk me through your banking solution.
 
 *CodeSignal*
 
@@ -1231,7 +1269,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 110. How would you have implemented the scheduled transfer?
+## 112. How would you have implemented the scheduled transfer?
 
 *CodeSignal*
 
@@ -1241,7 +1279,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 111. What would you do differently on the assessment?
+## 113. What would you do differently on the assessment?
 
 *CodeSignal*
 
