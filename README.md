@@ -13,7 +13,7 @@ skim questions the night before.
 [**Open the drill app →**](https://sachinbarthwal.github.io/interview-prep/) (live once
 GitHub Pages is enabled on this repo — see below)
 
-All 458 questions above are also playable as spaced-repetition flashcards: flip a
+All 459 questions above are also playable as spaced-repetition flashcards: flip a
 card, self-rate "Still learning" or "Got it", and missed cards resurface sooner
 than ones you know cold. It tracks a daily streak, XP, and a per-topic mastery bar
 — all stored only in your browser (`localStorage`), nothing leaves your device.
