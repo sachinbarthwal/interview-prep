@@ -1413,9 +1413,27 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 *CodeSignal*
 
-> "Store scheduled transfers ordered by execution time, in a list or a PriorityQueue keyed by time. Before handling any operation at timestamp T, process every scheduled transfer due at or before T, in order. Check the balance when it executes, not when it's scheduled; if it's insufficient, mark it failed. Give each one an id so it can be cancelled."
+> "Every operation takes a timestamp, so the key rule is: before handling any operation at time T, first execute every scheduled transfer due at or before T, in order. I'd store them in a PriorityQueue ordered by execution time, with creation order as the tie-break, plus a Dictionary by transfer id. When one is due, I reuse the Level 3 transfer logic and check the balance at execution time, not at scheduling. A failure is marked failed, not retried. Cancel marks it cancelled and it's skipped when dequeued, because a PriorityQueue can't remove from the middle."
 
-**Follow-up:** Why process due transfers first? So every operation sees the correct balance at its timestamp.
+```csharp
+private void ProcessDue(int now)
+{
+    while (_queue.Count > 0 && _queue.Peek().ExecuteAt <= now)
+    {
+        ScheduledTransfer transfer = _queue.Dequeue();
+        _scheduled.Remove(transfer.Id);
+
+        if (transfer.Cancelled)
+            continue;
+
+        TryTransfer(transfer.From, transfer.To, transfer.Amount);   // balance checked NOW
+    }
+}
+```
+
+Priority is a pair `(ExecuteAt, sequence)`: sorted by time, then by creation order. Every public method calls `ProcessDue(timestamp)` first.
+
+**Follow-up:** Why check the balance at execution? The client may have more or less money by then. Why ProcessDue first in every method? So every operation sees the correct balances for its timestamp.
 
 **[⬆ Back to Top](#table-of-contents)**
 
