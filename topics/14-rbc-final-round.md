@@ -264,7 +264,7 @@ Customer --POST /shipments--> APIM --> Your .NET 8 API
 
 > "Customer-facing work is synchronous; everything else is events, saved first, retried with backoff, and processed idempotently."
 
-**Follow-up:** WMS down for an hour? The customer isn't affected; rows stay pending and publish when it's back. What's backoff? Waiting longer between retries (1s, 2s, 4s, 8s) so you don't overwhelm a struggling system. Exact idempotency check: a ProcessedMessages table with the message id as a unique key, insert + process in one transaction; a duplicate insert fails, so skip.
+**Follow-up:** WMS down for an hour? The customer isn't affected. We publish to Pub/Sub, not to the WMS, so the publish SUCCEEDS and messages wait in the subscription; the WMS processes everything it hasn't acknowledged when it's back. Retries + Datadog alerts are for the OTHER case: the broker itself unreachable, so rows stay pending in our table. Pub/Sub uses acks, Kafka uses offsets, Event Hubs uses checkpoints: same idea. What's backoff? Waiting longer between retries (1s, 2s, 4s, 8s) so you don't overwhelm a struggling system. Exact idempotency check: a ProcessedMessages table with the message id as a unique key, insert + process in one transaction; a duplicate insert fails, so skip.
 
 **[⬆ Back to Top](#table-of-contents)**
 
