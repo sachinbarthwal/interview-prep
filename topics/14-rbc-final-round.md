@@ -193,11 +193,11 @@
 | 183 | Behavioural | [Why RBC, and why this role?](#183-why-rbc-and-why-this-role) |
 | 184 | Behavioural | [You're okay with contract-to-hire?](#184-youre-okay-with-contract-to-hire) |
 | 185 | Behavioural | [What questions do you have for us?](#185-what-questions-do-you-have-for-us) |
-| 186 | CodeSignal | [Walk me through your banking solution.](#186-walk-me-through-your-banking-solution) |
-| 187 | CodeSignal | [How would you have implemented the scheduled transfer?](#187-how-would-you-have-implemented-the-scheduled-transfer) |
-| 188 | CodeSignal | [In your scheduled transfer design, where does the money actually move?](#188-in-your-scheduled-transfer-design-where-does-the-money-actually-move) |
-| 189 | CodeSignal | [How would you improve your CodeSignal solution?](#189-how-would-you-improve-your-codesignal-solution) |
-| 190 | CodeSignal | [What would you do differently on the assessment?](#190-what-would-you-do-differently-on-the-assessment) |
+| 186 | CodeSignal | [Walk me through your banking solution, level by level.](#186-walk-me-through-your-banking-solution-level-by-level) |
+| 187 | CodeSignal | [Level 3: show the transfer and the traps.](#187-level-3-show-the-transfer-and-the-traps) |
+| 188 | CodeSignal | [Level 4: top spenders, and the traps.](#188-level-4-top-spenders-and-the-traps) |
+| 189 | CodeSignal | [How would you have implemented the scheduled transfer?](#189-how-would-you-have-implemented-the-scheduled-transfer) |
+| 190 | CodeSignal | [How would you improve your CodeSignal solution?](#190-how-would-you-improve-your-codesignal-solution) |
 
 ## 1. Tell me about yourself.
 
@@ -2258,127 +2258,139 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 186. Walk me through your banking solution.
+## 186. Walk me through your banking solution, level by level.
 
 *CodeSignal*
 
-- **Dictionary<accountId, Account>** for O(1) lookups.
-- Validate everything before changing state: accounts exist, amount positive, enough balance.
-- Transfer changes both balances only after every check passes, so it's all or nothing.
-- Top spenders: track each account's total outgoing, sort descending with an id tie-break, then format the output.
+Every method takes a timestamp first; the caller supplies the account id.
+
+- **L1 CreateAccount / GetBalance:** Dictionary<string, Account>, false on a duplicate id, null for unknown.
+- **L2 Deposit:** TryGetValue, reject amount <= 0, return the new balance.
+- **L3 Transfer:** ALL checks first (same account, amount, both exist, enough balance), THEN move money and add to TotalSpent. Returns the source balance.
+- **L4 TopSpenders:** LINQ: Where TotalSpent > 0, OrderByDescending, ThenBy id, Take(n), then string.Join of "id{total}".
+- **L5 Schedule / Cancel:** scheduling only records it; every method calls ProcessDue(timestamp) first, which executes due transfers through the same TryTransfer.
+
+**Follow-up:** Why Dictionary of Account objects? O(1) lookups, and each level adds a field instead of another dictionary to keep in sync. Why return false on a duplicate instead of throwing? It's an expected case, and the spec says so.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 187. How would you have implemented the scheduled transfer?
+## 187. Level 3: show the transfer and the traps.
 
 *CodeSignal*
 
-> "Every operation takes a timestamp, so the key rule is: before handling any operation at time T, first execute every scheduled transfer due at or before T, in order. I keep them in a simple List. When one is due, I reuse the Level 3 transfer logic and check the balance at execution time, not at scheduling. Cancel just removes it from the list."
+```csharp
+private int? TryTransfer(string sourceId, string targetId, int amount)
+{
+    if (sourceId == targetId || amount <= 0)
+        return null;
+    if (!_accounts.TryGetValue(sourceId, out Account? source))
+        return null;
+    if (!_accounts.TryGetValue(targetId, out Account? target))
+        return null;
+    if (source.Balance < amount)
+        return null;
+
+    source.Balance -= amount;        // only after ALL checks pass
+    target.Balance += amount;
+    source.TotalSpent += amount;
+    return source.Balance;
+}
+```
+
+> "Validate everything before changing anything, so a failed transfer never leaves money half-moved."
+
+**Follow-up:** Is it thread-safe? No; CodeSignal is single-threaded. In a real bank: a database transaction with an atomic conditional update, or a lock. Why block same-account? It would count as spending while moving nothing. TryGetValue vs ContainsKey + []: one lookup instead of two.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 188. Level 4: top spenders, and the traps.
+
+*CodeSignal*
 
 ```csharp
+IEnumerable<string> top = _accounts.Values
+    .Where(a => a.TotalSpent > 0)
+    .OrderByDescending(a => a.TotalSpent)
+    .ThenBy(a => a.Id, StringComparer.Ordinal)
+    .Take(n)
+    .Select(a => a.Id + "{" + a.TotalSpent + "}");
+
+return string.Join("", top);      // "acc2{300}acc1{100}"
+```
+
+**Follow-up:** Why StringComparer.Ordinal? A plain character-by-character sort, the same on every machine. Big-O? O(n log n) for the sort; fine here, a sorted structure if called constantly on huge data. Why a running TotalSpent? O(1) to update instead of re-scanning every transfer.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 189. How would you have implemented the scheduled transfer?
+
+*CodeSignal*
+
+> "Scheduling only records it. Every method calls ProcessDue(timestamp) first, which executes everything due, earliest first and then in scheduling order, through the same TryTransfer, so the balance is checked at execution time. If it's insufficient then, it's skipped for good."
+
+```csharp
+public override string? ScheduleTransfer(int timestamp, string sourceAccountId,
+    string targetAccountId, int amount, int delay)
+{
+    ProcessDue(timestamp);
+    if (sourceAccountId == targetAccountId || amount <= 0)
+        return null;
+    if (!_accounts.ContainsKey(sourceAccountId) || !_accounts.ContainsKey(targetAccountId))
+        return null;
+
+    _transferCount++;
+    var transfer = new ScheduledTransfer
+    {
+        Id = "transfer" + _transferCount, Source = sourceAccountId, Target = targetAccountId,
+        Amount = amount, ExecuteAt = timestamp + delay, Sequence = _transferCount
+    };
+    _scheduled.Add(transfer);
+    return transfer.Id;
+}
+
 private void ProcessDue(int now)
 {
     List<ScheduledTransfer> due = _scheduled
         .Where(t => t.ExecuteAt <= now)
-        .OrderBy(t => t.ExecuteAt)      // earliest first
-        .ThenBy(t => t.Sequence)        // same time: created first goes first
+        .OrderBy(t => t.ExecuteAt)
+        .ThenBy(t => t.Sequence)
         .ToList();
 
     foreach (ScheduledTransfer transfer in due)
     {
         _scheduled.Remove(transfer);
-        TryTransfer(transfer.From, transfer.To, transfer.Amount);   // balance checked NOW
+        TryTransfer(transfer.Source, transfer.Target, transfer.Amount);
     }
 }
 
-public bool CancelTransfer(int timestamp, string transferId)
+public override bool CancelTransfer(int timestamp, string transferId)
 {
     ProcessDue(timestamp);
-    int removed = _scheduled.RemoveAll(t => t.Id == transferId);
-    return removed > 0;
+    return _scheduled.RemoveAll(t => t.Id == transferId) > 0;
 }
 ```
 
-Every public method calls `ProcessDue(timestamp)` first.
-
-**Follow-up:** Why .ToList()? It copies the due items, so removing from the original list inside the loop doesn't throw 'Collection was modified'. Efficiency: 'I'd start with a List because it's simple and clearly correct; with thousands of transfers I'd switch to a PriorityQueue ordered by time.'
+**Follow-up:** Due at 14, GetBalance at 14? The transfer runs FIRST, because ProcessDue runs before the operation. Cancel after execution? False, it's no longer pending. Invalid schedule doesn't use an id: increment only after validation. Why .ToList()? A copy, so removing inside the loop is safe. Why a List? Simple and correct; a PriorityQueue for thousands.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 188. In your scheduled transfer design, where does the money actually move?
+## 190. How would you improve your CodeSignal solution?
 
 *CodeSignal*
 
-> "Scheduling only records the transfer. The money moves inside ProcessDue, which every operation calls first. It reuses the same TryTransfer method as instant transfers, so there's one place where balances change and the balance check happens at execution time."
-
-```csharp
-// Level 3: the ONLY place balances change
-private bool TryTransfer(string from, string to, int amount)
-{
-    if (!_accounts.ContainsKey(from) || !_accounts.ContainsKey(to)) return false;
-    if (from == to || amount <= 0) return false;
-    if (_accounts[from].Balance < amount) return false;
-
-    _accounts[from].Balance -= amount;
-    _accounts[to].Balance += amount;
-    _accounts[from].TotalSpent += amount;
-    return true;
-}
-
-public bool Transfer(int timestamp, string from, string to, int amount)
-{
-    ProcessDue(timestamp);
-    return TryTransfer(from, to, amount);
-}
-
-// Level 5: only SAVES it, no money moves
-public string ScheduleTransfer(int timestamp, string from, string to, int amount, int delay)
-{
-    ProcessDue(timestamp);
-    _sequence++;
-    var transfer = new ScheduledTransfer
-    {
-        Id = "transfer" + _sequence, From = from, To = to, Amount = amount,
-        ExecuteAt = timestamp + delay, Sequence = _sequence
-    };
-    _scheduled.Add(transfer);
-    return transfer.Id;
-}
-```
-
-Timeline: t=10 schedule $50 with delay 20 (ExecuteAt 30). t=25 nothing due. t=35 any call runs ProcessDue(35), the transfer is due, the money moves.
-
-**Follow-up:** Why one TryTransfer? Instant and scheduled transfers can't behave differently, and a bug fix in one place fixes both.
-
-**[⬆ Back to Top](#table-of-contents)**
-
-## 189. How would you improve your CodeSignal solution?
-
-*CodeSignal*
-
-> "In the assessment I kept adding separate dictionaries for each new requirement: balances, then spending, then scheduled transfers. By Level 4 every change was slow and error-prone. Now I'd model an Account class from the start, holding owner, balance and total spent, in one Dictionary<int, Account>. Each new level just adds a field or method instead of another parallel dictionary to keep in sync."
+> "In the assessment I kept adding separate dictionaries for each new requirement: balances, then spending, then scheduled transfers. By Level 4 every change was slow and error-prone. Now I'd model an Account class from the start, holding balance and total spent, in one Dictionary keyed by account id. Each new level adds a field or method instead of another dictionary to keep in sync, and one TryTransfer method is the only place money moves."
 
 ```csharp
 public class Account
 {
-    public int Id { get; set; }
-    public string Owner { get; set; } = "";
+    public string Id { get; set; } = "";
     public int Balance { get; set; }
     public int TotalSpent { get; set; }
 }
 
-private readonly Dictionary<int, Account> _accounts = new Dictionary<int, Account>();
-private int _nextId = 1;
+private readonly Dictionary<string, Account> _accounts = new Dictionary<string, Account>();
 ```
 
-**Follow-up:** Same idea as the country question: parallel collections that must stay in sync are fragile; one structure holding related data together is solid. It also explains honestly why Level 5 ran out of time.
-
-**[⬆ Back to Top](#table-of-contents)**
-
-## 190. What would you do differently on the assessment?
-
-*CodeSignal*
-
-> "I'd move faster through the first levels by setting up the data model for later requirements from the start, a dictionary of account objects with history, instead of refactoring each level. That would have left time for the scheduled transfers."
+**Follow-up:** Same idea as the country question: parallel collections that must stay in sync are fragile; one structure holding related data together is solid. It also honestly explains why Level 5 ran out of time.
 
 **[⬆ Back to Top](#table-of-contents)**
