@@ -12,115 +12,127 @@
 | 2 | Your stories | [Walk me through one integration flow at Staples, end to end.](#2-walk-me-through-one-integration-flow-at-staples-end-to-end) |
 | 3 | Your stories | [What happens at Staples if publishing to Event Hubs fails?](#3-what-happens-at-staples-if-publishing-to-event-hubs-fails) |
 | 4 | Your stories | [Why do you publish in 15-minute batches instead of immediately?](#4-why-do-you-publish-in-15-minute-batches-instead-of-immediately) |
-| 5 | Your stories | [What was the Bounteous / insightsoftware platform, and what was your role?](#5-what-was-the-bounteous--insightsoftware-platform-and-what-was-your-role) |
-| 6 | Your stories | [How did you make the reports faster?](#6-how-did-you-make-the-reports-faster) |
-| 7 | Your stories | [How did you find which queries were slow?](#7-how-did-you-find-which-queries-were-slow) |
-| 8 | Your stories | [Why is SELECT * a problem?](#8-why-is-select--a-problem) |
-| 9 | Your stories | [Tell me about a difficult legacy system you worked on.](#9-tell-me-about-a-difficult-legacy-system-you-worked-on) |
-| 10 | Your stories | [What did you build with Kafka at Centric?](#10-what-did-you-build-with-kafka-at-centric) |
-| 11 | Your stories | [Are you hands-on? What percentage of your day is coding?](#11-are-you-hands-on-what-percentage-of-your-day-is-coding) |
-| 12 | Screener follow-ups | [Explain SOLID with a real example.](#12-explain-solid-with-a-real-example) |
-| 13 | Screener follow-ups | [What are the benefits of dependency injection, beyond testing?](#13-what-are-the-benefits-of-dependency-injection-beyond-testing) |
-| 14 | Screener follow-ups | [You wrote a class teammates need, in the same solution. How do you share it?](#14-you-wrote-a-class-teammates-need-in-the-same-solution-how-do-you-share-it) |
-| 15 | Screener follow-ups | [Explain the Repository pattern. Isn't DbContext already one?](#15-explain-the-repository-pattern-isnt-dbcontext-already-one) |
-| 16 | Screener follow-ups | [When would you use a Factory? Give an example.](#16-when-would-you-use-a-factory-give-an-example) |
-| 17 | Screener follow-ups | [Find a number in a sorted array of 1 million ints, no built-ins.](#17-find-a-number-in-a-sorted-array-of-1-million-ints-no-built-ins) |
-| 18 | Screener follow-ups | [Array of only 0s and 1s: move all 0s to the front in O(n).](#18-array-of-only-0s-and-1s-move-all-0s-to-the-front-in-on) |
-| 19 | Screener follow-ups | [Country names and codes in two lists. Why a Dictionary?](#19-country-names-and-codes-in-two-lists-why-a-dictionary) |
-| 20 | Screener follow-ups | [How does a Dictionary actually get O(1) lookups?](#20-how-does-a-dictionary-actually-get-o1-lookups) |
-| 21 | Kafka | [Why use Kafka instead of calling the other service's API?](#21-why-use-kafka-instead-of-calling-the-other-services-api) |
-| 22 | Kafka | [Explain topics, partitions, offsets and consumer groups.](#22-explain-topics-partitions-offsets-and-consumer-groups) |
-| 23 | Kafka | [How do you keep one account's Buy and Cancel in order?](#23-how-do-you-keep-one-accounts-buy-and-cancel-in-order) |
-| 24 | Kafka | [A consumer processes a message but crashes before committing the offset.](#24-a-consumer-processes-a-message-but-crashes-before-committing-the-offset) |
-| 25 | Kafka | [Two consumers in the same group vs in different groups?](#25-two-consumers-in-the-same-group-vs-in-different-groups) |
-| 26 | Kafka | [What's a dead-letter queue and when do you use it?](#26-whats-a-dead-letter-queue-and-when-do-you-use-it) |
-| 27 | Kafka | [What's a rebalance?](#27-whats-a-rebalance) |
-| 28 | Kafka | [Kafka vs a queue like MQ, RabbitMQ or Service Bus?](#28-kafka-vs-a-queue-like-mq-rabbitmq-or-service-bus) |
-| 29 | Kafka | [Can more consumers than partitions make it faster?](#29-can-more-consumers-than-partitions-make-it-faster) |
-| 30 | Kafka | [Is exactly-once delivery possible?](#30-is-exactly-once-delivery-possible) |
-| 31 | Kafka | [Explain the transactional outbox pattern.](#31-explain-the-transactional-outbox-pattern) |
-| 32 | Redis | [How do you implement caching with Redis?](#32-how-do-you-implement-caching-with-redis) |
-| 33 | Redis | [How do you choose TTLs?](#33-how-do-you-choose-ttls) |
-| 34 | Redis | [How do you invalidate the cache when data changes?](#34-how-do-you-invalidate-the-cache-when-data-changes) |
-| 35 | Redis | [What's a cache stampede, and how do you prevent it?](#35-whats-a-cache-stampede-and-how-do-you-prevent-it) |
-| 36 | Redis | [Redis goes down. What happens to your API?](#36-redis-goes-down-what-happens-to-your-api) |
-| 37 | Redis | [Why shouldn't Redis be the source of truth for an account balance?](#37-why-shouldnt-redis-be-the-source-of-truth-for-an-account-balance) |
-| 38 | Redis | [IMemoryCache vs Redis?](#38-imemorycache-vs-redis) |
-| 39 | Redis | [What else is Redis used for besides caching?](#39-what-else-is-redis-used-for-besides-caching) |
-| 40 | Redis | [What happens when Redis runs out of memory?](#40-what-happens-when-redis-runs-out-of-memory) |
-| 41 | .NET core | [Transient vs Scoped vs Singleton?](#41-transient-vs-scoped-vs-singleton) |
-| 42 | .NET core | [Why can't you inject a Scoped service into a Singleton?](#42-why-cant-you-inject-a-scoped-service-into-a-singleton) |
-| 43 | .NET core | [How do you keep a Singleton thread-safe?](#43-how-do-you-keep-a-singleton-thread-safe) |
-| 44 | .NET core | [What does async/await actually do? Does it create a thread?](#44-what-does-asyncawait-actually-do-does-it-create-a-thread) |
-| 45 | .NET core | [Why is async void dangerous?](#45-why-is-async-void-dangerous) |
-| 46 | .NET core | [What's wrong with .Result or .Wait()?](#46-whats-wrong-with-result-or-wait) |
-| 47 | .NET core | [How do you run three independent calls in parallel?](#47-how-do-you-run-three-independent-calls-in-parallel) |
-| 48 | .NET core | [Why use IHttpClientFactory?](#48-why-use-ihttpclientfactory) |
-| 49 | .NET core | [IEnumerable vs IQueryable?](#49-ienumerable-vs-iqueryable) |
-| 50 | .NET core | [What is middleware in ASP.NET Core?](#50-what-is-middleware-in-aspnet-core) |
-| 51 | .NET core | [How do you handle exceptions globally in an API?](#51-how-do-you-handle-exceptions-globally-in-an-api) |
-| 52 | .NET core | [How do you reduce memory allocations on large data?](#52-how-do-you-reduce-memory-allocations-on-large-data) |
-| 53 | .NET core | [record vs class?](#53-record-vs-class) |
-| 54 | EF Core & SQL | [What's the N+1 problem? How do you fix it?](#54-whats-the-n1-problem-how-do-you-fix-it) |
-| 55 | EF Core & SQL | [What does AsNoTracking do, and when does it hurt?](#55-what-does-asnotracking-do-and-when-does-it-hurt) |
-| 56 | EF Core & SQL | [Two users update the same balance at once. How do you stop a lost update?](#56-two-users-update-the-same-balance-at-once-how-do-you-stop-a-lost-update) |
-| 57 | EF Core & SQL | [How do you deploy database changes safely?](#57-how-do-you-deploy-database-changes-safely) |
-| 58 | EF Core & SQL | [Clustered vs nonclustered index? What's a key lookup?](#58-clustered-vs-nonclustered-index-whats-a-key-lookup) |
-| 59 | EF Core & SQL | [Why would SQL Server ignore an index you created?](#59-why-would-sql-server-ignore-an-index-you-created) |
-| 60 | EF Core & SQL | [What's parameter sniffing?](#60-whats-parameter-sniffing) |
-| 61 | EF Core & SQL | [How do you prevent deadlocks in money transfers?](#61-how-do-you-prevent-deadlocks-in-money-transfers) |
-| 62 | EF Core & SQL | [Add a NOT NULL column to a 50-million-row table without downtime.](#62-add-a-not-null-column-to-a-50-million-row-table-without-downtime) |
-| 63 | EF Core & SQL | [Where should business logic live: stored procedures or C#?](#63-where-should-business-logic-live-stored-procedures-or-c) |
-| 64 | EF Core & SQL | [Isolation levels, in one breath.](#64-isolation-levels-in-one-breath) |
-| 65 | API & security | [What makes a RESTful API well designed?](#65-what-makes-a-restful-api-well-designed) |
-| 66 | API & security | [POST vs PUT vs PATCH, and which are idempotent?](#66-post-vs-put-vs-patch-and-which-are-idempotent) |
-| 67 | API & security | [Which status codes do you use, and when?](#67-which-status-codes-do-you-use-and-when) |
-| 68 | API & security | [A client retries a timed-out order. How do you prevent a duplicate trade?](#68-a-client-retries-a-timed-out-order-how-do-you-prevent-a-duplicate-trade) |
-| 69 | API & security | [How do you version an API?](#69-how-do-you-version-an-api) |
-| 70 | API & security | [OAuth2 vs JWT?](#70-oauth2-vs-jwt) |
-| 71 | API & security | [How does your API validate a JWT?](#71-how-does-your-api-validate-a-jwt) |
-| 72 | API & security | [Name an OWASP risk you've mitigated.](#72-name-an-owasp-risk-youve-mitigated) |
-| 73 | API & security | [How do you protect customer data and privacy?](#73-how-do-you-protect-customer-data-and-privacy) |
-| 74 | API & security | [Where do secrets like connection strings go?](#74-where-do-secrets-like-connection-strings-go) |
-| 75 | API & security | [What do you know about WCAG accessibility?](#75-what-do-you-know-about-wcag-accessibility) |
-| 76 | Testing | [Unit test vs integration test: where's the line?](#76-unit-test-vs-integration-test-wheres-the-line) |
-| 77 | Testing | [How do you unit test a class that publishes to Kafka?](#77-how-do-you-unit-test-a-class-that-publishes-to-kafka) |
-| 78 | Testing | [How do you test an API end to end?](#78-how-do-you-test-an-api-end-to-end) |
-| 79 | Testing | [What makes a good unit test?](#79-what-makes-a-good-unit-test) |
-| 80 | Testing | [Mock vs stub vs fake?](#80-mock-vs-stub-vs-fake) |
-| 81 | Testing | [Do you practise TDD?](#81-do-you-practise-tdd) |
-| 82 | Docker & OpenShift | [Image vs container vs Docker?](#82-image-vs-container-vs-docker) |
-| 83 | Docker & OpenShift | [How do you write a Dockerfile for a .NET API?](#83-how-do-you-write-a-dockerfile-for-a-net-api) |
-| 84 | Docker & OpenShift | [Explain the core Kubernetes objects.](#84-explain-the-core-kubernetes-objects) |
-| 85 | Docker & OpenShift | [OpenShift vs Kubernetes?](#85-openshift-vs-kubernetes) |
-| 86 | Docker & OpenShift | [Liveness vs readiness probe?](#86-liveness-vs-readiness-probe) |
-| 87 | Docker & OpenShift | [Walk me through a CI/CD pipeline you've built.](#87-walk-me-through-a-cicd-pipeline-youve-built) |
-| 88 | Docker & OpenShift | [How do you handle config per environment?](#88-how-do-you-handle-config-per-environment) |
-| 89 | System design | [Design order placement for our Direct Investing platform.](#89-design-order-placement-for-our-direct-investing-platform) |
-| 90 | System design | [Why return 202 Accepted instead of waiting for the market?](#90-why-return-202-accepted-instead-of-waiting-for-the-market) |
-| 91 | System design | [Kafka is down when an order is placed. What happens?](#91-kafka-is-down-when-an-order-is-placed-what-happens) |
-| 92 | System design | [How would a regulator reconstruct what happened to one order?](#92-how-would-a-regulator-reconstruct-what-happened-to-one-order) |
-| 93 | System design | [How do you keep data consistent across microservices?](#93-how-do-you-keep-data-consistent-across-microservices) |
-| 94 | System design | [Circuit breaker vs retry vs bulkhead?](#94-circuit-breaker-vs-retry-vs-bulkhead) |
-| 95 | System design | [How would you push live price or order updates to the UI?](#95-how-would-you-push-live-price-or-order-updates-to-the-ui) |
-| 96 | System design | [How does your design scale?](#96-how-does-your-design-scale) |
-| 97 | Behavioural | [Tell me about a disagreement with a teammate.](#97-tell-me-about-a-disagreement-with-a-teammate) |
-| 98 | Behavioural | [Tell me about a mistake or a production incident.](#98-tell-me-about-a-mistake-or-a-production-incident) |
-| 99 | Behavioural | [How do you mentor other developers?](#99-how-do-you-mentor-other-developers) |
-| 100 | Behavioural | [Why RBC, and why this role?](#100-why-rbc-and-why-this-role) |
-| 101 | Behavioural | [You're okay with contract-to-hire?](#101-youre-okay-with-contract-to-hire) |
-| 102 | Behavioural | [What questions do you have for us?](#102-what-questions-do-you-have-for-us) |
-| 103 | CodeSignal | [Walk me through your banking solution.](#103-walk-me-through-your-banking-solution) |
-| 104 | CodeSignal | [How would you have implemented the scheduled transfer?](#104-how-would-you-have-implemented-the-scheduled-transfer) |
-| 105 | CodeSignal | [What would you do differently on the assessment?](#105-what-would-you-do-differently-on-the-assessment) |
+| 5 | Your stories | [How do you keep stock consistent across multiple order management systems?](#5-how-do-you-keep-stock-consistent-across-multiple-order-management-systems) |
+| 6 | Your stories | [If the inventory service is the source of truth, why publish stock updates at all?](#6-if-the-inventory-service-is-the-source-of-truth-why-publish-stock-updates-at-all) |
+| 7 | Your stories | [What was the Bounteous / insightsoftware platform, and what was your role?](#7-what-was-the-bounteous--insightsoftware-platform-and-what-was-your-role) |
+| 8 | Your stories | [How did you make the reports faster?](#8-how-did-you-make-the-reports-faster) |
+| 9 | Your stories | [How did you find which queries were slow?](#9-how-did-you-find-which-queries-were-slow) |
+| 10 | Your stories | [Why is SELECT * a problem?](#10-why-is-select--a-problem) |
+| 11 | Your stories | [Tell me about a difficult legacy system you worked on.](#11-tell-me-about-a-difficult-legacy-system-you-worked-on) |
+| 12 | Your stories | [What did you build with Kafka at Centric?](#12-what-did-you-build-with-kafka-at-centric) |
+| 13 | Your stories | [Are you hands-on? What percentage of your day is coding?](#13-are-you-hands-on-what-percentage-of-your-day-is-coding) |
+| 14 | Screener follow-ups | [Explain SOLID with a real example.](#14-explain-solid-with-a-real-example) |
+| 15 | Screener follow-ups | [What are the benefits of dependency injection, beyond testing?](#15-what-are-the-benefits-of-dependency-injection-beyond-testing) |
+| 16 | Screener follow-ups | [You wrote a class teammates need, in the same solution. How do you share it?](#16-you-wrote-a-class-teammates-need-in-the-same-solution-how-do-you-share-it) |
+| 17 | Screener follow-ups | [Explain the Repository pattern. Isn't DbContext already one?](#17-explain-the-repository-pattern-isnt-dbcontext-already-one) |
+| 18 | Screener follow-ups | [When would you use a Factory? Give an example.](#18-when-would-you-use-a-factory-give-an-example) |
+| 19 | Screener follow-ups | [Find a number in a sorted array of 1 million ints, no built-ins.](#19-find-a-number-in-a-sorted-array-of-1-million-ints-no-built-ins) |
+| 20 | Screener follow-ups | [Array of only 0s and 1s: move all 0s to the front in O(n).](#20-array-of-only-0s-and-1s-move-all-0s-to-the-front-in-on) |
+| 21 | Screener follow-ups | [Country names and codes in two lists. Why a Dictionary?](#21-country-names-and-codes-in-two-lists-why-a-dictionary) |
+| 22 | Screener follow-ups | [How does a Dictionary actually get O(1) lookups?](#22-how-does-a-dictionary-actually-get-o1-lookups) |
+| 23 | Kafka | [Why use Kafka instead of calling the other service's API?](#23-why-use-kafka-instead-of-calling-the-other-services-api) |
+| 24 | Kafka | [Explain topics, partitions, offsets and consumer groups.](#24-explain-topics-partitions-offsets-and-consumer-groups) |
+| 25 | Kafka | [How do you keep one account's Buy and Cancel in order?](#25-how-do-you-keep-one-accounts-buy-and-cancel-in-order) |
+| 26 | Kafka | [A consumer processes a message but crashes before committing the offset.](#26-a-consumer-processes-a-message-but-crashes-before-committing-the-offset) |
+| 27 | Kafka | [Why add a version number to events if Kafka keeps order?](#27-why-add-a-version-number-to-events-if-kafka-keeps-order) |
+| 28 | Kafka | [Two consumers in the same group vs in different groups?](#28-two-consumers-in-the-same-group-vs-in-different-groups) |
+| 29 | Kafka | [What's a dead-letter queue and when do you use it?](#29-whats-a-dead-letter-queue-and-when-do-you-use-it) |
+| 30 | Kafka | [What's a rebalance?](#30-whats-a-rebalance) |
+| 31 | Kafka | [Kafka vs a queue like MQ, RabbitMQ or Service Bus?](#31-kafka-vs-a-queue-like-mq-rabbitmq-or-service-bus) |
+| 32 | Kafka | [Can more consumers than partitions make it faster?](#32-can-more-consumers-than-partitions-make-it-faster) |
+| 33 | Kafka | [Is exactly-once delivery possible?](#33-is-exactly-once-delivery-possible) |
+| 34 | Kafka | [Explain the transactional outbox pattern.](#34-explain-the-transactional-outbox-pattern) |
+| 35 | Redis | [How do you implement caching with Redis?](#35-how-do-you-implement-caching-with-redis) |
+| 36 | Redis | [How do you choose TTLs?](#36-how-do-you-choose-ttls) |
+| 37 | Redis | [How do you invalidate the cache when data changes?](#37-how-do-you-invalidate-the-cache-when-data-changes) |
+| 38 | Redis | [What's a cache stampede, and how do you prevent it?](#38-whats-a-cache-stampede-and-how-do-you-prevent-it) |
+| 39 | Redis | [Redis goes down. What happens to your API?](#39-redis-goes-down-what-happens-to-your-api) |
+| 40 | Redis | [Why shouldn't Redis be the source of truth for an account balance?](#40-why-shouldnt-redis-be-the-source-of-truth-for-an-account-balance) |
+| 41 | Redis | [IMemoryCache vs Redis?](#41-imemorycache-vs-redis) |
+| 42 | Redis | [What else is Redis used for besides caching?](#42-what-else-is-redis-used-for-besides-caching) |
+| 43 | Redis | [What happens when Redis runs out of memory?](#43-what-happens-when-redis-runs-out-of-memory) |
+| 44 | .NET core | [Transient vs Scoped vs Singleton?](#44-transient-vs-scoped-vs-singleton) |
+| 45 | .NET core | [Why can't you inject a Scoped service into a Singleton?](#45-why-cant-you-inject-a-scoped-service-into-a-singleton) |
+| 46 | .NET core | [How do you keep a Singleton thread-safe?](#46-how-do-you-keep-a-singleton-thread-safe) |
+| 47 | .NET core | [What does async/await actually do? Does it create a thread?](#47-what-does-asyncawait-actually-do-does-it-create-a-thread) |
+| 48 | .NET core | [Why is async void dangerous?](#48-why-is-async-void-dangerous) |
+| 49 | .NET core | [What's wrong with .Result or .Wait()?](#49-whats-wrong-with-result-or-wait) |
+| 50 | .NET core | [How do you run three independent calls in parallel?](#50-how-do-you-run-three-independent-calls-in-parallel) |
+| 51 | .NET core | [Why use IHttpClientFactory?](#51-why-use-ihttpclientfactory) |
+| 52 | .NET core | [IEnumerable vs IQueryable?](#52-ienumerable-vs-iqueryable) |
+| 53 | .NET core | [What is middleware in ASP.NET Core?](#53-what-is-middleware-in-aspnet-core) |
+| 54 | .NET core | [How do you handle exceptions globally in an API?](#54-how-do-you-handle-exceptions-globally-in-an-api) |
+| 55 | .NET core | [How do you reduce memory allocations on large data?](#55-how-do-you-reduce-memory-allocations-on-large-data) |
+| 56 | .NET core | [record vs class?](#56-record-vs-class) |
+| 57 | EF Core & SQL | [What's the N+1 problem? How do you fix it?](#57-whats-the-n1-problem-how-do-you-fix-it) |
+| 58 | EF Core & SQL | [What does AsNoTracking do, and when does it hurt?](#58-what-does-asnotracking-do-and-when-does-it-hurt) |
+| 59 | EF Core & SQL | [Two users update the same balance at once. How do you stop a lost update?](#59-two-users-update-the-same-balance-at-once-how-do-you-stop-a-lost-update) |
+| 60 | EF Core & SQL | [How do you deploy database changes safely?](#60-how-do-you-deploy-database-changes-safely) |
+| 61 | EF Core & SQL | [Clustered vs nonclustered index? What's a key lookup?](#61-clustered-vs-nonclustered-index-whats-a-key-lookup) |
+| 62 | EF Core & SQL | [Why would SQL Server ignore an index you created?](#62-why-would-sql-server-ignore-an-index-you-created) |
+| 63 | EF Core & SQL | [What's parameter sniffing?](#63-whats-parameter-sniffing) |
+| 64 | EF Core & SQL | [Two orders try to reserve the last unit at the same moment. How do you stop both succeeding?](#64-two-orders-try-to-reserve-the-last-unit-at-the-same-moment-how-do-you-stop-both-succeeding) |
+| 65 | EF Core & SQL | [Does SQL Server lock rows by itself?](#65-does-sql-server-lock-rows-by-itself) |
+| 66 | EF Core & SQL | [How do you prevent deadlocks in money transfers?](#66-how-do-you-prevent-deadlocks-in-money-transfers) |
+| 67 | EF Core & SQL | [Add a NOT NULL column to a 50-million-row table without downtime.](#67-add-a-not-null-column-to-a-50-million-row-table-without-downtime) |
+| 68 | EF Core & SQL | [Where should business logic live: stored procedures or C#?](#68-where-should-business-logic-live-stored-procedures-or-c) |
+| 69 | EF Core & SQL | [Isolation levels, in one breath.](#69-isolation-levels-in-one-breath) |
+| 70 | API & security | [What makes a RESTful API well designed?](#70-what-makes-a-restful-api-well-designed) |
+| 71 | API & security | [POST vs PUT vs PATCH, and which are idempotent?](#71-post-vs-put-vs-patch-and-which-are-idempotent) |
+| 72 | API & security | [Which status codes do you use, and when?](#72-which-status-codes-do-you-use-and-when) |
+| 73 | API & security | [A client retries a timed-out order. How do you prevent a duplicate trade?](#73-a-client-retries-a-timed-out-order-how-do-you-prevent-a-duplicate-trade) |
+| 74 | API & security | [How do you version an API?](#74-how-do-you-version-an-api) |
+| 75 | API & security | [OAuth2 vs JWT?](#75-oauth2-vs-jwt) |
+| 76 | API & security | [How does your API validate a JWT?](#76-how-does-your-api-validate-a-jwt) |
+| 77 | API & security | [Name an OWASP risk you've mitigated.](#77-name-an-owasp-risk-youve-mitigated) |
+| 78 | API & security | [How do you protect customer data and privacy?](#78-how-do-you-protect-customer-data-and-privacy) |
+| 79 | API & security | [Where do secrets like connection strings go?](#79-where-do-secrets-like-connection-strings-go) |
+| 80 | API & security | [What do you know about WCAG accessibility?](#80-what-do-you-know-about-wcag-accessibility) |
+| 81 | Testing | [How do you test a service that consumes events and writes to a database?](#81-how-do-you-test-a-service-that-consumes-events-and-writes-to-a-database) |
+| 82 | Testing | [Unit test vs integration test: where's the line?](#82-unit-test-vs-integration-test-wheres-the-line) |
+| 83 | Testing | [How do you unit test a class that publishes to Kafka?](#83-how-do-you-unit-test-a-class-that-publishes-to-kafka) |
+| 84 | Testing | [How do you test an API end to end?](#84-how-do-you-test-an-api-end-to-end) |
+| 85 | Testing | [What makes a good unit test?](#85-what-makes-a-good-unit-test) |
+| 86 | Testing | [Mock vs stub vs fake?](#86-mock-vs-stub-vs-fake) |
+| 87 | Testing | [Do you practise TDD?](#87-do-you-practise-tdd) |
+| 88 | Docker & OpenShift | [Image vs container vs Docker?](#88-image-vs-container-vs-docker) |
+| 89 | Docker & OpenShift | [How do you write a Dockerfile for a .NET API?](#89-how-do-you-write-a-dockerfile-for-a-net-api) |
+| 90 | Docker & OpenShift | [Explain the core Kubernetes objects.](#90-explain-the-core-kubernetes-objects) |
+| 91 | Docker & OpenShift | [OpenShift vs Kubernetes?](#91-openshift-vs-kubernetes) |
+| 92 | Docker & OpenShift | [Liveness vs readiness probe?](#92-liveness-vs-readiness-probe) |
+| 93 | Docker & OpenShift | [Walk me through a CI/CD pipeline you've built.](#93-walk-me-through-a-cicd-pipeline-youve-built) |
+| 94 | Docker & OpenShift | [How do you handle config per environment?](#94-how-do-you-handle-config-per-environment) |
+| 95 | System design | [Design order placement for our Direct Investing platform.](#95-design-order-placement-for-our-direct-investing-platform) |
+| 96 | System design | [Why return 202 Accepted instead of waiting for the market?](#96-why-return-202-accepted-instead-of-waiting-for-the-market) |
+| 97 | System design | [Kafka is down when an order is placed. What happens?](#97-kafka-is-down-when-an-order-is-placed-what-happens) |
+| 98 | System design | [How would a regulator reconstruct what happened to one order?](#98-how-would-a-regulator-reconstruct-what-happened-to-one-order) |
+| 99 | System design | [How do you keep data consistent across microservices?](#99-how-do-you-keep-data-consistent-across-microservices) |
+| 100 | System design | [Circuit breaker vs retry vs bulkhead?](#100-circuit-breaker-vs-retry-vs-bulkhead) |
+| 101 | System design | [How would you push live price or order updates to the UI?](#101-how-would-you-push-live-price-or-order-updates-to-the-ui) |
+| 102 | System design | [How does your design scale?](#102-how-does-your-design-scale) |
+| 103 | Behavioural | [Tell me about a disagreement with a teammate.](#103-tell-me-about-a-disagreement-with-a-teammate) |
+| 104 | Behavioural | [Tell me about a production incident or a hard problem you solved.](#104-tell-me-about-a-production-incident-or-a-hard-problem-you-solved) |
+| 105 | Behavioural | [How do you mentor other developers?](#105-how-do-you-mentor-other-developers) |
+| 106 | Behavioural | [Why RBC, and why this role?](#106-why-rbc-and-why-this-role) |
+| 107 | Behavioural | [You're okay with contract-to-hire?](#107-youre-okay-with-contract-to-hire) |
+| 108 | Behavioural | [What questions do you have for us?](#108-what-questions-do-you-have-for-us) |
+| 109 | CodeSignal | [Walk me through your banking solution.](#109-walk-me-through-your-banking-solution) |
+| 110 | CodeSignal | [How would you have implemented the scheduled transfer?](#110-how-would-you-have-implemented-the-scheduled-transfer) |
+| 111 | CodeSignal | [What would you do differently on the assessment?](#111-what-would-you-do-differently-on-the-assessment) |
 
 ## 1. Tell me about yourself.
 
 *Your stories*
 
-> "I'm a senior .NET developer with about 10 years of experience, mostly C# and .NET Core backends with Angular or React front ends. Right now I'm at Staples on the middleware team, building .NET 8 services that connect systems owned by different teams and vendors (warehouse, transport, carriers) over REST APIs, Google Pub/Sub and Azure Event Hubs. Before that I was lead developer at Bounteous on an equity-compensation reporting platform for insightsoftware: ESOP, vesting and tax reports, where a lot of my work was performance. At Centric I built Kafka consumer services for an insurance platform. This role brings those together: event-driven .NET services in a financial domain."
+**Formula:** Now, then before (1 to 2 highlights), then why this role. 60 to 90 seconds, then stop.
 
-**Follow-up:** Keep it to 60 to 90 seconds, then stop. Let them choose what to dig into.
+> "I'm a senior .NET developer with about ten years of experience, mostly C# and .NET Core backends with Angular or React front ends.
+
+> Right now I'm at Staples, building .NET 8 microservices for inventory allocation and carrier integration. For example, I delivered the shipment flow end to end: we call a third-party carrier platform to pick the carrier, and publish events to the warehouse and transport systems through Google Pub/Sub and Azure Event Hubs. It runs on AKS with Azure DevOps pipelines.
+
+> Before that I was lead developer at Accolite on a capital markets reporting SaaS for insightsoftware: equity-compensation reports like vesting and ESOP tax for corporate clients. A lot of my work there was performance: SQL tuning, execution plans, async and caching.
+
+> What attracts me here is that this role combines exactly those things: event-driven .NET services, performance, and a financial domain, on a platform being rebuilt."
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -158,7 +170,33 @@ This is an **outbox** pattern with batched publishing.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 5. What was the Bounteous / insightsoftware platform, and what was your role?
+## 5. How do you keep stock consistent across multiple order management systems?
+
+*Your stories*
+
+> "The key is one source of truth. Our inventory service owns the stock numbers, the single pool of inventory, and the order management systems don't calculate stock themselves; they receive it.
+
+> Every stock change is published as an event keyed by SKU, so changes for one product are processed in order. Each event carries a version number, so a late, older update is ignored instead of overwriting newer data. Consumers are idempotent, so a redelivered event doesn't change stock twice.
+
+> Events can still fail, so a reconciliation pipeline periodically compares each system's stock with ours, fixes differences and alerts when drift crosses a threshold. Failing messages go to a dead-letter queue. So it's eventually consistent, with reconciliation as the safety net."
+
+**Pattern:** one owner, then ordered and versioned events, then idempotent consumers, then reconciliation.
+
+**Follow-up:** Why not one shared database for all systems? They're owned by different teams and vendors. A shared database couples them, so one team's schema change breaks everyone. Events keep them independent.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 6. If the inventory service is the source of truth, why publish stock updates at all?
+
+*Your stories*
+
+> "The source of truth decides the numbers, but other systems still need to know them: the website shows availability on every page, and order systems check stock before accepting an order. They can't call us millions of times, so each keeps a read-only copy that our events keep current and reconciliation checks. Their copy never decides stock; ours wins."
+
+Analogy: the bank is the source of truth, and your banking app shows a copy.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 7. What was the Bounteous / insightsoftware platform, and what was your role?
 
 *Your stories*
 
@@ -168,7 +206,7 @@ This is an **outbox** pattern with batched publishing.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 6. How did you make the reports faster?
+## 8. How did you make the reports faster?
 
 *Your stories*
 
@@ -184,7 +222,7 @@ This is an **outbox** pattern with batched publishing.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 7. How did you find which queries were slow?
+## 9. How did you find which queries were slow?
 
 *Your stories*
 
@@ -194,7 +232,7 @@ This is an **outbox** pattern with batched publishing.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 8. Why is SELECT * a problem?
+## 10. Why is SELECT * a problem?
 
 *Your stories*
 
@@ -204,7 +242,7 @@ This is an **outbox** pattern with batched publishing.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 9. Tell me about a difficult legacy system you worked on.
+## 11. Tell me about a difficult legacy system you worked on.
 
 *Your stories*
 
@@ -214,7 +252,7 @@ This is an **outbox** pattern with batched publishing.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 10. What did you build with Kafka at Centric?
+## 12. What did you build with Kafka at Centric?
 
 *Your stories*
 
@@ -224,7 +262,7 @@ This is an **outbox** pattern with batched publishing.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 11. Are you hands-on? What percentage of your day is coding?
+## 13. Are you hands-on? What percentage of your day is coding?
 
 *Your stories*
 
@@ -232,7 +270,7 @@ This is an **outbox** pattern with batched publishing.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 12. Explain SOLID with a real example.
+## 14. Explain SOLID with a real example.
 
 *Screener follow-ups*
 
@@ -244,7 +282,7 @@ This is an **outbox** pattern with batched publishing.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 13. What are the benefits of dependency injection, beyond testing?
+## 15. What are the benefits of dependency injection, beyond testing?
 
 *Screener follow-ups*
 
@@ -256,7 +294,7 @@ This is an **outbox** pattern with batched publishing.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 14. You wrote a class teammates need, in the same solution. How do you share it?
+## 16. You wrote a class teammates need, in the same solution. How do you share it?
 
 *Screener follow-ups*
 
@@ -266,7 +304,7 @@ This is an **outbox** pattern with batched publishing.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 15. Explain the Repository pattern. Isn't DbContext already one?
+## 17. Explain the Repository pattern. Isn't DbContext already one?
 
 *Screener follow-ups*
 
@@ -276,7 +314,7 @@ This is an **outbox** pattern with batched publishing.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 16. When would you use a Factory? Give an example.
+## 18. When would you use a Factory? Give an example.
 
 *Screener follow-ups*
 
@@ -286,7 +324,7 @@ This is an **outbox** pattern with batched publishing.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 17. Find a number in a sorted array of 1 million ints, no built-ins.
+## 19. Find a number in a sorted array of 1 million ints, no built-ins.
 
 *Screener follow-ups*
 
@@ -308,7 +346,7 @@ O(log n) time, about 20 checks for 1M. O(1) space.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 18. Array of only 0s and 1s: move all 0s to the front in O(n).
+## 20. Array of only 0s and 1s: move all 0s to the front in O(n).
 
 *Screener follow-ups*
 
@@ -318,7 +356,7 @@ O(log n) time, about 20 checks for 1M. O(1) space.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 19. Country names and codes in two lists. Why a Dictionary?
+## 21. Country names and codes in two lists. Why a Dictionary?
 
 *Screener follow-ups*
 
@@ -328,7 +366,7 @@ O(log n) time, about 20 checks for 1M. O(1) space.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 20. How does a Dictionary actually get O(1) lookups?
+## 22. How does a Dictionary actually get O(1) lookups?
 
 *Screener follow-ups*
 
@@ -341,7 +379,7 @@ O(log n) time, about 20 checks for 1M. O(1) space.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 21. Why use Kafka instead of calling the other service's API?
+## 23. Why use Kafka instead of calling the other service's API?
 
 *Kafka*
 
@@ -349,7 +387,7 @@ O(log n) time, about 20 checks for 1M. O(1) space.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 22. Explain topics, partitions, offsets and consumer groups.
+## 24. Explain topics, partitions, offsets and consumer groups.
 
 *Kafka*
 
@@ -362,7 +400,7 @@ Messages stay until retention removes them. Reading doesn't delete them.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 23. How do you keep one account's Buy and Cancel in order?
+## 25. How do you keep one account's Buy and Cancel in order?
 
 *Kafka*
 
@@ -372,7 +410,7 @@ Messages stay until retention removes them. Reading doesn't delete them.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 24. A consumer processes a message but crashes before committing the offset.
+## 26. A consumer processes a message but crashes before committing the offset.
 
 *Kafka*
 
@@ -382,7 +420,19 @@ Messages stay until retention removes them. Reading doesn't delete them.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 25. Two consumers in the same group vs in different groups?
+## 27. Why add a version number to events if Kafka keeps order?
+
+*Kafka*
+
+> "Kafka only guarantees order within a partition. Retries, replays or a second producer can still deliver an older update late. With a version, the consumer ignores anything older than what it already has."
+
+Example: v2 (stock 8) arrives, then v1 (stock 10) arrives late. The consumer already has v2, so it ignores v1. Without the version, stock jumps back to 10 and you oversell.
+
+**Follow-up:** The version must be assigned by the owner of the data, such as a counter in the inventory database. Versions invented by different producers can't be compared.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 28. Two consumers in the same group vs in different groups?
 
 *Kafka*
 
@@ -390,7 +440,7 @@ Messages stay until retention removes them. Reading doesn't delete them.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 26. What's a dead-letter queue and when do you use it?
+## 29. What's a dead-letter queue and when do you use it?
 
 *Kafka*
 
@@ -398,7 +448,7 @@ Messages stay until retention removes them. Reading doesn't delete them.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 27. What's a rebalance?
+## 30. What's a rebalance?
 
 *Kafka*
 
@@ -406,7 +456,7 @@ Messages stay until retention removes them. Reading doesn't delete them.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 28. Kafka vs a queue like MQ, RabbitMQ or Service Bus?
+## 31. Kafka vs a queue like MQ, RabbitMQ or Service Bus?
 
 *Kafka*
 
@@ -414,7 +464,7 @@ Messages stay until retention removes them. Reading doesn't delete them.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 29. Can more consumers than partitions make it faster?
+## 32. Can more consumers than partitions make it faster?
 
 *Kafka*
 
@@ -422,7 +472,7 @@ Messages stay until retention removes them. Reading doesn't delete them.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 30. Is exactly-once delivery possible?
+## 33. Is exactly-once delivery possible?
 
 *Kafka*
 
@@ -430,7 +480,7 @@ Messages stay until retention removes them. Reading doesn't delete them.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 31. Explain the transactional outbox pattern.
+## 34. Explain the transactional outbox pattern.
 
 *Kafka*
 
@@ -438,7 +488,7 @@ Messages stay until retention removes them. Reading doesn't delete them.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 32. How do you implement caching with Redis?
+## 35. How do you implement caching with Redis?
 
 *Redis*
 
@@ -452,7 +502,7 @@ In .NET: `IDistributedCache` or `StackExchange.Redis`. In .NET 9+, `HybridCache`
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 33. How do you choose TTLs?
+## 36. How do you choose TTLs?
 
 *Redis*
 
@@ -462,7 +512,7 @@ In .NET: `IDistributedCache` or `StackExchange.Redis`. In .NET 9+, `HybridCache`
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 34. How do you invalidate the cache when data changes?
+## 37. How do you invalidate the cache when data changes?
 
 *Redis*
 
@@ -470,7 +520,7 @@ In .NET: `IDistributedCache` or `StackExchange.Redis`. In .NET 9+, `HybridCache`
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 35. What's a cache stampede, and how do you prevent it?
+## 38. What's a cache stampede, and how do you prevent it?
 
 *Redis*
 
@@ -478,7 +528,7 @@ In .NET: `IDistributedCache` or `StackExchange.Redis`. In .NET 9+, `HybridCache`
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 36. Redis goes down. What happens to your API?
+## 39. Redis goes down. What happens to your API?
 
 *Redis*
 
@@ -486,7 +536,7 @@ In .NET: `IDistributedCache` or `StackExchange.Redis`. In .NET 9+, `HybridCache`
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 37. Why shouldn't Redis be the source of truth for an account balance?
+## 40. Why shouldn't Redis be the source of truth for an account balance?
 
 *Redis*
 
@@ -494,7 +544,7 @@ In .NET: `IDistributedCache` or `StackExchange.Redis`. In .NET 9+, `HybridCache`
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 38. IMemoryCache vs Redis?
+## 41. IMemoryCache vs Redis?
 
 *Redis*
 
@@ -502,7 +552,7 @@ In .NET: `IDistributedCache` or `StackExchange.Redis`. In .NET 9+, `HybridCache`
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 39. What else is Redis used for besides caching?
+## 42. What else is Redis used for besides caching?
 
 *Redis*
 
@@ -514,7 +564,7 @@ In .NET: `IDistributedCache` or `StackExchange.Redis`. In .NET 9+, `HybridCache`
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 40. What happens when Redis runs out of memory?
+## 43. What happens when Redis runs out of memory?
 
 *Redis*
 
@@ -522,7 +572,7 @@ In .NET: `IDistributedCache` or `StackExchange.Redis`. In .NET 9+, `HybridCache`
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 41. Transient vs Scoped vs Singleton?
+## 44. Transient vs Scoped vs Singleton?
 
 *.NET core*
 
@@ -534,7 +584,7 @@ In .NET: `IDistributedCache` or `StackExchange.Redis`. In .NET 9+, `HybridCache`
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 42. Why can't you inject a Scoped service into a Singleton?
+## 45. Why can't you inject a Scoped service into a Singleton?
 
 *.NET core*
 
@@ -544,7 +594,7 @@ In .NET: `IDistributedCache` or `StackExchange.Redis`. In .NET 9+, `HybridCache`
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 43. How do you keep a Singleton thread-safe?
+## 46. How do you keep a Singleton thread-safe?
 
 *.NET core*
 
@@ -554,7 +604,7 @@ In .NET: `IDistributedCache` or `StackExchange.Redis`. In .NET 9+, `HybridCache`
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 44. What does async/await actually do? Does it create a thread?
+## 47. What does async/await actually do? Does it create a thread?
 
 *.NET core*
 
@@ -562,7 +612,7 @@ In .NET: `IDistributedCache` or `StackExchange.Redis`. In .NET 9+, `HybridCache`
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 45. Why is async void dangerous?
+## 48. Why is async void dangerous?
 
 *.NET core*
 
@@ -570,7 +620,7 @@ In .NET: `IDistributedCache` or `StackExchange.Redis`. In .NET 9+, `HybridCache`
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 46. What's wrong with .Result or .Wait()?
+## 49. What's wrong with .Result or .Wait()?
 
 *.NET core*
 
@@ -578,7 +628,7 @@ In .NET: `IDistributedCache` or `StackExchange.Redis`. In .NET 9+, `HybridCache`
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 47. How do you run three independent calls in parallel?
+## 50. How do you run three independent calls in parallel?
 
 *.NET core*
 
@@ -586,7 +636,7 @@ In .NET: `IDistributedCache` or `StackExchange.Redis`. In .NET 9+, `HybridCache`
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 48. Why use IHttpClientFactory?
+## 51. Why use IHttpClientFactory?
 
 *.NET core*
 
@@ -594,7 +644,7 @@ In .NET: `IDistributedCache` or `StackExchange.Redis`. In .NET 9+, `HybridCache`
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 49. IEnumerable vs IQueryable?
+## 52. IEnumerable vs IQueryable?
 
 *.NET core*
 
@@ -604,7 +654,7 @@ In .NET: `IDistributedCache` or `StackExchange.Redis`. In .NET 9+, `HybridCache`
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 50. What is middleware in ASP.NET Core?
+## 53. What is middleware in ASP.NET Core?
 
 *.NET core*
 
@@ -612,7 +662,7 @@ In .NET: `IDistributedCache` or `StackExchange.Redis`. In .NET 9+, `HybridCache`
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 51. How do you handle exceptions globally in an API?
+## 54. How do you handle exceptions globally in an API?
 
 *.NET core*
 
@@ -620,7 +670,7 @@ In .NET: `IDistributedCache` or `StackExchange.Redis`. In .NET 9+, `HybridCache`
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 52. How do you reduce memory allocations on large data?
+## 55. How do you reduce memory allocations on large data?
 
 *.NET core*
 
@@ -635,7 +685,7 @@ Fewer allocations mean less GC work and fewer pauses.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 53. record vs class?
+## 56. record vs class?
 
 *.NET core*
 
@@ -643,7 +693,7 @@ Fewer allocations mean less GC work and fewer pauses.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 54. What's the N+1 problem? How do you fix it?
+## 57. What's the N+1 problem? How do you fix it?
 
 *EF Core & SQL*
 
@@ -651,7 +701,7 @@ Fewer allocations mean less GC work and fewer pauses.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 55. What does AsNoTracking do, and when does it hurt?
+## 58. What does AsNoTracking do, and when does it hurt?
 
 *EF Core & SQL*
 
@@ -659,7 +709,7 @@ Fewer allocations mean less GC work and fewer pauses.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 56. Two users update the same balance at once. How do you stop a lost update?
+## 59. Two users update the same balance at once. How do you stop a lost update?
 
 *EF Core & SQL*
 
@@ -669,7 +719,7 @@ Fewer allocations mean less GC work and fewer pauses.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 57. How do you deploy database changes safely?
+## 60. How do you deploy database changes safely?
 
 *EF Core & SQL*
 
@@ -677,7 +727,7 @@ Fewer allocations mean less GC work and fewer pauses.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 58. Clustered vs nonclustered index? What's a key lookup?
+## 61. Clustered vs nonclustered index? What's a key lookup?
 
 *EF Core & SQL*
 
@@ -685,7 +735,7 @@ Fewer allocations mean less GC work and fewer pauses.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 59. Why would SQL Server ignore an index you created?
+## 62. Why would SQL Server ignore an index you created?
 
 *EF Core & SQL*
 
@@ -695,7 +745,7 @@ Fewer allocations mean less GC work and fewer pauses.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 60. What's parameter sniffing?
+## 63. What's parameter sniffing?
 
 *EF Core & SQL*
 
@@ -703,7 +753,35 @@ Fewer allocations mean less GC work and fewer pauses.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 61. How do you prevent deadlocks in money transfers?
+## 64. Two orders try to reserve the last unit at the same moment. How do you stop both succeeding?
+
+*EF Core & SQL*
+
+An **atomic conditional update**: the check and the change in ONE statement.
+
+```sql
+UPDATE Stock SET Qty = Qty - 1
+WHERE Sku = @sku AND Qty >= 1
+```
+
+- Order A locks the row, sees Qty 1, sets it to 0 and commits: 1 row updated.
+- Order B waited on the lock, then sees Qty 0: 0 rows updated, so it's out of stock.
+
+> "If 0 rows are updated, the reservation failed. The check and the change can't be separated, so two orders can't both win."
+
+**Follow-up:** The unsafe version: read Qty in C#, check it, then write. Both orders read 1 and both write 0, like count++. The gap between read and write is the bug.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 65. Does SQL Server lock rows by itself?
+
+*EF Core & SQL*
+
+> "Yes, automatically. An UPDATE, INSERT or DELETE takes an exclusive lock on the rows it changes and holds it until the transaction commits. Anyone else changing those rows waits, and under the default Read Committed, readers wait too, so nobody sees a half-finished change. That's why a single conditional UPDATE is atomic."
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 66. How do you prevent deadlocks in money transfers?
 
 *EF Core & SQL*
 
@@ -711,7 +789,7 @@ Fewer allocations mean less GC work and fewer pauses.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 62. Add a NOT NULL column to a 50-million-row table without downtime.
+## 67. Add a NOT NULL column to a 50-million-row table without downtime.
 
 *EF Core & SQL*
 
@@ -722,7 +800,7 @@ Fewer allocations mean less GC work and fewer pauses.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 63. Where should business logic live: stored procedures or C#?
+## 68. Where should business logic live: stored procedures or C#?
 
 *EF Core & SQL*
 
@@ -730,7 +808,7 @@ Fewer allocations mean less GC work and fewer pauses.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 64. Isolation levels, in one breath.
+## 69. Isolation levels, in one breath.
 
 *EF Core & SQL*
 
@@ -738,7 +816,7 @@ Fewer allocations mean less GC work and fewer pauses.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 65. What makes a RESTful API well designed?
+## 70. What makes a RESTful API well designed?
 
 *API & security*
 
@@ -750,7 +828,7 @@ Fewer allocations mean less GC work and fewer pauses.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 66. POST vs PUT vs PATCH, and which are idempotent?
+## 71. POST vs PUT vs PATCH, and which are idempotent?
 
 *API & security*
 
@@ -758,7 +836,7 @@ Fewer allocations mean less GC work and fewer pauses.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 67. Which status codes do you use, and when?
+## 72. Which status codes do you use, and when?
 
 *API & security*
 
@@ -771,7 +849,7 @@ Fewer allocations mean less GC work and fewer pauses.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 68. A client retries a timed-out order. How do you prevent a duplicate trade?
+## 73. A client retries a timed-out order. How do you prevent a duplicate trade?
 
 *API & security*
 
@@ -779,7 +857,7 @@ Fewer allocations mean less GC work and fewer pauses.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 69. How do you version an API?
+## 74. How do you version an API?
 
 *API & security*
 
@@ -787,7 +865,7 @@ Fewer allocations mean less GC work and fewer pauses.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 70. OAuth2 vs JWT?
+## 75. OAuth2 vs JWT?
 
 *API & security*
 
@@ -795,7 +873,7 @@ Fewer allocations mean less GC work and fewer pauses.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 71. How does your API validate a JWT?
+## 76. How does your API validate a JWT?
 
 *API & security*
 
@@ -806,7 +884,7 @@ Fewer allocations mean less GC work and fewer pauses.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 72. Name an OWASP risk you've mitigated.
+## 77. Name an OWASP risk you've mitigated.
 
 *API & security*
 
@@ -814,7 +892,7 @@ Fewer allocations mean less GC work and fewer pauses.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 73. How do you protect customer data and privacy?
+## 78. How do you protect customer data and privacy?
 
 *API & security*
 
@@ -825,7 +903,7 @@ Fewer allocations mean less GC work and fewer pauses.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 74. Where do secrets like connection strings go?
+## 79. Where do secrets like connection strings go?
 
 *API & security*
 
@@ -833,7 +911,7 @@ Fewer allocations mean less GC work and fewer pauses.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 75. What do you know about WCAG accessibility?
+## 80. What do you know about WCAG accessibility?
 
 *API & security*
 
@@ -841,7 +919,32 @@ Fewer allocations mean less GC work and fewer pauses.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 76. Unit test vs integration test: where's the line?
+## 81. How do you test a service that consumes events and writes to a database?
+
+*Testing*
+
+> "Take a flow I'm working on now: MDM publishes an event when a SKU changes, and my service maps it to the B2B format and sends it to the B2B team.
+
+> Unit tests cover the mapping logic, where the business rules live. I build test events for each scenario (colour change, quantity change, missing fields, invalid values), mock the dependencies like the B2B publisher and repository with Moq, and assert that the output is correct and that the publisher was or wasn't called.
+
+> I specifically test failure cases: a duplicate event is processed once, an older event doesn't overwrite newer data, and a malformed message is dead-lettered instead of crashing the consumer.
+
+> Integration tests run the service against a real database in a Docker container to catch query, serialization and configuration problems. Everything runs on every PR, and a failing test blocks the merge."
+
+```csharp
+var publisher = new Mock<IB2BPublisher>();
+var handler = new SkuChangedHandler(publisher.Object);
+
+await handler.HandleAsync(new SkuChangedEvent { Sku = "ABC123", Colour = "Blue" });
+
+publisher.Verify(p => p.SendAsync(It.Is<B2BProduct>(b => b.Colour == "Blue")), Times.Once);
+```
+
+**Follow-up:** Terminology: Moq is the mocking library; the sample values are test data. Mock the boundaries (database, publishers, HTTP), never the logic under test. Is 150 tests a good metric? The count isn't the goal; covering business rules and failure cases is.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 82. Unit test vs integration test: where's the line?
 
 *Testing*
 
@@ -849,7 +952,7 @@ Fewer allocations mean less GC work and fewer pauses.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 77. How do you unit test a class that publishes to Kafka?
+## 83. How do you unit test a class that publishes to Kafka?
 
 *Testing*
 
@@ -866,7 +969,7 @@ publisher.Verify(p => p.PublishAsync(It.IsAny<ShipmentEvent>()), Times.Once);
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 78. How do you test an API end to end?
+## 84. How do you test an API end to end?
 
 *Testing*
 
@@ -874,7 +977,7 @@ publisher.Verify(p => p.PublishAsync(It.IsAny<ShipmentEvent>()), Times.Once);
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 79. What makes a good unit test?
+## 85. What makes a good unit test?
 
 *Testing*
 
@@ -885,7 +988,7 @@ publisher.Verify(p => p.PublishAsync(It.IsAny<ShipmentEvent>()), Times.Once);
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 80. Mock vs stub vs fake?
+## 86. Mock vs stub vs fake?
 
 *Testing*
 
@@ -893,7 +996,7 @@ publisher.Verify(p => p.PublishAsync(It.IsAny<ShipmentEvent>()), Times.Once);
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 81. Do you practise TDD?
+## 87. Do you practise TDD?
 
 *Testing*
 
@@ -901,7 +1004,7 @@ publisher.Verify(p => p.PublishAsync(It.IsAny<ShipmentEvent>()), Times.Once);
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 82. Image vs container vs Docker?
+## 88. Image vs container vs Docker?
 
 *Docker & OpenShift*
 
@@ -909,7 +1012,7 @@ publisher.Verify(p => p.PublishAsync(It.IsAny<ShipmentEvent>()), Times.Once);
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 83. How do you write a Dockerfile for a .NET API?
+## 89. How do you write a Dockerfile for a .NET API?
 
 *Docker & OpenShift*
 
@@ -917,7 +1020,7 @@ publisher.Verify(p => p.PublishAsync(It.IsAny<ShipmentEvent>()), Times.Once);
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 84. Explain the core Kubernetes objects.
+## 90. Explain the core Kubernetes objects.
 
 *Docker & OpenShift*
 
@@ -930,7 +1033,7 @@ publisher.Verify(p => p.PublishAsync(It.IsAny<ShipmentEvent>()), Times.Once);
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 85. OpenShift vs Kubernetes?
+## 91. OpenShift vs Kubernetes?
 
 *Docker & OpenShift*
 
@@ -938,7 +1041,7 @@ publisher.Verify(p => p.PublishAsync(It.IsAny<ShipmentEvent>()), Times.Once);
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 86. Liveness vs readiness probe?
+## 92. Liveness vs readiness probe?
 
 *Docker & OpenShift*
 
@@ -946,7 +1049,7 @@ publisher.Verify(p => p.PublishAsync(It.IsAny<ShipmentEvent>()), Times.Once);
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 87. Walk me through a CI/CD pipeline you've built.
+## 93. Walk me through a CI/CD pipeline you've built.
 
 *Docker & OpenShift*
 
@@ -959,7 +1062,7 @@ The same image moves through every environment; only configuration changes.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 88. How do you handle config per environment?
+## 94. How do you handle config per environment?
 
 *Docker & OpenShift*
 
@@ -967,7 +1070,7 @@ The same image moves through every environment; only configuration changes.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 89. Design order placement for our Direct Investing platform.
+## 95. Design order placement for our Direct Investing platform.
 
 *System design*
 
@@ -988,7 +1091,7 @@ Client -> APIM -> Order API
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 90. Why return 202 Accepted instead of waiting for the market?
+## 96. Why return 202 Accepted instead of waiting for the market?
 
 *System design*
 
@@ -996,7 +1099,7 @@ Client -> APIM -> Order API
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 91. Kafka is down when an order is placed. What happens?
+## 97. Kafka is down when an order is placed. What happens?
 
 *System design*
 
@@ -1004,7 +1107,7 @@ Client -> APIM -> Order API
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 92. How would a regulator reconstruct what happened to one order?
+## 98. How would a regulator reconstruct what happened to one order?
 
 *System design*
 
@@ -1012,7 +1115,7 @@ Client -> APIM -> Order API
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 93. How do you keep data consistent across microservices?
+## 99. How do you keep data consistent across microservices?
 
 *System design*
 
@@ -1020,7 +1123,7 @@ Client -> APIM -> Order API
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 94. Circuit breaker vs retry vs bulkhead?
+## 100. Circuit breaker vs retry vs bulkhead?
 
 *System design*
 
@@ -1032,7 +1135,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 95. How would you push live price or order updates to the UI?
+## 101. How would you push live price or order updates to the UI?
 
 *System design*
 
@@ -1040,7 +1143,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 96. How does your design scale?
+## 102. How does your design scale?
 
 *System design*
 
@@ -1048,33 +1151,39 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 97. Tell me about a disagreement with a teammate.
+## 103. Tell me about a disagreement with a teammate.
 
 *Behavioural*
 
-**STAR, about 90 seconds.** Situation, Task, Action, Result.
+**S:** At Staples, our publishing table deleted rows as soon as messages were sent to the WMS and TMS.
 
-What they check: you listen, argue with data, and commit to the team decision.
+**T:** I thought we were losing important information, but the team was comfortable with it because it worked.
 
-> Shape: "We disagreed about X. I understood their concern about Y, proposed we compare Z, and we agreed on… The result was…"
+**A:** I listened to their concern first, mainly table growth and extra work. Then I showed a concrete case: when a partner says "we never got shipment X", we couldn't prove whether or when we sent it. I proposed keeping rows with a status per destination, plus a cleanup job that purges sent rows after a set number of days.
 
-**Follow-up:** Use a real example. A good one is technical: where logic should live, sync vs events, or a code review.
+**R:** Adopted: "Now we can answer partner questions in minutes instead of guessing." Or not yet: "We put it on the backlog. I committed to the team's decision and documented the risk. The lesson: bring a concrete example, not just an opinion."
+
+**Follow-up:** What they check: you listen, argue with evidence, and commit to the team decision even when it doesn't go your way.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 98. Tell me about a mistake or a production incident.
+## 104. Tell me about a production incident or a hard problem you solved.
 
 *Behavioural*
 
-What they check: ownership, calm diagnosis, prevention.
+**S:** At insightsoftware, heavy reports like vesting and tax reports were slow for our largest clients, and clients were complaining.
 
-> Shape: "Something broke. I owned it, found the cause with logs or Datadog, fixed it, and then added a test, alert or process so it can't happen again."
+**T:** As lead on the reporting team, I owned finding and fixing it.
+
+**A:** Datadog APM showed almost all the time was inside the database call; the code was already async. I captured the slow queries with SQL Profiler and read the execution plans: table scans, SELECT * and key lookups. I replaced SELECT * with only the needed columns, added covering indexes, and cached reference data that rarely changes, shipping in small steps and checking each one in Datadog.
+
+**R:** The heavy reports got significantly faster, roughly 40% on the worst ones, and the complaints stopped. Since then I check the execution plan for any new heavy query before it ships.
 
 **Follow-up:** End on what you changed afterwards. That's the part they remember.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 99. How do you mentor other developers?
+## 105. How do you mentor other developers?
 
 *Behavioural*
 
@@ -1082,7 +1191,7 @@ What they check: ownership, calm diagnosis, prevention.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 100. Why RBC, and why this role?
+## 106. Why RBC, and why this role?
 
 *Behavioural*
 
@@ -1090,7 +1199,7 @@ What they check: ownership, calm diagnosis, prevention.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 101. You're okay with contract-to-hire?
+## 107. You're okay with contract-to-hire?
 
 *Behavioural*
 
@@ -1100,7 +1209,7 @@ What they check: ownership, calm diagnosis, prevention.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 102. What questions do you have for us?
+## 108. What questions do you have for us?
 
 *Behavioural*
 
@@ -1111,7 +1220,7 @@ What they check: ownership, calm diagnosis, prevention.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 103. Walk me through your banking solution.
+## 109. Walk me through your banking solution.
 
 *CodeSignal*
 
@@ -1122,7 +1231,7 @@ What they check: ownership, calm diagnosis, prevention.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 104. How would you have implemented the scheduled transfer?
+## 110. How would you have implemented the scheduled transfer?
 
 *CodeSignal*
 
@@ -1132,7 +1241,7 @@ What they check: ownership, calm diagnosis, prevention.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 105. What would you do differently on the assessment?
+## 111. What would you do differently on the assessment?
 
 *CodeSignal*
 
