@@ -126,7 +126,8 @@
 | 116 | Behavioural | [What questions do you have for us?](#116-what-questions-do-you-have-for-us) |
 | 117 | CodeSignal | [Walk me through your banking solution.](#117-walk-me-through-your-banking-solution) |
 | 118 | CodeSignal | [How would you have implemented the scheduled transfer?](#118-how-would-you-have-implemented-the-scheduled-transfer) |
-| 119 | CodeSignal | [What would you do differently on the assessment?](#119-what-would-you-do-differently-on-the-assessment) |
+| 119 | CodeSignal | [In your scheduled transfer design, where does the money actually move?](#119-in-your-scheduled-transfer-design-where-does-the-money-actually-move) |
+| 120 | CodeSignal | [What would you do differently on the assessment?](#120-what-would-you-do-differently-on-the-assessment) |
 
 ## 1. Tell me about yourself.
 
@@ -1445,7 +1446,54 @@ Every public method calls `ProcessDue(timestamp)` first.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 119. What would you do differently on the assessment?
+## 119. In your scheduled transfer design, where does the money actually move?
+
+*CodeSignal*
+
+> "Scheduling only records the transfer. The money moves inside ProcessDue, which every operation calls first. It reuses the same TryTransfer method as instant transfers, so there's one place where balances change and the balance check happens at execution time."
+
+```csharp
+// Level 3: the ONLY place balances change
+private bool TryTransfer(string from, string to, int amount)
+{
+    if (!_accounts.ContainsKey(from) || !_accounts.ContainsKey(to)) return false;
+    if (from == to || amount <= 0) return false;
+    if (_accounts[from].Balance < amount) return false;
+
+    _accounts[from].Balance -= amount;
+    _accounts[to].Balance += amount;
+    _accounts[from].TotalSpent += amount;
+    return true;
+}
+
+public bool Transfer(int timestamp, string from, string to, int amount)
+{
+    ProcessDue(timestamp);
+    return TryTransfer(from, to, amount);
+}
+
+// Level 5: only SAVES it, no money moves
+public string ScheduleTransfer(int timestamp, string from, string to, int amount, int delay)
+{
+    ProcessDue(timestamp);
+    _sequence++;
+    var transfer = new ScheduledTransfer
+    {
+        Id = "transfer" + _sequence, From = from, To = to, Amount = amount,
+        ExecuteAt = timestamp + delay, Sequence = _sequence
+    };
+    _scheduled.Add(transfer);
+    return transfer.Id;
+}
+```
+
+Timeline: t=10 schedule $50 with delay 20 (ExecuteAt 30). t=25 nothing due. t=35 any call runs ProcessDue(35), the transfer is due, the money moves.
+
+**Follow-up:** Why one TryTransfer? Instant and scheduled transfers can't behave differently, and a bug fix in one place fixes both.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 120. What would you do differently on the assessment?
 
 *CodeSignal*
 
