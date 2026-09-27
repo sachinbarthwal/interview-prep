@@ -894,7 +894,9 @@ public static string ReverseWords(string sentence)
 }
 ```
 
-> "I walk the sentence backwards; each time I hit a space I append the word after it to a StringBuilder, then add the first word at the end. O(n). StringBuilder because string concatenation in a loop is O(n squared)."
+**Your order:** 1) "Simplest: Split by space, swap words from both ends, Join. O(n)." 2) If he says no Split, use your own words:
+
+> "Walk backwards and check for a space. When I find one, take the substring from space + 1 up to the end of the current word, then move the end to that space and repeat. The first word is left at the end. O(n), with a StringBuilder."
 
 **Follow-up:** Lead with the practical version: string.Join(" ", sentence.Split(' ').Reverse()), which is O(n) (three single passes, no nested loop). If no built-ins: Split, then swap words with two pointers (like the 0/1 problem), then Join. Reverse the word ORDER only, not the letters. Traps: i > 0 skips index 0; string += in a loop is O(n squared).
 
