@@ -203,15 +203,25 @@
 
 *Your stories*
 
-**Formula:** Now, then before (1 to 2 highlights), then why this role. 60 to 90 seconds, then stop.
+**Hooked version, about 75 seconds.** Every bold word leads to a prepared answer.
 
-> "I'm a senior .NET developer with about ten years of experience, mostly C# and .NET Core backends with Angular or React front ends.
+> "I'm a senior .NET developer with about ten years of experience, mostly C# and .NET Core backends.
 
-> Right now I'm at Staples, building .NET 8 microservices for inventory allocation and carrier integration. For example, I delivered the shipment flow end to end: we call a third-party carrier platform to pick the carrier, and publish events to the warehouse and transport systems through Google Pub/Sub and Azure Event Hubs. It runs on AKS with Azure DevOps pipelines.
+> At Staples I'm on the middleware team, building .NET 8 microservices that connect systems owned by different teams: warehouse, transport, carriers. A typical flow is a customer API call through **APIM**, a synchronous call to our carrier platform, then **events** to the warehouse and transport systems over **Pub/Sub and Event Hubs**. I make sure those events are never lost with an **outbox-style table and retries**, and that consumers are **idempotent**. I also work on our inventory platform, where keeping stock **consistent across systems** is the main challenge. It runs on **AKS** with Azure DevOps pipelines.
 
-> Before that I was lead developer at Accolite on a capital markets reporting SaaS for insightsoftware: equity-compensation reports like vesting and ESOP tax for corporate clients. A lot of my work there was performance: SQL tuning, execution plans, async and caching.
+> Before that I was lead developer at Accolite on a **capital markets** reporting platform for insightsoftware, with equity-compensation reports. A lot of my work was **performance**: reading **execution plans**, fixing indexes and queries, and **caching**.
 
-> What attracts me here is that this role combines exactly those things: event-driven .NET services, performance, and a financial domain, on a platform being rebuilt."
+> What excites me about this role is that it's exactly that combination (event-driven .NET, performance, financial data) on a platform being rebuilt."
+
+- APIM → client credentials + validate-jwt
+- Events → sync vs async split
+- Outbox + retries → status per destination
+- Idempotent → dedupe on message id
+- Consistent across systems → source of truth, versioned events, reconciliation
+- AKS → pods, deployments, probes, HPA
+- Capital markets → vesting, grants, ESOP
+- Execution plans → Insight tuning story
+- Caching → Redis for display, DB for decisions
 
 **[⬆ Back to Top](#table-of-contents)**
 
