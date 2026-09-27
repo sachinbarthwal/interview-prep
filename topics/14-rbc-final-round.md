@@ -2299,7 +2299,7 @@ private int? TryTransfer(string sourceId, string targetId, int amount)
 
 > "Validate everything before changing anything, so a failed transfer never leaves money half-moved."
 
-**Follow-up:** Is it thread-safe? No; CodeSignal is single-threaded. In a real bank: a database transaction with an atomic conditional update, or a lock. Why block same-account? It would count as spending while moving nothing. TryGetValue vs ContainsKey + []: one lookup instead of two.
+**Follow-up:** Unsure whether the target had to exist? Say: the source check is essential; for the target I'd confirm the requirement, since crediting a non-existent account makes no sense in a bank. Is it thread-safe? No; CodeSignal is single-threaded. In a real bank: a database transaction with an atomic conditional update, or a lock. Why block same-account? It would count as spending while moving nothing. TryGetValue vs ContainsKey + []: one lookup instead of two.
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -2378,7 +2378,7 @@ public override bool CancelTransfer(int timestamp, string transferId)
 
 *CodeSignal*
 
-> "In the assessment I kept adding separate dictionaries for each new requirement: balances, then spending, then scheduled transfers. By Level 4 every change was slow and error-prone. Now I'd model an Account class from the start, holding balance and total spent, in one Dictionary keyed by account id. Each new level adds a field or method instead of another dictionary to keep in sync, and one TryTransfer method is the only place money moves."
+> "The levels unlock one at a time, so I couldn't see what later requirements would need. At each level I kept it simple, and two dictionaries sharing the account id worked. With the full picture now, I'd model an Account object from the start, holding balance and total spent, because requirements always evolve and it keeps each new level to one field or one method. And one TryTransfer method would be the only place money moves."
 
 ```csharp
 public class Account
