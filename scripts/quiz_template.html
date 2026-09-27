@@ -160,7 +160,38 @@ a{ color:var(--accent); }
 footer{ text-align:center; margin-top:30px; color:var(--ink-faint); font-size:12px; font-family:var(--font-mono); }
 footer a{ color:var(--ink-faint); }
 
+/* browse: find any question */
+.browse{
+  background:var(--surface); border:1px solid var(--line); border-radius:16px;
+  padding:20px 22px; margin-top:22px; box-shadow:var(--shadow);
+}
+.browse h2{ font-family:var(--font-head); font-size:22px; margin:0 0 4px; }
+.browse .hint{ margin:0 0 14px; color:var(--ink-soft); font-size:14px; }
+.browse-controls{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:12px; }
+.browse-controls input, .browse-controls select{
+  font-family:var(--font-body); font-size:15px; color:var(--ink); background:var(--paper);
+  border:1px solid var(--line-strong); border-radius:10px; padding:10px 12px;
+}
+.browse-controls input{ flex:1 1 240px; min-width:0; }
+.browse-controls select{ flex:0 1 240px; min-width:0; }
+.browse-count{ font-family:var(--font-mono); font-size:12px; color:var(--ink-faint); margin-bottom:8px; }
+.q-list{ max-height:480px; overflow-y:auto; border:1px solid var(--line); border-radius:12px; }
+.q-item{
+  display:flex; gap:10px; align-items:baseline; width:100%; text-align:left;
+  background:transparent; border:none; border-bottom:1px solid var(--line);
+  padding:11px 14px; cursor:pointer; color:var(--ink); font-family:var(--font-body); font-size:15px;
+}
+.q-item:last-child{ border-bottom:none; }
+.q-item:hover{ background:var(--surface-2); }
+.q-item .num{ font-family:var(--font-mono); font-size:12px; color:var(--ink-faint); min-width:2.6em; }
+.q-item .txt{ flex:1; }
+.q-item .sec{ font-family:var(--font-mono); font-size:11px; color:var(--cat, var(--accent)); white-space:nowrap; }
+.q-empty{ padding:16px; color:var(--ink-soft); font-size:14px; }
+.browse-nav{ display:none; gap:12px; margin-top:12px; }
+.browse-nav .btn{ flex:1; }
+
 @media (max-width:560px){
+  .q-item .sec{ display:none; }
   .card-q{ font-size:20px; }
   .flashcard{ padding:22px 18px 20px; }
   .hero-card{ flex-direction:column; align-items:flex-start; }
@@ -189,6 +220,17 @@ footer a{ color:var(--ink-faint); }
     </div>
 
     <div class="cat-grid" id="cat-grid"></div>
+
+    <div class="browse">
+      <h2>Find a question</h2>
+      <p class="hint">Search or pick a category, then tap any question to open it. Prev and Next walk the list in order.</p>
+      <div class="browse-controls">
+        <input id="q-search" type="search" placeholder="Search questions, e.g. Kafka, yourself, Dictionary" aria-label="Search questions">
+        <select id="q-cat" aria-label="Category"></select>
+      </div>
+      <div class="browse-count" id="q-count"></div>
+      <div class="q-list" id="q-list"></div>
+    </div>
   </div>
 
   <div id="study">
@@ -213,6 +255,10 @@ footer a{ color:var(--ink-faint); }
     <div class="rate-row" id="rate-row" style="display:none;">
       <button class="btn rate-bad" id="btn-again">😵 Still learning</button>
       <button class="btn rate-good" id="btn-good">✅ Got it</button>
+    </div>
+    <div class="browse-nav" id="browse-nav">
+      <button class="btn ghost" id="btn-prev">&larr; Prev</button>
+      <button class="btn ghost" id="btn-next">Next &rarr;</button>
     </div>
   </div>
 
@@ -392,11 +438,23 @@ window.CARD_DATA = __CARD_DATA_JSON__;
     }
     queue = shuffle(queue).map(c => c.id).slice(0, 30);
 
-    session = { queue, pos:0, reviewed:0, got:0, xp:0 };
+    session = { queue, pos:0, reviewed:0, got:0, xp:0, browse:false };
     els.dashboard.style.display = 'none';
     els.summary.style.display = 'none';
     els.study.style.display = 'block';
+    document.getElementById('browse-nav').style.display = 'none';
     showCard();
+  }
+
+  // Open a specific card from the browse list; Prev/Next walk the filtered list in order.
+  function startBrowse(ids, index){
+    session = { queue: ids, pos:index, reviewed:0, got:0, xp:0, browse:true };
+    els.dashboard.style.display = 'none';
+    els.summary.style.display = 'none';
+    els.study.style.display = 'block';
+    document.getElementById('browse-nav').style.display = 'flex';
+    showCard();
+    window.scrollTo(0, 0);
   }
 
   const se = {
@@ -414,6 +472,10 @@ window.CARD_DATA = __CARD_DATA_JSON__;
   };
 
   function showCard(){
+    if (session.browse){
+      if (session.pos >= session.queue.length) session.pos = 0;
+      if (session.pos < 0) session.pos = session.queue.length - 1;
+    }
     if (session.pos >= session.queue.length){ return finishSession(); }
     const card = CARD_BY_ID[session.queue[session.pos]];
     se.pos.textContent = (session.pos + 1) + ' / ' + session.queue.length;
@@ -443,10 +505,67 @@ window.CARD_DATA = __CARD_DATA_JSON__;
     if (good) session.got++;
     session.pos++;
     updateStatPills();
+    if (session.browse && session.pos >= session.queue.length){
+      showToast('End of list');
+      session.pos = session.queue.length - 1;
+    }
     showCard();
   }
   se.btnAgain.addEventListener('click', () => rateAndAdvance(false));
   se.btnGood.addEventListener('click', () => rateAndAdvance(true));
+
+  document.getElementById('btn-prev').addEventListener('click', () => { session.pos--; showCard(); window.scrollTo(0, 0); });
+  document.getElementById('btn-next').addEventListener('click', () => { session.pos++; showCard(); window.scrollTo(0, 0); });
+
+  // ---------- browse: find any question ----------
+  const qSearch = document.getElementById('q-search');
+  const qCat = document.getElementById('q-cat');
+  const qList = document.getElementById('q-list');
+  const qCount = document.getElementById('q-count');
+
+  // RBC cards carry their section as a leading <p><em>Section</em></p>
+  function sectionOf(card){
+    const m = /^<p><em>(.*?)<\/em><\/p>/.exec(card.a);
+    return m ? m[1] : '';
+  }
+  function plainText(html){
+    const d = document.createElement('div');
+    d.innerHTML = html;
+    return d.textContent || '';
+  }
+  const SEARCH_TEXT = Object.fromEntries(CARDS.map(c => [c.id, (plainText(c.q) + ' ' + sectionOf(c)).toLowerCase()]));
+
+  qCat.innerHTML = '<option value="">All categories</option>' +
+    CATS.map(c => '<option value="' + c.key + '">' + c.label + ' (' + c.count + ')</option>').join('');
+  try{ const saved = localStorage.getItem('ipq_browse_cat'); if (saved !== null) qCat.value = saved; } catch(e){}
+
+  function renderList(){
+    const term = qSearch.value.trim().toLowerCase();
+    const cat = qCat.value;
+    const list = CARDS.filter(c => (!cat || c.cat === cat) && (!term || SEARCH_TEXT[c.id].includes(term)));
+    qCount.textContent = list.length + ' question' + (list.length === 1 ? '' : 's');
+    qList.innerHTML = '';
+    if (list.length === 0){
+      qList.innerHTML = '<div class="q-empty">No questions match. Try a shorter word.</div>';
+      return;
+    }
+    const ids = list.map(c => c.id);
+    list.forEach((c, i) => {
+      const b = document.createElement('button');
+      b.className = 'q-item';
+      b.style.setProperty('--cat', catColor(c.cat));
+      const sec = sectionOf(c) || catLabel(c.cat);
+      b.innerHTML = '<span class="num">' + (i + 1) + '</span><span class="txt">' + c.q + '</span><span class="sec">' + sec + '</span>';
+      b.addEventListener('click', () => startBrowse(ids, i));
+      qList.appendChild(b);
+    });
+  }
+  qSearch.addEventListener('input', renderList);
+  qCat.addEventListener('change', () => {
+    try{ localStorage.setItem('ipq_browse_cat', qCat.value); } catch(e){}
+    renderList();
+  });
+  renderList();
 
   document.getElementById('btn-exit').addEventListener('click', () => {
     els.study.style.display = 'none';
