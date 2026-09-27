@@ -2,7 +2,7 @@
 
 > Final-round prep for a Senior .NET Developer role rebuilding a Direct Investing
 > trading platform (.NET Core, Kafka, Redis, SQL Server, Docker/OpenShift). Say each
-> answer out loud in under a minute before revealing it. Sections: Your stories, Screener follow-ups, Basics, Kafka, Redis, .NET core, EF Core & SQL, API & security, Testing, Docker & OpenShift, System design, Frontend, Behavioural, CodeSignal.
+> answer out loud in under a minute before revealing it. Sections: Your stories, Screener follow-ups, Basics, Kafka, Redis, .NET core, EF Core & SQL, API & security, Testing, Docker & OpenShift, Azure, System design, Frontend, Behavioural, CodeSignal.
 
 ## Table of Contents
 
@@ -144,31 +144,42 @@
 | 134 | Docker & OpenShift | [Liveness vs readiness probe?](#134-liveness-vs-readiness-probe) |
 | 135 | Docker & OpenShift | [Walk me through a CI/CD pipeline you've built.](#135-walk-me-through-a-cicd-pipeline-youve-built) |
 | 136 | Docker & OpenShift | [How do you handle config per environment?](#136-how-do-you-handle-config-per-environment) |
-| 137 | System design | [A client clicks 'Buy 100 shares'. Design what happens until the order reaches the market.](#137-a-client-clicks-buy-100-shares-design-what-happens-until-the-order-reaches-the-market) |
-| 138 | System design | [Does the Direct Investing platform match buyers and sellers?](#138-does-the-direct-investing-platform-match-buyers-and-sellers) |
-| 139 | System design | [Why return 202 Accepted instead of waiting for the market?](#139-why-return-202-accepted-instead-of-waiting-for-the-market) |
-| 140 | System design | [Kafka is down when an order is placed. What happens?](#140-kafka-is-down-when-an-order-is-placed-what-happens) |
-| 141 | System design | [How would a regulator reconstruct what happened to one order?](#141-how-would-a-regulator-reconstruct-what-happened-to-one-order) |
-| 142 | System design | [How do you keep data consistent across microservices?](#142-how-do-you-keep-data-consistent-across-microservices) |
-| 143 | System design | [Circuit breaker vs retry vs bulkhead?](#143-circuit-breaker-vs-retry-vs-bulkhead) |
-| 144 | System design | [How would you push live price or order updates to the UI?](#144-how-would-you-push-live-price-or-order-updates-to-the-ui) |
-| 145 | System design | [How does your design scale?](#145-how-does-your-design-scale) |
-| 146 | Frontend | [Frontend: how do you position yourself if they go deep?](#146-frontend-how-do-you-position-yourself-if-they-go-deep) |
-| 147 | Frontend | [Angular: component vs service? Lifecycle hooks?](#147-angular-component-vs-service-lifecycle-hooks) |
-| 148 | Frontend | [Angular: Observables, the async pipe and switchMap?](#148-angular-observables-the-async-pipe-and-switchmap) |
-| 149 | Frontend | [Angular: HTTP interceptor and route guard?](#149-angular-http-interceptor-and-route-guard) |
-| 150 | Frontend | [Angular: change detection, OnPush, and modern Angular?](#150-angular-change-detection-onpush-and-modern-angular) |
-| 151 | Frontend | [React: props vs state, useState, useEffect, virtual DOM?](#151-react-props-vs-state-usestate-useeffect-virtual-dom) |
-| 152 | Behavioural | [Tell me about a disagreement with a teammate.](#152-tell-me-about-a-disagreement-with-a-teammate) |
-| 153 | Behavioural | [Tell me about a production incident or a hard problem you solved.](#153-tell-me-about-a-production-incident-or-a-hard-problem-you-solved) |
-| 154 | Behavioural | [How do you mentor other developers?](#154-how-do-you-mentor-other-developers) |
-| 155 | Behavioural | [Why RBC, and why this role?](#155-why-rbc-and-why-this-role) |
-| 156 | Behavioural | [You're okay with contract-to-hire?](#156-youre-okay-with-contract-to-hire) |
-| 157 | Behavioural | [What questions do you have for us?](#157-what-questions-do-you-have-for-us) |
-| 158 | CodeSignal | [Walk me through your banking solution.](#158-walk-me-through-your-banking-solution) |
-| 159 | CodeSignal | [How would you have implemented the scheduled transfer?](#159-how-would-you-have-implemented-the-scheduled-transfer) |
-| 160 | CodeSignal | [In your scheduled transfer design, where does the money actually move?](#160-in-your-scheduled-transfer-design-where-does-the-money-actually-move) |
-| 161 | CodeSignal | [What would you do differently on the assessment?](#161-what-would-you-do-differently-on-the-assessment) |
+| 137 | Azure | [Azure: App Service vs AKS vs Azure Functions?](#137-azure-app-service-vs-aks-vs-azure-functions) |
+| 138 | Azure | [Azure: Event Hubs vs Service Bus vs Event Grid?](#138-azure-event-hubs-vs-service-bus-vs-event-grid) |
+| 139 | Azure | [Azure: what is APIM for?](#139-azure-what-is-apim-for) |
+| 140 | Azure | [Azure: Key Vault and Managed Identity?](#140-azure-key-vault-and-managed-identity) |
+| 141 | Azure | [Azure: what does Application Insights give you?](#141-azure-what-does-application-insights-give-you) |
+| 142 | Azure | [Azure: storage types?](#142-azure-storage-types) |
+| 143 | Azure | [Azure: Table Storage vs Cosmos DB vs Azure SQL?](#143-azure-table-storage-vs-cosmos-db-vs-azure-sql) |
+| 144 | Azure | [Azure: what is ACR?](#144-azure-what-is-acr) |
+| 145 | Azure | [Azure: how does a request reach your AKS service?](#145-azure-how-does-a-request-reach-your-aks-service) |
+| 146 | Azure | [Azure: what are deployment slots?](#146-azure-what-are-deployment-slots) |
+| 147 | Azure | [Azure: how do you scale?](#147-azure-how-do-you-scale) |
+| 148 | System design | [A client clicks 'Buy 100 shares'. Design what happens until the order reaches the market.](#148-a-client-clicks-buy-100-shares-design-what-happens-until-the-order-reaches-the-market) |
+| 149 | System design | [Does the Direct Investing platform match buyers and sellers?](#149-does-the-direct-investing-platform-match-buyers-and-sellers) |
+| 150 | System design | [Why return 202 Accepted instead of waiting for the market?](#150-why-return-202-accepted-instead-of-waiting-for-the-market) |
+| 151 | System design | [Kafka is down when an order is placed. What happens?](#151-kafka-is-down-when-an-order-is-placed-what-happens) |
+| 152 | System design | [How would a regulator reconstruct what happened to one order?](#152-how-would-a-regulator-reconstruct-what-happened-to-one-order) |
+| 153 | System design | [How do you keep data consistent across microservices?](#153-how-do-you-keep-data-consistent-across-microservices) |
+| 154 | System design | [Circuit breaker vs retry vs bulkhead?](#154-circuit-breaker-vs-retry-vs-bulkhead) |
+| 155 | System design | [How would you push live price or order updates to the UI?](#155-how-would-you-push-live-price-or-order-updates-to-the-ui) |
+| 156 | System design | [How does your design scale?](#156-how-does-your-design-scale) |
+| 157 | Frontend | [Frontend: how do you position yourself if they go deep?](#157-frontend-how-do-you-position-yourself-if-they-go-deep) |
+| 158 | Frontend | [Angular: component vs service? Lifecycle hooks?](#158-angular-component-vs-service-lifecycle-hooks) |
+| 159 | Frontend | [Angular: Observables, the async pipe and switchMap?](#159-angular-observables-the-async-pipe-and-switchmap) |
+| 160 | Frontend | [Angular: HTTP interceptor and route guard?](#160-angular-http-interceptor-and-route-guard) |
+| 161 | Frontend | [Angular: change detection, OnPush, and modern Angular?](#161-angular-change-detection-onpush-and-modern-angular) |
+| 162 | Frontend | [React: props vs state, useState, useEffect, virtual DOM?](#162-react-props-vs-state-usestate-useeffect-virtual-dom) |
+| 163 | Behavioural | [Tell me about a disagreement with a teammate.](#163-tell-me-about-a-disagreement-with-a-teammate) |
+| 164 | Behavioural | [Tell me about a production incident or a hard problem you solved.](#164-tell-me-about-a-production-incident-or-a-hard-problem-you-solved) |
+| 165 | Behavioural | [How do you mentor other developers?](#165-how-do-you-mentor-other-developers) |
+| 166 | Behavioural | [Why RBC, and why this role?](#166-why-rbc-and-why-this-role) |
+| 167 | Behavioural | [You're okay with contract-to-hire?](#167-youre-okay-with-contract-to-hire) |
+| 168 | Behavioural | [What questions do you have for us?](#168-what-questions-do-you-have-for-us) |
+| 169 | CodeSignal | [Walk me through your banking solution.](#169-walk-me-through-your-banking-solution) |
+| 170 | CodeSignal | [How would you have implemented the scheduled transfer?](#170-how-would-you-have-implemented-the-scheduled-transfer) |
+| 171 | CodeSignal | [In your scheduled transfer design, where does the money actually move?](#171-in-your-scheduled-transfer-design-where-does-the-money-actually-move) |
+| 172 | CodeSignal | [What would you do differently on the assessment?](#172-what-would-you-do-differently-on-the-assessment) |
 
 ## 1. Tell me about yourself.
 
@@ -1602,7 +1613,102 @@ The same image moves through every environment; only configuration changes.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 137. A client clicks 'Buy 100 shares'. Design what happens until the order reaches the market.
+## 137. Azure: App Service vs AKS vs Azure Functions?
+
+*Azure*
+
+> "App Service is the simplest way to host a web app or API: deploy code, Azure manages servers. AKS is managed Kubernetes for many containerised microservices, with fine control over scaling and networking. Functions are event-driven and serverless: pay per execution, good for small background jobs."
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 138. Azure: Event Hubs vs Service Bus vs Event Grid?
+
+*Azure*
+
+- **Event Hubs**: high-throughput event streaming with partitions and replay. Azure's Kafka; supports the Kafka protocol.
+- **Service Bus**: reliable enterprise messaging: queues, topics, sessions for ordering, dead-lettering, transactions. For commands like "process this order".
+- **Event Grid**: lightweight event notification, like "a blob was uploaded", pushed to subscribers.
+
+Your example: "At Staples we use Event Hubs for high-throughput integration events to the TMS."
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 139. Azure: what is APIM for?
+
+*Azure*
+
+> "A gateway in front of our APIs: JWT validation, rate limiting and quotas, versioning, request transformation, and a developer portal for partners. One secure front door for all APIs."
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 140. Azure: Key Vault and Managed Identity?
+
+*Azure*
+
+> "Key Vault stores secrets, keys and certificates. Managed Identity gives the app its own Azure identity, so it reads Key Vault without any stored password. That removes the problem of where to keep the secret that unlocks the secrets."
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 141. Azure: what does Application Insights give you?
+
+*Azure*
+
+> "Azure's APM: request rates, failures, dependency calls with timings, exceptions and distributed traces across services. It's how you find that time is going into a slow SQL call, the same way we use Datadog at Staples."
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 142. Azure: storage types?
+
+*Azure*
+
+- **Blob**: files like PDFs.
+- **Table Storage**: cheap NoSQL key-value (used at Staples).
+- **Queue Storage**: simple queuing.
+- **Files**: SMB file shares.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 143. Azure: Table Storage vs Cosmos DB vs Azure SQL?
+
+*Azure*
+
+> "Azure SQL is relational with joins, transactions and strong consistency, what you want for money. Cosmos DB is globally distributed NoSQL with low latency and flexible schemas. Table Storage is the cheapest key-value option for simple lookups at scale."
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 144. Azure: what is ACR?
+
+*Azure*
+
+> "Azure Container Registry: the private Docker image registry. The pipeline pushes images there and AKS pulls from it."
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 145. Azure: how does a request reach your AKS service?
+
+*Azure*
+
+DNS, then Azure Front Door or Application Gateway (WAF, TLS), then APIM, then the AKS ingress controller, then the Kubernetes Service, then the pods.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 146. Azure: what are deployment slots?
+
+*Azure*
+
+> "An App Service feature: deploy to a staging slot, warm it up, then swap with production for near-zero downtime, and swap back if something breaks."
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 147. Azure: how do you scale?
+
+*Azure*
+
+> "Scale up means a bigger machine; scale out means more instances. App Service autoscales on rules like CPU; AKS uses the Horizontal Pod Autoscaler for pods and the cluster autoscaler for nodes."
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 148. A client clicks 'Buy 100 shares'. Design what happens until the order reaches the market.
 
 *System design*
 
@@ -1625,7 +1731,7 @@ Client -> Gateway -> Order API
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 138. Does the Direct Investing platform match buyers and sellers?
+## 149. Does the Direct Investing platform match buyers and sellers?
 
 *System design*
 
@@ -1635,7 +1741,7 @@ Client -> Gateway -> Order API
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 139. Why return 202 Accepted instead of waiting for the market?
+## 150. Why return 202 Accepted instead of waiting for the market?
 
 *System design*
 
@@ -1643,7 +1749,7 @@ Client -> Gateway -> Order API
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 140. Kafka is down when an order is placed. What happens?
+## 151. Kafka is down when an order is placed. What happens?
 
 *System design*
 
@@ -1651,7 +1757,7 @@ Client -> Gateway -> Order API
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 141. How would a regulator reconstruct what happened to one order?
+## 152. How would a regulator reconstruct what happened to one order?
 
 *System design*
 
@@ -1659,7 +1765,7 @@ Client -> Gateway -> Order API
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 142. How do you keep data consistent across microservices?
+## 153. How do you keep data consistent across microservices?
 
 *System design*
 
@@ -1667,7 +1773,7 @@ Client -> Gateway -> Order API
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 143. Circuit breaker vs retry vs bulkhead?
+## 154. Circuit breaker vs retry vs bulkhead?
 
 *System design*
 
@@ -1679,7 +1785,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 144. How would you push live price or order updates to the UI?
+## 155. How would you push live price or order updates to the UI?
 
 *System design*
 
@@ -1687,7 +1793,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 145. How does your design scale?
+## 156. How does your design scale?
 
 *System design*
 
@@ -1695,7 +1801,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 146. Frontend: how do you position yourself if they go deep?
+## 157. Frontend: how do you position yourself if they go deep?
 
 *Frontend*
 
@@ -1703,7 +1809,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 147. Angular: component vs service? Lifecycle hooks?
+## 158. Angular: component vs service? Lifecycle hooks?
 
 *Frontend*
 
@@ -1712,7 +1818,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 148. Angular: Observables, the async pipe and switchMap?
+## 159. Angular: Observables, the async pipe and switchMap?
 
 *Frontend*
 
@@ -1722,7 +1828,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 149. Angular: HTTP interceptor and route guard?
+## 160. Angular: HTTP interceptor and route guard?
 
 *Frontend*
 
@@ -1731,7 +1837,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 150. Angular: change detection, OnPush, and modern Angular?
+## 161. Angular: change detection, OnPush, and modern Angular?
 
 *Frontend*
 
@@ -1740,7 +1846,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 151. React: props vs state, useState, useEffect, virtual DOM?
+## 162. React: props vs state, useState, useEffect, virtual DOM?
 
 *Frontend*
 
@@ -1750,7 +1856,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 152. Tell me about a disagreement with a teammate.
+## 163. Tell me about a disagreement with a teammate.
 
 *Behavioural*
 
@@ -1766,7 +1872,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 153. Tell me about a production incident or a hard problem you solved.
+## 164. Tell me about a production incident or a hard problem you solved.
 
 *Behavioural*
 
@@ -1782,7 +1888,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 154. How do you mentor other developers?
+## 165. How do you mentor other developers?
 
 *Behavioural*
 
@@ -1790,7 +1896,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 155. Why RBC, and why this role?
+## 166. Why RBC, and why this role?
 
 *Behavioural*
 
@@ -1798,7 +1904,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 156. You're okay with contract-to-hire?
+## 167. You're okay with contract-to-hire?
 
 *Behavioural*
 
@@ -1808,7 +1914,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 157. What questions do you have for us?
+## 168. What questions do you have for us?
 
 *Behavioural*
 
@@ -1819,7 +1925,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 158. Walk me through your banking solution.
+## 169. Walk me through your banking solution.
 
 *CodeSignal*
 
@@ -1830,7 +1936,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 159. How would you have implemented the scheduled transfer?
+## 170. How would you have implemented the scheduled transfer?
 
 *CodeSignal*
 
@@ -1866,7 +1972,7 @@ Every public method calls `ProcessDue(timestamp)` first.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 160. In your scheduled transfer design, where does the money actually move?
+## 171. In your scheduled transfer design, where does the money actually move?
 
 *CodeSignal*
 
@@ -1913,7 +2019,7 @@ Timeline: t=10 schedule $50 with delay 20 (ExecuteAt 30). t=25 nothing due. t=35
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 161. What would you do differently on the assessment?
+## 172. What would you do differently on the assessment?
 
 *CodeSignal*
 
