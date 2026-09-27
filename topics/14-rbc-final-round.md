@@ -2318,7 +2318,7 @@ IEnumerable<string> top = _accounts.Values
 return string.Join(",", top);     // "acct5{10},acct3{8},acct4{7}"
 ```
 
-**Follow-up:** Why StringComparer.Ordinal? A plain character-by-character sort, the same on every machine. Big-O? O(n log n) for the sort; fine here, a sorted structure if called constantly on huge data. Why a running TotalSpent? O(1) to update instead of re-scanning every transfer.
+**Follow-up:** Why StringComparer.Ordinal? A plain character-by-character sort. Big-O? O(n log n) for the sort. Why a running TotalSpent? O(1) to update instead of re-scanning transfers.
 
 **[⬆ Back to Top](#table-of-contents)**
 
