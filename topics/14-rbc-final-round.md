@@ -216,7 +216,8 @@
 | 206 | CodeSignal | [Level 3: show the transfer and the traps.](#206-level-3-show-the-transfer-and-the-traps) |
 | 207 | CodeSignal | [Level 4: top spenders, and the traps.](#207-level-4-top-spenders-and-the-traps) |
 | 208 | CodeSignal | [How would you have implemented the scheduled transfer?](#208-how-would-you-have-implemented-the-scheduled-transfer) |
-| 209 | CodeSignal | [How would you improve your CodeSignal solution?](#209-how-would-you-improve-your-codesignal-solution) |
+| 209 | CodeSignal | [Why call ProcessDue in every method instead of a background service?](#209-why-call-processdue-in-every-method-instead-of-a-background-service) |
+| 210 | CodeSignal | [How would you improve your CodeSignal solution?](#210-how-would-you-improve-your-codesignal-solution) |
 
 ## 1. Tell me about yourself.
 
@@ -2782,7 +2783,30 @@ public override bool CancelTransfer(int timestamp, string transferId)
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 209. How would you improve your CodeSignal solution?
+## 209. Why call ProcessDue in every method instead of a background service?
+
+*CodeSignal*
+
+In CodeSignal there is no real clock: time only exists as the timestamp parameter, and it only moves when a method is called. A background timer would use the real clock and give random test results.
+
+```sql
+CreateAccount(1, ...)       it is now time 1
+ScheduleTransfer(5, ...)    time 5, due at 15
+GetBalance(20, ...)         time 20: the transfer due at 15 must run FIRST
+```
+
+**In production:** a BackgroundService polling a ScheduledTransfers table (ExecuteAt, Status) with the real clock every few seconds.
+
+- **Several pods:** claim rows atomically, UPDATE ... SET Status = 'Processing' WHERE Id = @id AND Status = 'Pending'; only the worker that gets 1 row updated executes it.
+- **Idempotency:** a crash mid-way must not transfer twice on retry.
+
+> "In the assessment, time only advanced through the timestamp parameter, so processing due transfers at the start of each call was the right design; it's deterministic. In production I'd use a background service polling a ScheduledTransfers table with the real clock, claiming rows atomically so two instances never execute the same transfer."
+
+**Follow-up:** Raising this yourself shows production thinking, not just passing tests.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 210. How would you improve your CodeSignal solution?
 
 *CodeSignal*
 
