@@ -210,16 +210,21 @@
 | 200 | Frontend | [React: props vs state, useState, useEffect, virtual DOM?](#200-react-props-vs-state-usestate-useeffect-virtual-dom) |
 | 201 | Behavioural | [Tell me about a disagreement with a teammate.](#201-tell-me-about-a-disagreement-with-a-teammate) |
 | 202 | Behavioural | [Tell me about a production incident or a hard problem you solved.](#202-tell-me-about-a-production-incident-or-a-hard-problem-you-solved) |
-| 203 | Behavioural | [How do you mentor other developers?](#203-how-do-you-mentor-other-developers) |
-| 204 | Behavioural | [Why RBC, and why this role?](#204-why-rbc-and-why-this-role) |
-| 205 | Behavioural | [You're okay with contract-to-hire?](#205-youre-okay-with-contract-to-hire) |
-| 206 | Behavioural | [What questions do you have for us?](#206-what-questions-do-you-have-for-us) |
-| 207 | CodeSignal | [Walk me through your banking solution, level by level.](#207-walk-me-through-your-banking-solution-level-by-level) |
-| 208 | CodeSignal | [Level 3: show the transfer and the traps.](#208-level-3-show-the-transfer-and-the-traps) |
-| 209 | CodeSignal | [Level 4: top spenders, and the traps.](#209-level-4-top-spenders-and-the-traps) |
-| 210 | CodeSignal | [How would you have implemented the scheduled transfer?](#210-how-would-you-have-implemented-the-scheduled-transfer) |
-| 211 | CodeSignal | [Why call ProcessDue in every method instead of a background service?](#211-why-call-processdue-in-every-method-instead-of-a-background-service) |
-| 212 | CodeSignal | [How would you improve your CodeSignal solution?](#212-how-would-you-improve-your-codesignal-solution) |
+| 203 | Behavioural | [Working with another team or an external vendor whose system didn't do what you needed?](#203-working-with-another-team-or-an-external-vendor-whose-system-didnt-do-what-you-needed) |
+| 204 | Behavioural | [Tell me about delivering under a tight deadline.](#204-tell-me-about-delivering-under-a-tight-deadline) |
+| 205 | Behavioural | [Tell me about a hard technical challenge you overcame.](#205-tell-me-about-a-hard-technical-challenge-you-overcame) |
+| 206 | Behavioural | [How do you use AI in your work?](#206-how-do-you-use-ai-in-your-work) |
+| 207 | Behavioural | [Other likely behavioural questions: quick starting points.](#207-other-likely-behavioural-questions-quick-starting-points) |
+| 208 | Behavioural | [How do you mentor other developers?](#208-how-do-you-mentor-other-developers) |
+| 209 | Behavioural | [Why RBC, and why this role?](#209-why-rbc-and-why-this-role) |
+| 210 | Behavioural | [You're okay with contract-to-hire?](#210-youre-okay-with-contract-to-hire) |
+| 211 | Behavioural | [What questions do you have for us?](#211-what-questions-do-you-have-for-us) |
+| 212 | CodeSignal | [Walk me through your banking solution, level by level.](#212-walk-me-through-your-banking-solution-level-by-level) |
+| 213 | CodeSignal | [Level 3: show the transfer and the traps.](#213-level-3-show-the-transfer-and-the-traps) |
+| 214 | CodeSignal | [Level 4: top spenders, and the traps.](#214-level-4-top-spenders-and-the-traps) |
+| 215 | CodeSignal | [How would you have implemented the scheduled transfer?](#215-how-would-you-have-implemented-the-scheduled-transfer) |
+| 216 | CodeSignal | [Why call ProcessDue in every method instead of a background service?](#216-why-call-processdue-in-every-method-instead-of-a-background-service) |
+| 217 | CodeSignal | [How would you improve your CodeSignal solution?](#217-how-would-you-improve-your-codesignal-solution) |
 
 ## 1. Tell me about yourself.
 
@@ -2679,7 +2684,64 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 203. How do you mentor other developers?
+## 203. Working with another team or an external vendor whose system didn't do what you needed?
+
+*Behavioural*
+
+> "At Staples, our carrier platform is Centiro, a third-party vendor. Their response didn't include the content we needed in both English and French, which our Canadian customers require. Rather than hacking around it, I set up regular syncs with their team, every other day, and showed them concrete example payloads of exactly what we needed, so there was no room for misreading. Once we agreed the format, I built our side against it in parallel so we weren't blocked. They delivered the change, I switched our integration to the new payload, and it went live with bilingual responses. My takeaway: with vendors, agree the contract early, with real examples, and build against it in parallel."
+
+**Follow-up:** Say 'I' more than 'we'. End with the result and the lesson.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 204. Tell me about delivering under a tight deadline.
+
+*Behavioural*
+
+> "At Staples, integration requests often came with about two weeks' notice for work that needed four. On one [name a real integration], instead of just agreeing and hoping, I broke it down straight away into what was essential for go-live and what could follow, and shared that plan with stakeholders early. We delivered the core flow on time and shipped the rest in the next sprint. But the real fix was upstream: requests kept reaching us late, so I helped design a process where teams raise integration tickets ahead of time, with the data they need. Since then those last-minute crunches have become much rarer."
+
+**Follow-up:** Avoid 'I worked day and night': it sounds like poor planning. The ticket process is the senior part: you fixed the root cause.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 205. Tell me about a hard technical challenge you overcame.
+
+*Behavioural*
+
+> "At Accolite, on the insightsoftware platform, we migrated legacy .NET Framework APIs to .NET Core. The hardest part was dependencies: several NuGet packages and libraries had no .NET Core support. I went through them one by one and handled each in one of three ways: upgrade to a version that supported .NET Core, swap in an alternative library, or, where nothing existed, build that piece ourselves as an internal NuGet package so every service could reuse it. We migrated module by module, with tests confirming each behaved the same as before. We got fully onto .NET Core, with better performance and faster builds. The lesson: audit dependencies before starting a migration; that's where the real risk hides."
+
+**Follow-up:** Matches the JD nice-to-have: reusable components and package deployment. Also works for 'learning under pressure'.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 206. How do you use AI in your work?
+
+*Behavioural*
+
+> "GitHub Copilot and Claude help me with boilerplate and exploring options quickly, but I review and understand everything I ship. The design decisions and fundamentals are mine; AI speeds up the typing, not the thinking."
+
+**Follow-up:** Tony raised AI himself in the screener: 'if you don't know the fundamentals it won't solve your problems for you'.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 207. Other likely behavioural questions: quick starting points.
+
+*Behavioural*
+
+- **Ambiguous requirements:** ask what the consumer actually needs, write down the data mapping, confirm before building.
+- **Learning something new quickly:** build a small working demo first (the Kafka demo, the sample API).
+- **Disagreeing with a manager:** data, not opinion, then commit to the decision.
+- **Feedback received:** something true, and what you changed afterwards.
+- **Conflicting priorities:** make the trade-off visible to the lead or PO; let the business decide.
+- **Improving a process:** the integration ticket process, code reviews, structured logging with correlation IDs.
+- **Why hire you:** event-driven .NET integration, performance tuning, financial reporting; hands-on.
+- **5 years:** growing into a senior or lead role on a platform like this: owning architecture, mentoring.
+
+Formula: STAR in about 90 seconds. Most of the time on Action, then Result and what you learned.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 208. How do you mentor other developers?
 
 *Behavioural*
 
@@ -2687,7 +2749,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 204. Why RBC, and why this role?
+## 209. Why RBC, and why this role?
 
 *Behavioural*
 
@@ -2695,7 +2757,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 205. You're okay with contract-to-hire?
+## 210. You're okay with contract-to-hire?
 
 *Behavioural*
 
@@ -2705,7 +2767,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 206. What questions do you have for us?
+## 211. What questions do you have for us?
 
 *Behavioural*
 
@@ -2716,7 +2778,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 207. Walk me through your banking solution, level by level.
+## 212. Walk me through your banking solution, level by level.
 
 *CodeSignal*
 
@@ -2732,7 +2794,7 @@ Every method takes a timestamp first; the caller supplies the account id.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 208. Level 3: show the transfer and the traps.
+## 213. Level 3: show the transfer and the traps.
 
 *CodeSignal*
 
@@ -2761,7 +2823,7 @@ private int? TryTransfer(string sourceId, string targetId, int amount)
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 209. Level 4: top spenders, and the traps.
+## 214. Level 4: top spenders, and the traps.
 
 *CodeSignal*
 
@@ -2780,7 +2842,7 @@ return string.Join(",", top);     // "acct5{10},acct3{8},acct4{7}"
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 210. How would you have implemented the scheduled transfer?
+## 215. How would you have implemented the scheduled transfer?
 
 *CodeSignal*
 
@@ -2832,7 +2894,7 @@ public override bool CancelTransfer(int timestamp, string transferId)
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 211. Why call ProcessDue in every method instead of a background service?
+## 216. Why call ProcessDue in every method instead of a background service?
 
 *CodeSignal*
 
@@ -2855,7 +2917,7 @@ GetBalance(20, ...)         time 20: the transfer due at 15 must run FIRST
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 212. How would you improve your CodeSignal solution?
+## 217. How would you improve your CodeSignal solution?
 
 *CodeSignal*
 
