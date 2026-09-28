@@ -1383,7 +1383,7 @@ int r = await GetValueAsync(); // 42, after 1 second
 
 > "Inside the method, code after await Task.Delay always runs, after the delay; await pauses the method, not the thread. Without an await in the caller, Main carries on immediately: it prints the Task's type name, or a default value. It doesn't throw; you get the wrong output. In a console app the rest may never run if Main exits first. Fix: async Task Main and await."
 
-**Follow-up:** Sachin's insight (execution moves on before the value arrives) was right; the trap was saying 'it will fail'. It's the runtime that moves on, not the compiler.
+**Follow-up:** The trap is saying it will fail: it prints the wrong value, it does not throw. It's the runtime that moves on, not the compiler.
 
 **[⬆ Back to Top](#table-of-contents)**
 
