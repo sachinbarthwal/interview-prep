@@ -111,123 +111,124 @@
 | 101 | .NET core | [Why is async void dangerous?](#101-why-is-async-void-dangerous) |
 | 102 | .NET core | [What's wrong with .Result or .Wait()?](#102-whats-wrong-with-result-or-wait) |
 | 103 | .NET core | [How do you run three independent calls in parallel?](#103-how-do-you-run-three-independent-calls-in-parallel) |
-| 104 | .NET core | [Why use IHttpClientFactory?](#104-why-use-ihttpclientfactory) |
-| 105 | .NET core | [IEnumerable vs IQueryable?](#105-ienumerable-vs-iqueryable) |
-| 106 | .NET core | [What is middleware in ASP.NET Core?](#106-what-is-middleware-in-aspnet-core) |
-| 107 | .NET core | [How do you handle exceptions globally in an API?](#107-how-do-you-handle-exceptions-globally-in-an-api) |
-| 108 | .NET core | [How do you reduce memory allocations on large data?](#108-how-do-you-reduce-memory-allocations-on-large-data) |
-| 109 | .NET core | [record vs class?](#109-record-vs-class) |
-| 110 | EF Core & SQL | [What's the N+1 problem? How do you fix it?](#110-whats-the-n1-problem-how-do-you-fix-it) |
-| 111 | EF Core & SQL | [What does AsNoTracking do, and when does it hurt?](#111-what-does-asnotracking-do-and-when-does-it-hurt) |
-| 112 | EF Core & SQL | [Two users update the same balance at once. How do you stop a lost update?](#112-two-users-update-the-same-balance-at-once-how-do-you-stop-a-lost-update) |
-| 113 | EF Core & SQL | [How do you deploy database changes safely?](#113-how-do-you-deploy-database-changes-safely) |
-| 114 | EF Core & SQL | [Clustered vs nonclustered index? What's a key lookup?](#114-clustered-vs-nonclustered-index-whats-a-key-lookup) |
-| 115 | EF Core & SQL | [Why would SQL Server ignore an index you created?](#115-why-would-sql-server-ignore-an-index-you-created) |
-| 116 | EF Core & SQL | [What's parameter sniffing?](#116-whats-parameter-sniffing) |
-| 117 | EF Core & SQL | [Two orders try to reserve the last unit at the same moment. How do you stop both succeeding?](#117-two-orders-try-to-reserve-the-last-unit-at-the-same-moment-how-do-you-stop-both-succeeding) |
-| 118 | EF Core & SQL | [Does SQL Server lock rows by itself?](#118-does-sql-server-lock-rows-by-itself) |
-| 119 | EF Core & SQL | [How do you prevent deadlocks in money transfers?](#119-how-do-you-prevent-deadlocks-in-money-transfers) |
-| 120 | EF Core & SQL | [Add a NOT NULL column to a 50-million-row table without downtime.](#120-add-a-not-null-column-to-a-50-million-row-table-without-downtime) |
-| 121 | EF Core & SQL | [Where should business logic live: stored procedures or C#?](#121-where-should-business-logic-live-stored-procedures-or-c) |
-| 122 | EF Core & SQL | [Isolation levels, in one breath.](#122-isolation-levels-in-one-breath) |
-| 123 | EF Core & SQL | [SQL: types of JOIN?](#123-sql-types-of-join) |
-| 124 | EF Core & SQL | [SQL: WHERE vs HAVING?](#124-sql-where-vs-having) |
-| 125 | EF Core & SQL | [SQL: DELETE vs TRUNCATE?](#125-sql-delete-vs-truncate) |
-| 126 | EF Core & SQL | [SQL: UNION vs UNION ALL?](#126-sql-union-vs-union-all) |
-| 127 | EF Core & SQL | [SQL: what's a CTE?](#127-sql-whats-a-cte) |
-| 128 | EF Core & SQL | [SQL: ROW_NUMBER vs RANK vs DENSE_RANK?](#128-sql-rownumber-vs-rank-vs-denserank) |
-| 129 | EF Core & SQL | [SQL: find the second-highest salary.](#129-sql-find-the-second-highest-salary) |
-| 130 | EF Core & SQL | [SQL: delete duplicate rows but keep one.](#130-sql-delete-duplicate-rows-but-keep-one) |
-| 131 | EF Core & SQL | [SQL: temp table vs table variable?](#131-sql-temp-table-vs-table-variable) |
-| 132 | EF Core & SQL | [SQL: stored procedure vs function?](#132-sql-stored-procedure-vs-function) |
-| 133 | EF Core & SQL | [SQL: what is ACID?](#133-sql-what-is-acid) |
-| 134 | EF Core & SQL | [SQL: what is normalization?](#134-sql-what-is-normalization) |
-| 135 | API & security | [What makes a RESTful API well designed?](#135-what-makes-a-restful-api-well-designed) |
-| 136 | API & security | [POST vs PUT vs PATCH, and which are idempotent?](#136-post-vs-put-vs-patch-and-which-are-idempotent) |
-| 137 | API & security | [Which status codes do you use, and when?](#137-which-status-codes-do-you-use-and-when) |
-| 138 | API & security | [A client retries a timed-out order. How do you prevent a duplicate trade?](#138-a-client-retries-a-timed-out-order-how-do-you-prevent-a-duplicate-trade) |
-| 139 | API & security | [How do you version an API?](#139-how-do-you-version-an-api) |
-| 140 | API & security | [OAuth2 vs JWT?](#140-oauth2-vs-jwt) |
-| 141 | API & security | [A partner system calls your API through APIM. Walk me through how it's secured.](#141-a-partner-system-calls-your-api-through-apim-walk-me-through-how-its-secured) |
-| 142 | API & security | [How do users log in through the UI and call your API?](#142-how-do-users-log-in-through-the-ui-and-call-your-api) |
-| 143 | API & security | [What does rotating secrets mean?](#143-what-does-rotating-secrets-mean) |
-| 144 | API & security | [How do you implement authorization in .NET?](#144-how-do-you-implement-authorization-in-net) |
-| 145 | API & security | [How does your API validate a JWT?](#145-how-does-your-api-validate-a-jwt) |
-| 146 | API & security | [Name an OWASP risk you've mitigated.](#146-name-an-owasp-risk-youve-mitigated) |
-| 147 | API & security | [How do you protect customer data and privacy?](#147-how-do-you-protect-customer-data-and-privacy) |
-| 148 | API & security | [Where do secrets like connection strings go?](#148-where-do-secrets-like-connection-strings-go) |
-| 149 | API & security | [What do you know about WCAG accessibility?](#149-what-do-you-know-about-wcag-accessibility) |
-| 150 | Testing | [How do you test a service that consumes events and writes to a database?](#150-how-do-you-test-a-service-that-consumes-events-and-writes-to-a-database) |
-| 151 | Testing | [Unit test vs integration test: where's the line?](#151-unit-test-vs-integration-test-wheres-the-line) |
-| 152 | Testing | [How do you unit test a class that publishes to Kafka?](#152-how-do-you-unit-test-a-class-that-publishes-to-kafka) |
-| 153 | Testing | [How do you test an API end to end?](#153-how-do-you-test-an-api-end-to-end) |
-| 154 | Testing | [What makes a good unit test?](#154-what-makes-a-good-unit-test) |
-| 155 | Testing | [Mock vs stub vs fake?](#155-mock-vs-stub-vs-fake) |
-| 156 | Testing | [Do you practise TDD?](#156-do-you-practise-tdd) |
-| 157 | Docker & OpenShift | [Image vs container vs Docker?](#157-image-vs-container-vs-docker) |
-| 158 | Docker & OpenShift | [How do you write a Dockerfile for a .NET API?](#158-how-do-you-write-a-dockerfile-for-a-net-api) |
-| 159 | Docker & OpenShift | [Explain the core Kubernetes objects.](#159-explain-the-core-kubernetes-objects) |
-| 160 | Docker & OpenShift | [OpenShift vs Kubernetes?](#160-openshift-vs-kubernetes) |
-| 161 | Docker & OpenShift | [Liveness vs readiness probe?](#161-liveness-vs-readiness-probe) |
-| 162 | Docker & OpenShift | [Walk me through a CI/CD pipeline you've built.](#162-walk-me-through-a-cicd-pipeline-youve-built) |
-| 163 | Docker & OpenShift | [How do you handle config per environment?](#163-how-do-you-handle-config-per-environment) |
-| 164 | Git | [Git: merge vs rebase?](#164-git-merge-vs-rebase) |
-| 165 | Git | [Git: what's your branching strategy?](#165-git-whats-your-branching-strategy) |
-| 166 | Git | [Git: how do you resolve a merge conflict?](#166-git-how-do-you-resolve-a-merge-conflict) |
-| 167 | Git | [What do you look for in a code review?](#167-what-do-you-look-for-in-a-code-review) |
-| 168 | Git | [Git: revert vs reset?](#168-git-revert-vs-reset) |
-| 169 | Azure | [Azure: App Service vs AKS vs Azure Functions?](#169-azure-app-service-vs-aks-vs-azure-functions) |
-| 170 | Azure | [Azure: Event Hubs vs Service Bus vs Event Grid?](#170-azure-event-hubs-vs-service-bus-vs-event-grid) |
-| 171 | Azure | [Azure: what is APIM for?](#171-azure-what-is-apim-for) |
-| 172 | Azure | [Azure: Key Vault and Managed Identity?](#172-azure-key-vault-and-managed-identity) |
-| 173 | Azure | [Azure: what does Application Insights give you?](#173-azure-what-does-application-insights-give-you) |
-| 174 | Azure | [Azure: storage types?](#174-azure-storage-types) |
-| 175 | Azure | [Azure: Table Storage vs Cosmos DB vs Azure SQL?](#175-azure-table-storage-vs-cosmos-db-vs-azure-sql) |
-| 176 | Azure | [Azure: what is ACR?](#176-azure-what-is-acr) |
-| 177 | Azure | [Azure: how does a request reach your AKS service?](#177-azure-how-does-a-request-reach-your-aks-service) |
-| 178 | Azure | [Azure: what are deployment slots?](#178-azure-what-are-deployment-slots) |
-| 179 | Azure | [Azure: how do you scale?](#179-azure-how-do-you-scale) |
-| 180 | Azure | [How do you implement Event Hubs in .NET?](#180-how-do-you-implement-event-hubs-in-net) |
-| 181 | Azure | [What is Google Pub/Sub and how does it work?](#181-what-is-google-pubsub-and-how-does-it-work) |
-| 182 | Azure | [What is AKS, and who decides the number of pods?](#182-what-is-aks-and-who-decides-the-number-of-pods) |
-| 183 | Azure | [Walk me through an Azure DevOps pipeline you built.](#183-walk-me-through-an-azure-devops-pipeline-you-built) |
-| 184 | System design | [Microservices vs monolith?](#184-microservices-vs-monolith) |
-| 185 | System design | [How would you build a microservice?](#185-how-would-you-build-a-microservice) |
-| 186 | System design | [A client clicks 'Buy 100 shares'. Design what happens until the order reaches the market.](#186-a-client-clicks-buy-100-shares-design-what-happens-until-the-order-reaches-the-market) |
-| 187 | System design | [Does the Direct Investing platform match buyers and sellers?](#187-does-the-direct-investing-platform-match-buyers-and-sellers) |
-| 188 | System design | [Broker domain terms: exchange, market vs limit order, fill, buying power?](#188-broker-domain-terms-exchange-market-vs-limit-order-fill-buying-power) |
-| 189 | System design | [Draw the journey of one 'Buy 100 AAPL' order.](#189-draw-the-journey-of-one-buy-100-aapl-order) |
-| 190 | System design | [Order follow-ups: partial fill, client cancel, exchange reject?](#190-order-follow-ups-partial-fill-client-cancel-exchange-reject) |
-| 191 | System design | [Why return 202 Accepted instead of waiting for the market?](#191-why-return-202-accepted-instead-of-waiting-for-the-market) |
-| 192 | System design | [Kafka is down when an order is placed. What happens?](#192-kafka-is-down-when-an-order-is-placed-what-happens) |
-| 193 | System design | [How would a regulator reconstruct what happened to one order?](#193-how-would-a-regulator-reconstruct-what-happened-to-one-order) |
-| 194 | System design | [How do you keep data consistent across microservices?](#194-how-do-you-keep-data-consistent-across-microservices) |
-| 195 | System design | [Circuit breaker vs retry vs bulkhead?](#195-circuit-breaker-vs-retry-vs-bulkhead) |
-| 196 | System design | [How would you push live price or order updates to the UI?](#196-how-would-you-push-live-price-or-order-updates-to-the-ui) |
-| 197 | System design | [How does your design scale?](#197-how-does-your-design-scale) |
-| 198 | Frontend | [Frontend: how do you position yourself if they go deep?](#198-frontend-how-do-you-position-yourself-if-they-go-deep) |
-| 199 | Frontend | [Angular: component vs service? Lifecycle hooks?](#199-angular-component-vs-service-lifecycle-hooks) |
-| 200 | Frontend | [Angular: Observables, the async pipe and switchMap?](#200-angular-observables-the-async-pipe-and-switchmap) |
-| 201 | Frontend | [Angular: HTTP interceptor and route guard?](#201-angular-http-interceptor-and-route-guard) |
-| 202 | Frontend | [Angular: change detection, OnPush, and modern Angular?](#202-angular-change-detection-onpush-and-modern-angular) |
-| 203 | Frontend | [React: props vs state, useState, useEffect, virtual DOM?](#203-react-props-vs-state-usestate-useeffect-virtual-dom) |
-| 204 | Behavioural | [Tell me about a disagreement with a teammate.](#204-tell-me-about-a-disagreement-with-a-teammate) |
-| 205 | Behavioural | [Tell me about a production incident or a hard problem you solved.](#205-tell-me-about-a-production-incident-or-a-hard-problem-you-solved) |
-| 206 | Behavioural | [Working with another team or an external vendor whose system didn't do what you needed?](#206-working-with-another-team-or-an-external-vendor-whose-system-didnt-do-what-you-needed) |
-| 207 | Behavioural | [Tell me about delivering under a tight deadline.](#207-tell-me-about-delivering-under-a-tight-deadline) |
-| 208 | Behavioural | [Tell me about a hard technical challenge you overcame.](#208-tell-me-about-a-hard-technical-challenge-you-overcame) |
-| 209 | Behavioural | [How do you use AI in your work?](#209-how-do-you-use-ai-in-your-work) |
-| 210 | Behavioural | [Other likely behavioural questions: quick starting points.](#210-other-likely-behavioural-questions-quick-starting-points) |
-| 211 | Behavioural | [How do you mentor other developers?](#211-how-do-you-mentor-other-developers) |
-| 212 | Behavioural | [Why RBC, and why this role?](#212-why-rbc-and-why-this-role) |
-| 213 | Behavioural | [You're okay with contract-to-hire?](#213-youre-okay-with-contract-to-hire) |
-| 214 | Behavioural | [What questions do you have for us?](#214-what-questions-do-you-have-for-us) |
-| 215 | CodeSignal | [Walk me through your banking solution, level by level.](#215-walk-me-through-your-banking-solution-level-by-level) |
-| 216 | CodeSignal | [Level 3: show the transfer and the traps.](#216-level-3-show-the-transfer-and-the-traps) |
-| 217 | CodeSignal | [Level 4: top spenders, and the traps.](#217-level-4-top-spenders-and-the-traps) |
-| 218 | CodeSignal | [How would you have implemented the scheduled transfer?](#218-how-would-you-have-implemented-the-scheduled-transfer) |
-| 219 | CodeSignal | [Why call ProcessDue in every method instead of a background service?](#219-why-call-processdue-in-every-method-instead-of-a-background-service) |
-| 220 | CodeSignal | [How would you improve your CodeSignal solution?](#220-how-would-you-improve-your-codesignal-solution) |
+| 104 | .NET core | [Process 1000 messages, max 10 at a time, and start the next as soon as one finishes. How?](#104-process-1000-messages-max-10-at-a-time-and-start-the-next-as-soon-as-one-finishes-how) |
+| 105 | .NET core | [Why use IHttpClientFactory?](#105-why-use-ihttpclientfactory) |
+| 106 | .NET core | [IEnumerable vs IQueryable?](#106-ienumerable-vs-iqueryable) |
+| 107 | .NET core | [What is middleware in ASP.NET Core?](#107-what-is-middleware-in-aspnet-core) |
+| 108 | .NET core | [How do you handle exceptions globally in an API?](#108-how-do-you-handle-exceptions-globally-in-an-api) |
+| 109 | .NET core | [How do you reduce memory allocations on large data?](#109-how-do-you-reduce-memory-allocations-on-large-data) |
+| 110 | .NET core | [record vs class?](#110-record-vs-class) |
+| 111 | EF Core & SQL | [What's the N+1 problem? How do you fix it?](#111-whats-the-n1-problem-how-do-you-fix-it) |
+| 112 | EF Core & SQL | [What does AsNoTracking do, and when does it hurt?](#112-what-does-asnotracking-do-and-when-does-it-hurt) |
+| 113 | EF Core & SQL | [Two users update the same balance at once. How do you stop a lost update?](#113-two-users-update-the-same-balance-at-once-how-do-you-stop-a-lost-update) |
+| 114 | EF Core & SQL | [How do you deploy database changes safely?](#114-how-do-you-deploy-database-changes-safely) |
+| 115 | EF Core & SQL | [Clustered vs nonclustered index? What's a key lookup?](#115-clustered-vs-nonclustered-index-whats-a-key-lookup) |
+| 116 | EF Core & SQL | [Why would SQL Server ignore an index you created?](#116-why-would-sql-server-ignore-an-index-you-created) |
+| 117 | EF Core & SQL | [What's parameter sniffing?](#117-whats-parameter-sniffing) |
+| 118 | EF Core & SQL | [Two orders try to reserve the last unit at the same moment. How do you stop both succeeding?](#118-two-orders-try-to-reserve-the-last-unit-at-the-same-moment-how-do-you-stop-both-succeeding) |
+| 119 | EF Core & SQL | [Does SQL Server lock rows by itself?](#119-does-sql-server-lock-rows-by-itself) |
+| 120 | EF Core & SQL | [How do you prevent deadlocks in money transfers?](#120-how-do-you-prevent-deadlocks-in-money-transfers) |
+| 121 | EF Core & SQL | [Add a NOT NULL column to a 50-million-row table without downtime.](#121-add-a-not-null-column-to-a-50-million-row-table-without-downtime) |
+| 122 | EF Core & SQL | [Where should business logic live: stored procedures or C#?](#122-where-should-business-logic-live-stored-procedures-or-c) |
+| 123 | EF Core & SQL | [Isolation levels, in one breath.](#123-isolation-levels-in-one-breath) |
+| 124 | EF Core & SQL | [SQL: types of JOIN?](#124-sql-types-of-join) |
+| 125 | EF Core & SQL | [SQL: WHERE vs HAVING?](#125-sql-where-vs-having) |
+| 126 | EF Core & SQL | [SQL: DELETE vs TRUNCATE?](#126-sql-delete-vs-truncate) |
+| 127 | EF Core & SQL | [SQL: UNION vs UNION ALL?](#127-sql-union-vs-union-all) |
+| 128 | EF Core & SQL | [SQL: what's a CTE?](#128-sql-whats-a-cte) |
+| 129 | EF Core & SQL | [SQL: ROW_NUMBER vs RANK vs DENSE_RANK?](#129-sql-rownumber-vs-rank-vs-denserank) |
+| 130 | EF Core & SQL | [SQL: find the second-highest salary.](#130-sql-find-the-second-highest-salary) |
+| 131 | EF Core & SQL | [SQL: delete duplicate rows but keep one.](#131-sql-delete-duplicate-rows-but-keep-one) |
+| 132 | EF Core & SQL | [SQL: temp table vs table variable?](#132-sql-temp-table-vs-table-variable) |
+| 133 | EF Core & SQL | [SQL: stored procedure vs function?](#133-sql-stored-procedure-vs-function) |
+| 134 | EF Core & SQL | [SQL: what is ACID?](#134-sql-what-is-acid) |
+| 135 | EF Core & SQL | [SQL: what is normalization?](#135-sql-what-is-normalization) |
+| 136 | API & security | [What makes a RESTful API well designed?](#136-what-makes-a-restful-api-well-designed) |
+| 137 | API & security | [POST vs PUT vs PATCH, and which are idempotent?](#137-post-vs-put-vs-patch-and-which-are-idempotent) |
+| 138 | API & security | [Which status codes do you use, and when?](#138-which-status-codes-do-you-use-and-when) |
+| 139 | API & security | [A client retries a timed-out order. How do you prevent a duplicate trade?](#139-a-client-retries-a-timed-out-order-how-do-you-prevent-a-duplicate-trade) |
+| 140 | API & security | [How do you version an API?](#140-how-do-you-version-an-api) |
+| 141 | API & security | [OAuth2 vs JWT?](#141-oauth2-vs-jwt) |
+| 142 | API & security | [A partner system calls your API through APIM. Walk me through how it's secured.](#142-a-partner-system-calls-your-api-through-apim-walk-me-through-how-its-secured) |
+| 143 | API & security | [How do users log in through the UI and call your API?](#143-how-do-users-log-in-through-the-ui-and-call-your-api) |
+| 144 | API & security | [What does rotating secrets mean?](#144-what-does-rotating-secrets-mean) |
+| 145 | API & security | [How do you implement authorization in .NET?](#145-how-do-you-implement-authorization-in-net) |
+| 146 | API & security | [How does your API validate a JWT?](#146-how-does-your-api-validate-a-jwt) |
+| 147 | API & security | [Name an OWASP risk you've mitigated.](#147-name-an-owasp-risk-youve-mitigated) |
+| 148 | API & security | [How do you protect customer data and privacy?](#148-how-do-you-protect-customer-data-and-privacy) |
+| 149 | API & security | [Where do secrets like connection strings go?](#149-where-do-secrets-like-connection-strings-go) |
+| 150 | API & security | [What do you know about WCAG accessibility?](#150-what-do-you-know-about-wcag-accessibility) |
+| 151 | Testing | [How do you test a service that consumes events and writes to a database?](#151-how-do-you-test-a-service-that-consumes-events-and-writes-to-a-database) |
+| 152 | Testing | [Unit test vs integration test: where's the line?](#152-unit-test-vs-integration-test-wheres-the-line) |
+| 153 | Testing | [How do you unit test a class that publishes to Kafka?](#153-how-do-you-unit-test-a-class-that-publishes-to-kafka) |
+| 154 | Testing | [How do you test an API end to end?](#154-how-do-you-test-an-api-end-to-end) |
+| 155 | Testing | [What makes a good unit test?](#155-what-makes-a-good-unit-test) |
+| 156 | Testing | [Mock vs stub vs fake?](#156-mock-vs-stub-vs-fake) |
+| 157 | Testing | [Do you practise TDD?](#157-do-you-practise-tdd) |
+| 158 | Docker & OpenShift | [Image vs container vs Docker?](#158-image-vs-container-vs-docker) |
+| 159 | Docker & OpenShift | [How do you write a Dockerfile for a .NET API?](#159-how-do-you-write-a-dockerfile-for-a-net-api) |
+| 160 | Docker & OpenShift | [Explain the core Kubernetes objects.](#160-explain-the-core-kubernetes-objects) |
+| 161 | Docker & OpenShift | [OpenShift vs Kubernetes?](#161-openshift-vs-kubernetes) |
+| 162 | Docker & OpenShift | [Liveness vs readiness probe?](#162-liveness-vs-readiness-probe) |
+| 163 | Docker & OpenShift | [Walk me through a CI/CD pipeline you've built.](#163-walk-me-through-a-cicd-pipeline-youve-built) |
+| 164 | Docker & OpenShift | [How do you handle config per environment?](#164-how-do-you-handle-config-per-environment) |
+| 165 | Git | [Git: merge vs rebase?](#165-git-merge-vs-rebase) |
+| 166 | Git | [Git: what's your branching strategy?](#166-git-whats-your-branching-strategy) |
+| 167 | Git | [Git: how do you resolve a merge conflict?](#167-git-how-do-you-resolve-a-merge-conflict) |
+| 168 | Git | [What do you look for in a code review?](#168-what-do-you-look-for-in-a-code-review) |
+| 169 | Git | [Git: revert vs reset?](#169-git-revert-vs-reset) |
+| 170 | Azure | [Azure: App Service vs AKS vs Azure Functions?](#170-azure-app-service-vs-aks-vs-azure-functions) |
+| 171 | Azure | [Azure: Event Hubs vs Service Bus vs Event Grid?](#171-azure-event-hubs-vs-service-bus-vs-event-grid) |
+| 172 | Azure | [Azure: what is APIM for?](#172-azure-what-is-apim-for) |
+| 173 | Azure | [Azure: Key Vault and Managed Identity?](#173-azure-key-vault-and-managed-identity) |
+| 174 | Azure | [Azure: what does Application Insights give you?](#174-azure-what-does-application-insights-give-you) |
+| 175 | Azure | [Azure: storage types?](#175-azure-storage-types) |
+| 176 | Azure | [Azure: Table Storage vs Cosmos DB vs Azure SQL?](#176-azure-table-storage-vs-cosmos-db-vs-azure-sql) |
+| 177 | Azure | [Azure: what is ACR?](#177-azure-what-is-acr) |
+| 178 | Azure | [Azure: how does a request reach your AKS service?](#178-azure-how-does-a-request-reach-your-aks-service) |
+| 179 | Azure | [Azure: what are deployment slots?](#179-azure-what-are-deployment-slots) |
+| 180 | Azure | [Azure: how do you scale?](#180-azure-how-do-you-scale) |
+| 181 | Azure | [How do you implement Event Hubs in .NET?](#181-how-do-you-implement-event-hubs-in-net) |
+| 182 | Azure | [What is Google Pub/Sub and how does it work?](#182-what-is-google-pubsub-and-how-does-it-work) |
+| 183 | Azure | [What is AKS, and who decides the number of pods?](#183-what-is-aks-and-who-decides-the-number-of-pods) |
+| 184 | Azure | [Walk me through an Azure DevOps pipeline you built.](#184-walk-me-through-an-azure-devops-pipeline-you-built) |
+| 185 | System design | [Microservices vs monolith?](#185-microservices-vs-monolith) |
+| 186 | System design | [How would you build a microservice?](#186-how-would-you-build-a-microservice) |
+| 187 | System design | [A client clicks 'Buy 100 shares'. Design what happens until the order reaches the market.](#187-a-client-clicks-buy-100-shares-design-what-happens-until-the-order-reaches-the-market) |
+| 188 | System design | [Does the Direct Investing platform match buyers and sellers?](#188-does-the-direct-investing-platform-match-buyers-and-sellers) |
+| 189 | System design | [Broker domain terms: exchange, market vs limit order, fill, buying power?](#189-broker-domain-terms-exchange-market-vs-limit-order-fill-buying-power) |
+| 190 | System design | [Draw the journey of one 'Buy 100 AAPL' order.](#190-draw-the-journey-of-one-buy-100-aapl-order) |
+| 191 | System design | [Order follow-ups: partial fill, client cancel, exchange reject?](#191-order-follow-ups-partial-fill-client-cancel-exchange-reject) |
+| 192 | System design | [Why return 202 Accepted instead of waiting for the market?](#192-why-return-202-accepted-instead-of-waiting-for-the-market) |
+| 193 | System design | [Kafka is down when an order is placed. What happens?](#193-kafka-is-down-when-an-order-is-placed-what-happens) |
+| 194 | System design | [How would a regulator reconstruct what happened to one order?](#194-how-would-a-regulator-reconstruct-what-happened-to-one-order) |
+| 195 | System design | [How do you keep data consistent across microservices?](#195-how-do-you-keep-data-consistent-across-microservices) |
+| 196 | System design | [Circuit breaker vs retry vs bulkhead?](#196-circuit-breaker-vs-retry-vs-bulkhead) |
+| 197 | System design | [How would you push live price or order updates to the UI?](#197-how-would-you-push-live-price-or-order-updates-to-the-ui) |
+| 198 | System design | [How does your design scale?](#198-how-does-your-design-scale) |
+| 199 | Frontend | [Frontend: how do you position yourself if they go deep?](#199-frontend-how-do-you-position-yourself-if-they-go-deep) |
+| 200 | Frontend | [Angular: component vs service? Lifecycle hooks?](#200-angular-component-vs-service-lifecycle-hooks) |
+| 201 | Frontend | [Angular: Observables, the async pipe and switchMap?](#201-angular-observables-the-async-pipe-and-switchmap) |
+| 202 | Frontend | [Angular: HTTP interceptor and route guard?](#202-angular-http-interceptor-and-route-guard) |
+| 203 | Frontend | [Angular: change detection, OnPush, and modern Angular?](#203-angular-change-detection-onpush-and-modern-angular) |
+| 204 | Frontend | [React: props vs state, useState, useEffect, virtual DOM?](#204-react-props-vs-state-usestate-useeffect-virtual-dom) |
+| 205 | Behavioural | [Tell me about a disagreement with a teammate.](#205-tell-me-about-a-disagreement-with-a-teammate) |
+| 206 | Behavioural | [Tell me about a production incident or a hard problem you solved.](#206-tell-me-about-a-production-incident-or-a-hard-problem-you-solved) |
+| 207 | Behavioural | [Working with another team or an external vendor whose system didn't do what you needed?](#207-working-with-another-team-or-an-external-vendor-whose-system-didnt-do-what-you-needed) |
+| 208 | Behavioural | [Tell me about delivering under a tight deadline.](#208-tell-me-about-delivering-under-a-tight-deadline) |
+| 209 | Behavioural | [Tell me about a hard technical challenge you overcame.](#209-tell-me-about-a-hard-technical-challenge-you-overcame) |
+| 210 | Behavioural | [How do you use AI in your work?](#210-how-do-you-use-ai-in-your-work) |
+| 211 | Behavioural | [Other likely behavioural questions: quick starting points.](#211-other-likely-behavioural-questions-quick-starting-points) |
+| 212 | Behavioural | [How do you mentor other developers?](#212-how-do-you-mentor-other-developers) |
+| 213 | Behavioural | [Why RBC, and why this role?](#213-why-rbc-and-why-this-role) |
+| 214 | Behavioural | [You're okay with contract-to-hire?](#214-youre-okay-with-contract-to-hire) |
+| 215 | Behavioural | [What questions do you have for us?](#215-what-questions-do-you-have-for-us) |
+| 216 | CodeSignal | [Walk me through your banking solution, level by level.](#216-walk-me-through-your-banking-solution-level-by-level) |
+| 217 | CodeSignal | [Level 3: show the transfer and the traps.](#217-level-3-show-the-transfer-and-the-traps) |
+| 218 | CodeSignal | [Level 4: top spenders, and the traps.](#218-level-4-top-spenders-and-the-traps) |
+| 219 | CodeSignal | [How would you have implemented the scheduled transfer?](#219-how-would-you-have-implemented-the-scheduled-transfer) |
+| 220 | CodeSignal | [Why call ProcessDue in every method instead of a background service?](#220-why-call-processdue-in-every-method-instead-of-a-background-service) |
+| 221 | CodeSignal | [How would you improve your CodeSignal solution?](#221-how-would-you-improve-your-codesignal-solution) |
 
 ## 1. Tell me about yourself.
 
@@ -1658,7 +1659,57 @@ In .NET: `IDistributedCache` or `StackExchange.Redis`. In .NET 9+, `HybridCache`
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 104. Why use IHttpClientFactory?
+## 104. Process 1000 messages, max 10 at a time, and start the next as soon as one finishes. How?
+
+*.NET core*
+
+**Batches of 10 (underutilized):** each batch waits for its slowest message.
+
+```csharp
+foreach (var batch in messages.Chunk(10))
+{
+    await Task.WhenAll(batch.Select(m => ProcessAsync(m)));
+}
+```
+
+**SemaphoreSlim: always 10 in flight, next starts immediately:**
+
+```csharp
+var gate = new SemaphoreSlim(10);
+
+var tasks = messages.Select(async m =>
+{
+    await gate.WaitAsync();          // take a slot
+    try
+    {
+        await ProcessAsync(m);
+    }
+    finally
+    {
+        gate.Release();              // free it, even on error
+    }
+});
+
+await Task.WhenAll(tasks);
+```
+
+**.NET 6+, simplest:**
+
+```csharp
+var options = new ParallelOptions { MaxDegreeOfParallelism = 10 };
+await Parallel.ForEachAsync(messages, options, async (m, ct) =>
+{
+    await ProcessAsync(m);
+});
+```
+
+> "Batching with WhenAll wastes slots because each batch waits for its slowest message. A SemaphoreSlim with 10 slots keeps 10 in flight: each message takes a slot and releases it in a finally, so the next starts as soon as one finishes. Parallel.ForEachAsync with MaxDegreeOfParallelism = 10 does the same more simply."
+
+**Follow-up:** Kafka: parallel processing breaks per-key ordering, so parallelise across keys or partitions, not within one.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 105. Why use IHttpClientFactory?
 
 *.NET core*
 
@@ -1666,7 +1717,7 @@ In .NET: `IDistributedCache` or `StackExchange.Redis`. In .NET 9+, `HybridCache`
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 105. IEnumerable vs IQueryable?
+## 106. IEnumerable vs IQueryable?
 
 *.NET core*
 
@@ -1676,7 +1727,7 @@ In .NET: `IDistributedCache` or `StackExchange.Redis`. In .NET 9+, `HybridCache`
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 106. What is middleware in ASP.NET Core?
+## 107. What is middleware in ASP.NET Core?
 
 *.NET core*
 
@@ -1684,7 +1735,7 @@ In .NET: `IDistributedCache` or `StackExchange.Redis`. In .NET 9+, `HybridCache`
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 107. How do you handle exceptions globally in an API?
+## 108. How do you handle exceptions globally in an API?
 
 *.NET core*
 
@@ -1692,7 +1743,7 @@ In .NET: `IDistributedCache` or `StackExchange.Redis`. In .NET 9+, `HybridCache`
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 108. How do you reduce memory allocations on large data?
+## 109. How do you reduce memory allocations on large data?
 
 *.NET core*
 
@@ -1707,7 +1758,7 @@ Fewer allocations mean less GC work and fewer pauses.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 109. record vs class?
+## 110. record vs class?
 
 *.NET core*
 
@@ -1715,7 +1766,7 @@ Fewer allocations mean less GC work and fewer pauses.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 110. What's the N+1 problem? How do you fix it?
+## 111. What's the N+1 problem? How do you fix it?
 
 *EF Core & SQL*
 
@@ -1723,7 +1774,7 @@ Fewer allocations mean less GC work and fewer pauses.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 111. What does AsNoTracking do, and when does it hurt?
+## 112. What does AsNoTracking do, and when does it hurt?
 
 *EF Core & SQL*
 
@@ -1731,7 +1782,7 @@ Fewer allocations mean less GC work and fewer pauses.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 112. Two users update the same balance at once. How do you stop a lost update?
+## 113. Two users update the same balance at once. How do you stop a lost update?
 
 *EF Core & SQL*
 
@@ -1741,7 +1792,7 @@ Fewer allocations mean less GC work and fewer pauses.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 113. How do you deploy database changes safely?
+## 114. How do you deploy database changes safely?
 
 *EF Core & SQL*
 
@@ -1749,7 +1800,7 @@ Fewer allocations mean less GC work and fewer pauses.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 114. Clustered vs nonclustered index? What's a key lookup?
+## 115. Clustered vs nonclustered index? What's a key lookup?
 
 *EF Core & SQL*
 
@@ -1757,7 +1808,7 @@ Fewer allocations mean less GC work and fewer pauses.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 115. Why would SQL Server ignore an index you created?
+## 116. Why would SQL Server ignore an index you created?
 
 *EF Core & SQL*
 
@@ -1767,7 +1818,7 @@ Fewer allocations mean less GC work and fewer pauses.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 116. What's parameter sniffing?
+## 117. What's parameter sniffing?
 
 *EF Core & SQL*
 
@@ -1775,7 +1826,7 @@ Fewer allocations mean less GC work and fewer pauses.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 117. Two orders try to reserve the last unit at the same moment. How do you stop both succeeding?
+## 118. Two orders try to reserve the last unit at the same moment. How do you stop both succeeding?
 
 *EF Core & SQL*
 
@@ -1795,7 +1846,7 @@ WHERE Sku = @sku AND Qty >= 1
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 118. Does SQL Server lock rows by itself?
+## 119. Does SQL Server lock rows by itself?
 
 *EF Core & SQL*
 
@@ -1803,7 +1854,7 @@ WHERE Sku = @sku AND Qty >= 1
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 119. How do you prevent deadlocks in money transfers?
+## 120. How do you prevent deadlocks in money transfers?
 
 *EF Core & SQL*
 
@@ -1811,7 +1862,7 @@ WHERE Sku = @sku AND Qty >= 1
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 120. Add a NOT NULL column to a 50-million-row table without downtime.
+## 121. Add a NOT NULL column to a 50-million-row table without downtime.
 
 *EF Core & SQL*
 
@@ -1822,7 +1873,7 @@ WHERE Sku = @sku AND Qty >= 1
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 121. Where should business logic live: stored procedures or C#?
+## 122. Where should business logic live: stored procedures or C#?
 
 *EF Core & SQL*
 
@@ -1830,7 +1881,7 @@ WHERE Sku = @sku AND Qty >= 1
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 122. Isolation levels, in one breath.
+## 123. Isolation levels, in one breath.
 
 *EF Core & SQL*
 
@@ -1838,7 +1889,7 @@ WHERE Sku = @sku AND Qty >= 1
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 123. SQL: types of JOIN?
+## 124. SQL: types of JOIN?
 
 *EF Core & SQL*
 
@@ -1846,7 +1897,7 @@ WHERE Sku = @sku AND Qty >= 1
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 124. SQL: WHERE vs HAVING?
+## 125. SQL: WHERE vs HAVING?
 
 *EF Core & SQL*
 
@@ -1854,7 +1905,7 @@ WHERE Sku = @sku AND Qty >= 1
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 125. SQL: DELETE vs TRUNCATE?
+## 126. SQL: DELETE vs TRUNCATE?
 
 *EF Core & SQL*
 
@@ -1862,7 +1913,7 @@ WHERE Sku = @sku AND Qty >= 1
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 126. SQL: UNION vs UNION ALL?
+## 127. SQL: UNION vs UNION ALL?
 
 *EF Core & SQL*
 
@@ -1870,7 +1921,7 @@ WHERE Sku = @sku AND Qty >= 1
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 127. SQL: what's a CTE?
+## 128. SQL: what's a CTE?
 
 *EF Core & SQL*
 
@@ -1878,7 +1929,7 @@ WHERE Sku = @sku AND Qty >= 1
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 128. SQL: ROW_NUMBER vs RANK vs DENSE_RANK?
+## 129. SQL: ROW_NUMBER vs RANK vs DENSE_RANK?
 
 *EF Core & SQL*
 
@@ -1890,7 +1941,7 @@ For scores 100, 90, 90, 80:
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 129. SQL: find the second-highest salary.
+## 130. SQL: find the second-highest salary.
 
 *EF Core & SQL*
 
@@ -1905,7 +1956,7 @@ DENSE_RANK handles ties: if two share the top salary, the next distinct one is s
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 130. SQL: delete duplicate rows but keep one.
+## 131. SQL: delete duplicate rows but keep one.
 
 *EF Core & SQL*
 
@@ -1921,7 +1972,7 @@ Number rows within each duplicate group, delete everything after the first.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 131. SQL: temp table vs table variable?
+## 132. SQL: temp table vs table variable?
 
 *EF Core & SQL*
 
@@ -1929,7 +1980,7 @@ Number rows within each duplicate group, delete everything after the first.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 132. SQL: stored procedure vs function?
+## 133. SQL: stored procedure vs function?
 
 *EF Core & SQL*
 
@@ -1937,7 +1988,7 @@ Number rows within each duplicate group, delete everything after the first.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 133. SQL: what is ACID?
+## 134. SQL: what is ACID?
 
 *EF Core & SQL*
 
@@ -1945,7 +1996,7 @@ Number rows within each duplicate group, delete everything after the first.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 134. SQL: what is normalization?
+## 135. SQL: what is normalization?
 
 *EF Core & SQL*
 
@@ -1953,7 +2004,7 @@ Number rows within each duplicate group, delete everything after the first.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 135. What makes a RESTful API well designed?
+## 136. What makes a RESTful API well designed?
 
 *API & security*
 
@@ -1965,7 +2016,7 @@ Number rows within each duplicate group, delete everything after the first.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 136. POST vs PUT vs PATCH, and which are idempotent?
+## 137. POST vs PUT vs PATCH, and which are idempotent?
 
 *API & security*
 
@@ -1973,7 +2024,7 @@ Number rows within each duplicate group, delete everything after the first.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 137. Which status codes do you use, and when?
+## 138. Which status codes do you use, and when?
 
 *API & security*
 
@@ -1986,7 +2037,7 @@ Number rows within each duplicate group, delete everything after the first.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 138. A client retries a timed-out order. How do you prevent a duplicate trade?
+## 139. A client retries a timed-out order. How do you prevent a duplicate trade?
 
 *API & security*
 
@@ -1994,7 +2045,7 @@ Number rows within each duplicate group, delete everything after the first.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 139. How do you version an API?
+## 140. How do you version an API?
 
 *API & security*
 
@@ -2002,7 +2053,7 @@ Number rows within each duplicate group, delete everything after the first.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 140. OAuth2 vs JWT?
+## 141. OAuth2 vs JWT?
 
 *API & security*
 
@@ -2010,7 +2061,7 @@ Number rows within each duplicate group, delete everything after the first.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 141. A partner system calls your API through APIM. Walk me through how it's secured.
+## 142. A partner system calls your API through APIM. Walk me through how it's secured.
 
 *API & security*
 
@@ -2029,7 +2080,7 @@ Secrets are rotated and stored in Key Vault, never in code.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 142. How do users log in through the UI and call your API?
+## 143. How do users log in through the UI and call your API?
 
 *API & security*
 
@@ -2046,7 +2097,7 @@ Refresh token stored server-side and encrypted. If the access token is in a cook
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 143. What does rotating secrets mean?
+## 144. What does rotating secrets mean?
 
 *API & security*
 
@@ -2060,7 +2111,7 @@ A client secret is like a password and expires in Entra. Rotating means replacin
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 144. How do you implement authorization in .NET?
+## 145. How do you implement authorization in .NET?
 
 *API & security*
 
@@ -2097,7 +2148,7 @@ if (account.OwnerId != userId)
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 145. How does your API validate a JWT?
+## 146. How does your API validate a JWT?
 
 *API & security*
 
@@ -2108,7 +2159,7 @@ if (account.OwnerId != userId)
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 146. Name an OWASP risk you've mitigated.
+## 147. Name an OWASP risk you've mitigated.
 
 *API & security*
 
@@ -2116,7 +2167,7 @@ if (account.OwnerId != userId)
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 147. How do you protect customer data and privacy?
+## 148. How do you protect customer data and privacy?
 
 *API & security*
 
@@ -2127,7 +2178,7 @@ if (account.OwnerId != userId)
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 148. Where do secrets like connection strings go?
+## 149. Where do secrets like connection strings go?
 
 *API & security*
 
@@ -2135,7 +2186,7 @@ if (account.OwnerId != userId)
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 149. What do you know about WCAG accessibility?
+## 150. What do you know about WCAG accessibility?
 
 *API & security*
 
@@ -2143,7 +2194,7 @@ if (account.OwnerId != userId)
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 150. How do you test a service that consumes events and writes to a database?
+## 151. How do you test a service that consumes events and writes to a database?
 
 *Testing*
 
@@ -2168,7 +2219,7 @@ publisher.Verify(p => p.SendAsync(It.Is<B2BProduct>(b => b.Colour == "Blue")), T
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 151. Unit test vs integration test: where's the line?
+## 152. Unit test vs integration test: where's the line?
 
 *Testing*
 
@@ -2176,7 +2227,7 @@ publisher.Verify(p => p.SendAsync(It.Is<B2BProduct>(b => b.Colour == "Blue")), T
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 152. How do you unit test a class that publishes to Kafka?
+## 153. How do you unit test a class that publishes to Kafka?
 
 *Testing*
 
@@ -2193,7 +2244,7 @@ publisher.Verify(p => p.PublishAsync(It.IsAny<ShipmentEvent>()), Times.Once);
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 153. How do you test an API end to end?
+## 154. How do you test an API end to end?
 
 *Testing*
 
@@ -2201,7 +2252,7 @@ publisher.Verify(p => p.PublishAsync(It.IsAny<ShipmentEvent>()), Times.Once);
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 154. What makes a good unit test?
+## 155. What makes a good unit test?
 
 *Testing*
 
@@ -2212,7 +2263,7 @@ publisher.Verify(p => p.PublishAsync(It.IsAny<ShipmentEvent>()), Times.Once);
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 155. Mock vs stub vs fake?
+## 156. Mock vs stub vs fake?
 
 *Testing*
 
@@ -2220,7 +2271,7 @@ publisher.Verify(p => p.PublishAsync(It.IsAny<ShipmentEvent>()), Times.Once);
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 156. Do you practise TDD?
+## 157. Do you practise TDD?
 
 *Testing*
 
@@ -2228,7 +2279,7 @@ publisher.Verify(p => p.PublishAsync(It.IsAny<ShipmentEvent>()), Times.Once);
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 157. Image vs container vs Docker?
+## 158. Image vs container vs Docker?
 
 *Docker & OpenShift*
 
@@ -2236,7 +2287,7 @@ publisher.Verify(p => p.PublishAsync(It.IsAny<ShipmentEvent>()), Times.Once);
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 158. How do you write a Dockerfile for a .NET API?
+## 159. How do you write a Dockerfile for a .NET API?
 
 *Docker & OpenShift*
 
@@ -2244,7 +2295,7 @@ publisher.Verify(p => p.PublishAsync(It.IsAny<ShipmentEvent>()), Times.Once);
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 159. Explain the core Kubernetes objects.
+## 160. Explain the core Kubernetes objects.
 
 *Docker & OpenShift*
 
@@ -2257,7 +2308,7 @@ publisher.Verify(p => p.PublishAsync(It.IsAny<ShipmentEvent>()), Times.Once);
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 160. OpenShift vs Kubernetes?
+## 161. OpenShift vs Kubernetes?
 
 *Docker & OpenShift*
 
@@ -2265,7 +2316,7 @@ publisher.Verify(p => p.PublishAsync(It.IsAny<ShipmentEvent>()), Times.Once);
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 161. Liveness vs readiness probe?
+## 162. Liveness vs readiness probe?
 
 *Docker & OpenShift*
 
@@ -2273,7 +2324,7 @@ publisher.Verify(p => p.PublishAsync(It.IsAny<ShipmentEvent>()), Times.Once);
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 162. Walk me through a CI/CD pipeline you've built.
+## 163. Walk me through a CI/CD pipeline you've built.
 
 *Docker & OpenShift*
 
@@ -2286,7 +2337,7 @@ The same image moves through every environment; only configuration changes.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 163. How do you handle config per environment?
+## 164. How do you handle config per environment?
 
 *Docker & OpenShift*
 
@@ -2294,7 +2345,7 @@ The same image moves through every environment; only configuration changes.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 164. Git: merge vs rebase?
+## 165. Git: merge vs rebase?
 
 *Git*
 
@@ -2302,7 +2353,7 @@ The same image moves through every environment; only configuration changes.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 165. Git: what's your branching strategy?
+## 166. Git: what's your branching strategy?
 
 *Git*
 
@@ -2310,7 +2361,7 @@ The same image moves through every environment; only configuration changes.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 166. Git: how do you resolve a merge conflict?
+## 167. Git: how do you resolve a merge conflict?
 
 *Git*
 
@@ -2318,7 +2369,7 @@ The same image moves through every environment; only configuration changes.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 167. What do you look for in a code review?
+## 168. What do you look for in a code review?
 
 *Git*
 
@@ -2326,7 +2377,7 @@ The same image moves through every environment; only configuration changes.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 168. Git: revert vs reset?
+## 169. Git: revert vs reset?
 
 *Git*
 
@@ -2334,7 +2385,7 @@ The same image moves through every environment; only configuration changes.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 169. Azure: App Service vs AKS vs Azure Functions?
+## 170. Azure: App Service vs AKS vs Azure Functions?
 
 *Azure*
 
@@ -2342,7 +2393,7 @@ The same image moves through every environment; only configuration changes.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 170. Azure: Event Hubs vs Service Bus vs Event Grid?
+## 171. Azure: Event Hubs vs Service Bus vs Event Grid?
 
 *Azure*
 
@@ -2354,7 +2405,7 @@ Your example: "At Staples we use Event Hubs for high-throughput integration even
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 171. Azure: what is APIM for?
+## 172. Azure: what is APIM for?
 
 *Azure*
 
@@ -2362,7 +2413,7 @@ Your example: "At Staples we use Event Hubs for high-throughput integration even
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 172. Azure: Key Vault and Managed Identity?
+## 173. Azure: Key Vault and Managed Identity?
 
 *Azure*
 
@@ -2370,7 +2421,7 @@ Your example: "At Staples we use Event Hubs for high-throughput integration even
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 173. Azure: what does Application Insights give you?
+## 174. Azure: what does Application Insights give you?
 
 *Azure*
 
@@ -2378,7 +2429,7 @@ Your example: "At Staples we use Event Hubs for high-throughput integration even
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 174. Azure: storage types?
+## 175. Azure: storage types?
 
 *Azure*
 
@@ -2389,7 +2440,7 @@ Your example: "At Staples we use Event Hubs for high-throughput integration even
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 175. Azure: Table Storage vs Cosmos DB vs Azure SQL?
+## 176. Azure: Table Storage vs Cosmos DB vs Azure SQL?
 
 *Azure*
 
@@ -2397,7 +2448,7 @@ Your example: "At Staples we use Event Hubs for high-throughput integration even
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 176. Azure: what is ACR?
+## 177. Azure: what is ACR?
 
 *Azure*
 
@@ -2405,7 +2456,7 @@ Your example: "At Staples we use Event Hubs for high-throughput integration even
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 177. Azure: how does a request reach your AKS service?
+## 178. Azure: how does a request reach your AKS service?
 
 *Azure*
 
@@ -2413,7 +2464,7 @@ DNS, then Azure Front Door or Application Gateway (WAF, TLS), then APIM, then th
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 178. Azure: what are deployment slots?
+## 179. Azure: what are deployment slots?
 
 *Azure*
 
@@ -2421,7 +2472,7 @@ DNS, then Azure Front Door or Application Gateway (WAF, TLS), then APIM, then th
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 179. Azure: how do you scale?
+## 180. Azure: how do you scale?
 
 *Azure*
 
@@ -2429,7 +2480,7 @@ DNS, then Azure Front Door or Application Gateway (WAF, TLS), then APIM, then th
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 180. How do you implement Event Hubs in .NET?
+## 181. How do you implement Event Hubs in .NET?
 
 *Azure*
 
@@ -2457,7 +2508,7 @@ await processor.StartProcessingAsync();
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 181. What is Google Pub/Sub and how does it work?
+## 182. What is Google Pub/Sub and how does it work?
 
 *Azure*
 
@@ -2465,7 +2516,7 @@ await processor.StartProcessingAsync();
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 182. What is AKS, and who decides the number of pods?
+## 183. What is AKS, and who decides the number of pods?
 
 *Azure*
 
@@ -2475,7 +2526,7 @@ await processor.StartProcessingAsync();
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 183. Walk me through an Azure DevOps pipeline you built.
+## 184. Walk me through an Azure DevOps pipeline you built.
 
 *Azure*
 
@@ -2507,7 +2558,7 @@ stages:
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 184. Microservices vs monolith?
+## 185. Microservices vs monolith?
 
 *System design*
 
@@ -2515,7 +2566,7 @@ stages:
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 185. How would you build a microservice?
+## 186. How would you build a microservice?
 
 *System design*
 
@@ -2523,7 +2574,7 @@ stages:
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 186. A client clicks 'Buy 100 shares'. Design what happens until the order reaches the market.
+## 187. A client clicks 'Buy 100 shares'. Design what happens until the order reaches the market.
 
 *System design*
 
@@ -2546,7 +2597,7 @@ Client -> Gateway -> Order API
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 187. Does the Direct Investing platform match buyers and sellers?
+## 188. Does the Direct Investing platform match buyers and sellers?
 
 *System design*
 
@@ -2556,7 +2607,7 @@ Client -> Gateway -> Order API
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 188. Broker domain terms: exchange, market vs limit order, fill, buying power?
+## 189. Broker domain terms: exchange, market vs limit order, fill, buying power?
 
 *System design*
 
@@ -2570,7 +2621,7 @@ Client -> Gateway -> Order API
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 189. Draw the journey of one 'Buy 100 AAPL' order.
+## 190. Draw the journey of one 'Buy 100 AAPL' order.
 
 *System design*
 
@@ -2600,7 +2651,7 @@ Outbox worker --> Kafka "orders" (key = AccountId)
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 190. Order follow-ups: partial fill, client cancel, exchange reject?
+## 191. Order follow-ups: partial fill, client cancel, exchange reject?
 
 *System design*
 
@@ -2612,7 +2663,7 @@ Outbox worker --> Kafka "orders" (key = AccountId)
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 191. Why return 202 Accepted instead of waiting for the market?
+## 192. Why return 202 Accepted instead of waiting for the market?
 
 *System design*
 
@@ -2620,7 +2671,7 @@ Outbox worker --> Kafka "orders" (key = AccountId)
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 192. Kafka is down when an order is placed. What happens?
+## 193. Kafka is down when an order is placed. What happens?
 
 *System design*
 
@@ -2628,7 +2679,7 @@ Outbox worker --> Kafka "orders" (key = AccountId)
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 193. How would a regulator reconstruct what happened to one order?
+## 194. How would a regulator reconstruct what happened to one order?
 
 *System design*
 
@@ -2636,7 +2687,7 @@ Outbox worker --> Kafka "orders" (key = AccountId)
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 194. How do you keep data consistent across microservices?
+## 195. How do you keep data consistent across microservices?
 
 *System design*
 
@@ -2644,7 +2695,7 @@ Outbox worker --> Kafka "orders" (key = AccountId)
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 195. Circuit breaker vs retry vs bulkhead?
+## 196. Circuit breaker vs retry vs bulkhead?
 
 *System design*
 
@@ -2656,7 +2707,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 196. How would you push live price or order updates to the UI?
+## 197. How would you push live price or order updates to the UI?
 
 *System design*
 
@@ -2664,7 +2715,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 197. How does your design scale?
+## 198. How does your design scale?
 
 *System design*
 
@@ -2672,7 +2723,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 198. Frontend: how do you position yourself if they go deep?
+## 199. Frontend: how do you position yourself if they go deep?
 
 *Frontend*
 
@@ -2680,7 +2731,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 199. Angular: component vs service? Lifecycle hooks?
+## 200. Angular: component vs service? Lifecycle hooks?
 
 *Frontend*
 
@@ -2689,7 +2740,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 200. Angular: Observables, the async pipe and switchMap?
+## 201. Angular: Observables, the async pipe and switchMap?
 
 *Frontend*
 
@@ -2699,7 +2750,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 201. Angular: HTTP interceptor and route guard?
+## 202. Angular: HTTP interceptor and route guard?
 
 *Frontend*
 
@@ -2708,7 +2759,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 202. Angular: change detection, OnPush, and modern Angular?
+## 203. Angular: change detection, OnPush, and modern Angular?
 
 *Frontend*
 
@@ -2717,7 +2768,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 203. React: props vs state, useState, useEffect, virtual DOM?
+## 204. React: props vs state, useState, useEffect, virtual DOM?
 
 *Frontend*
 
@@ -2727,7 +2778,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 204. Tell me about a disagreement with a teammate.
+## 205. Tell me about a disagreement with a teammate.
 
 *Behavioural*
 
@@ -2743,7 +2794,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 205. Tell me about a production incident or a hard problem you solved.
+## 206. Tell me about a production incident or a hard problem you solved.
 
 *Behavioural*
 
@@ -2759,7 +2810,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 206. Working with another team or an external vendor whose system didn't do what you needed?
+## 207. Working with another team or an external vendor whose system didn't do what you needed?
 
 *Behavioural*
 
@@ -2769,7 +2820,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 207. Tell me about delivering under a tight deadline.
+## 208. Tell me about delivering under a tight deadline.
 
 *Behavioural*
 
@@ -2779,7 +2830,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 208. Tell me about a hard technical challenge you overcame.
+## 209. Tell me about a hard technical challenge you overcame.
 
 *Behavioural*
 
@@ -2789,7 +2840,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 209. How do you use AI in your work?
+## 210. How do you use AI in your work?
 
 *Behavioural*
 
@@ -2799,7 +2850,7 @@ In .NET: Polly or Microsoft.Extensions.Http.Resilience. On one critical dependen
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 210. Other likely behavioural questions: quick starting points.
+## 211. Other likely behavioural questions: quick starting points.
 
 *Behavioural*
 
@@ -2816,7 +2867,7 @@ Formula: STAR in about 90 seconds. Most of the time on Action, then Result and w
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 211. How do you mentor other developers?
+## 212. How do you mentor other developers?
 
 *Behavioural*
 
@@ -2824,7 +2875,7 @@ Formula: STAR in about 90 seconds. Most of the time on Action, then Result and w
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 212. Why RBC, and why this role?
+## 213. Why RBC, and why this role?
 
 *Behavioural*
 
@@ -2832,7 +2883,7 @@ Formula: STAR in about 90 seconds. Most of the time on Action, then Result and w
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 213. You're okay with contract-to-hire?
+## 214. You're okay with contract-to-hire?
 
 *Behavioural*
 
@@ -2842,7 +2893,7 @@ Formula: STAR in about 90 seconds. Most of the time on Action, then Result and w
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 214. What questions do you have for us?
+## 215. What questions do you have for us?
 
 *Behavioural*
 
@@ -2853,7 +2904,7 @@ Formula: STAR in about 90 seconds. Most of the time on Action, then Result and w
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 215. Walk me through your banking solution, level by level.
+## 216. Walk me through your banking solution, level by level.
 
 *CodeSignal*
 
@@ -2869,7 +2920,7 @@ Every method takes a timestamp first; the caller supplies the account id.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 216. Level 3: show the transfer and the traps.
+## 217. Level 3: show the transfer and the traps.
 
 *CodeSignal*
 
@@ -2898,7 +2949,7 @@ private int? TryTransfer(string sourceId, string targetId, int amount)
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 217. Level 4: top spenders, and the traps.
+## 218. Level 4: top spenders, and the traps.
 
 *CodeSignal*
 
@@ -2917,7 +2968,7 @@ return string.Join(",", top);     // "acct5{10},acct3{8},acct4{7}"
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 218. How would you have implemented the scheduled transfer?
+## 219. How would you have implemented the scheduled transfer?
 
 *CodeSignal*
 
@@ -2969,7 +3020,7 @@ public override bool CancelTransfer(int timestamp, string transferId)
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 219. Why call ProcessDue in every method instead of a background service?
+## 220. Why call ProcessDue in every method instead of a background service?
 
 *CodeSignal*
 
@@ -2992,7 +3043,7 @@ GetBalance(20, ...)         time 20: the transfer due at 15 must run FIRST
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 220. How would you improve your CodeSignal solution?
+## 221. How would you improve your CodeSignal solution?
 
 *CodeSignal*
 
