@@ -2,6 +2,7 @@
 import re, glob, json, os, html
 
 TOPIC_FILES = [
+    ("tr",          "TR Round 1",                           "#ff8000"),
     ("rbc",         "RBC Final Round",                      "#1d6b58"),
     ("csharp",      "C# & OOP Fundamentals",              "#b5502f"),
     ("dotnet",      ".NET Core, ASP.NET & Web API",        "#2f6f6b"),
@@ -20,6 +21,7 @@ TOPIC_FILES = [
 ]
 
 FILE_ORDER = [
+    "15-tr-round-1.md",
     "14-rbc-final-round.md",
     "01-csharp-oop.md",
     "02-dotnet-aspnet-webapi.md",
