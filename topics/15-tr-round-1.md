@@ -3,7 +3,9 @@
 > Hiring-manager round, 1 hour: technical questions on your experience with C#, .NET,
 > OpenAPI, Kubernetes, GitHub, Docker and especially LLMs/AI. Say each answer out loud
 > in under a minute before revealing it. Sections: Your stories, Kubernetes & Docker,
-> APIs, AI & LLMs, Resilience, Quality, Behavioural, Your questions.
+> APIs, AI & LLMs, Resilience, Quality, Behavioural, Your questions, then core practice: C# & .NET,
+> ASP.NET Core & APIs, Azure, Microservices, Design & patterns, Async & concurrency, Testing,
+> DevOps & Agile, Scenarios.
 
 ## 1. Tell me about yourself.
 
@@ -470,5 +472,1424 @@ builder.Services.AddHttpClient<CarrierClient>(c => c.BaseAddress = new Uri("http
 *APIs*
 
 > "Users authenticate with **OAuth2 / OpenID Connect** (Entra ID). The API validates the **JWT** (signature, issuer, audience, expiry), then checks **scopes or roles**. Service to service uses **managed identity**, so there are no secrets in config. APIM in front adds rate limiting. Secrets live in Key Vault, everything is HTTPS, inputs are validated, and SQL is parameterised."
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 48. Abstract class vs interface — what's the difference and when do you use each?
+
+*C# & .NET*
+
+The single most-asked question on this list. Give the mechanical differences, then
+the design guidance.
+
+| | Abstract class | Interface |
+|---|---|---|
+| State | Can hold fields and constructors | Cannot hold instance fields (C# 8+ default method *bodies* are allowed, not state) |
+| Multiple inheritance | A class can inherit only one | A class can implement many |
+| Access modifiers | Members can be `private`/`protected` | Members are implicitly `public` |
+| Versioning | Adding a member breaks nothing (give it a body) | C# 8+ default interface methods let you add members without breaking implementers |
+| Use it when | A family of related types shares real state/behavior | Unrelated types opt into the same capability (`IDisposable`, `IComparable`) |
+
+**How to phrase it out loud:** "An abstract class answers 'what is it' — it's a base
+for related types that share state and behavior. An interface answers 'what can it
+do' — unrelated types can implement the same interface. I reach for an interface by
+default because it keeps things loosely coupled, and only pull in an abstract class
+when there's real shared implementation to avoid duplicating it."
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 49. Value type vs reference type
+
+*C# & .NET*
+
+Value types (`struct`, `int`, `bool`, enums) live on the stack (or inline inside
+whatever contains them) and are copied by value on assignment. Reference types
+(`class`, arrays, delegates, strings) live on the heap, and the variable holds a
+reference — assignment copies the reference, not the object.
+
+```csharp
+// Value type: assignment copies the data
+int x = 5;
+int y = x;
+y = 10;
+Console.WriteLine(x); // 5 — x is untouched
+
+// Reference type: assignment copies the pointer, not the object
+List<int> a = new List<int> { 1, 2, 3 };
+List<int> b = a;      // b and a now point at the exact same List in memory
+a.Add(4);
+Console.WriteLine(string.Join(",", b)); // "1,2,3,4" — b sees the change made through a
+```
+
+**Gotcha worth mentioning:** `string` is a reference type but *behaves* immutably —
+every "mutation" produces a new string, so equality comparisons use value semantics
+even though it's heap-allocated.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 50. How do you handle exceptions in C#?
+
+*C# & .NET*
+
+```csharp
+try
+{
+    // risky operation
+}
+catch (SqlException ex) when (ex.Number == 2601)
+{
+    // narrowest, most specific exception type first, optionally with a filter
+}
+catch (Exception ex)
+{
+    // broad catch-all last
+    throw; // preserves the original stack trace — never `throw ex;`
+}
+finally
+{
+    // always runs — cleanup, even if an exception propagates
+}
+```
+
+**Interview trap:** `throw;` vs `throw ex;` — the former preserves the original
+stack trace, the latter resets it to the current line, hiding where the exception
+actually originated.
+
+```csharp
+catch (Exception ex)
+{
+    Logger.Log(ex);
+    throw ex;   // BAD  — stack trace now starts here, you lose where it really failed
+    throw;      // GOOD — original stack trace (exact file/line of the real failure) is kept
+}
+```
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 51. What are generics, and why use them?
+
+*C# & .NET*
+
+Generics let you write a type or method parameterized by type, with compile-time
+type safety and no boxing for value types:
+
+```csharp
+public class Repository<T> where T : class, IEntity
+{
+    public T GetById(int id) { /* ... */ }
+}
+```
+
+The `where T : ...` constraint restricts what `T` can be (`class`, `struct`, a base
+type/interface, `new()`).
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 52. What are record types?
+
+*C# & .NET*
+
+Reference types (or, with `record struct`, value types) with built-in
+**value-based equality**, `ToString()`, and support for non-destructive mutation via
+`with` expressions:
+
+```csharp
+public record Point(int X, int Y);
+var p1 = new Point(1, 2);
+var p2 = p1 with { Y = 5 }; // new record, X copied, Y changed
+p1 == p2; // false — but two records with the same values are `==` even though they're different instances
+```
+
+Good fit for immutable DTOs and value objects.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 53. How does the Garbage Collector work?
+
+*C# & .NET*
+
+The GC tracks object reachability from a set of roots (static fields, thread stacks,
+CPU registers) and reclaims anything unreachable. It's generational — Gen 0
+(short-lived objects, collected most often/cheaply), Gen 1 (a buffer), Gen 2
+(long-lived objects, collected least often, most expensively), plus a separate Large
+Object Heap for allocations over ~85KB. This is why churning lots of small,
+short-lived objects is usually fine (Gen 0 collections are fast) while large
+allocations or objects that survive into Gen 2 are the ones that hurt.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 54. `Dispose()` vs `Finalize()`
+
+*C# & .NET*
+
+- **`Dispose()`** (via `IDisposable`) is **deterministic** — you (or a `using`
+  block) call it explicitly to release unmanaged resources (file handles, DB
+  connections, sockets) right away.
+- **`Finalize()`** (a C# destructor, `~ClassName()`) is called by the GC
+  **non-deterministically**, as a safety net, and is more expensive because
+  finalizable objects need an extra GC pass.
+
+The standard pattern: implement `IDisposable`, and have the finalizer call the same
+cleanup as a backstop, guarded by `GC.SuppressFinalize(this)` in `Dispose()` so the
+finalizer doesn't run twice.
+
+```csharp
+public class ResourceHolder : IDisposable
+{
+    private bool _disposed;
+    public void Dispose()
+    {
+        if (_disposed) return;
+        // release unmanaged resource here (file handle, socket, etc.)
+        _disposed = true;
+        GC.SuppressFinalize(this); // finalizer no longer needed, we already cleaned up
+    }
+    ~ResourceHolder() { Dispose(); } // safety net if someone forgets to call Dispose()
+}
+```
+
+**Why do you still need the `using` statement if `IDisposable` already exists?**
+Because `Dispose()` only runs if something actually calls it — `using` guarantees
+that call happens automatically, wrapped in a hidden `try`/`finally`, even if an
+exception is thrown partway through the block:
+
+```csharp
+using (var stream = new FileStream("file.txt", FileMode.Open))
+{
+    // read the file — stream.Dispose() runs automatically here,
+    // even if an exception is thrown above
+}
+
+// equivalent to what the compiler actually generates:
+var stream2 = new FileStream("file.txt", FileMode.Open);
+try { /* read the file */ }
+finally { stream2.Dispose(); }
+```
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 55. Hashtable vs Dictionary, and how do they work internally?
+
+*C# & .NET*
+
+Both are hash-table based key/value stores. `Dictionary<TKey,TValue>` is the
+modern, generic, type-safe version — no boxing for value-type keys/values, and it
+throws `KeyNotFoundException` on a missing key via the indexer. `Hashtable` is the
+older, non-generic collection — everything is stored as `object`, so value types get
+boxed, and a missing key via the indexer just returns `null` instead of throwing.
+
+**Internally**, both hash the key to compute a bucket index into an internal array,
+then handle collisions by chaining entries that land in the same bucket. Average
+case is `O(1)` for get/insert/delete; **worst case degrades toward `O(n)`** if the
+hash function distributes poorly and many keys collide into the same bucket. The
+table resizes (and rehashes everything) once the load factor crosses a threshold.
+
+```csharp
+// Throws KeyNotFoundException if missing:
+var v = dict["key"];
+
+// Safe:
+if (dict.TryGetValue("key", out var value)) { /* use value */ }
+```
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 56. `IEnumerable` vs `IQueryable`
+
+*C# & .NET*
+
+- **`IEnumerable<T>`** — iterates an **in-memory** sequence. LINQ operators
+  (`.Where()`, `.Select()`) compile to delegates and execute **in process**, item by
+  item, as you enumerate.
+- **`IQueryable<T>`** — represents a **not-yet-executed query** as an expression
+  tree. LINQ operators build up the expression tree instead of running immediately;
+  the provider (e.g. EF Core) translates the whole tree into a single SQL statement
+  only when you enumerate it (`.ToList()`, `foreach`, etc.).
+
+**The classic bug this causes:** chaining `.Where()` calls on an `IQueryable` from
+EF, then accidentally calling `.AsEnumerable()` or `.ToList()` too early — every
+filter after that point runs in application memory instead of the database, pulling
+far more rows across the wire than intended.
+
+```csharp
+IQueryable<Order> query = dbContext.Orders;        // nothing has run yet
+query = query.Where(o => o.Status == "Pending");   // still just building an expression tree
+var results = query.ToList();                       // NOW it runs — translated to one SQL query:
+                                                      // SELECT * FROM Orders WHERE Status = 'Pending'
+
+IEnumerable<Order> inMemory = dbContext.Orders.ToList(); // pulls ALL rows into memory here
+inMemory = inMemory.Where(o => o.Status == "Pending");   // filters in C#, not in SQL
+```
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 57. .NET Framework vs .NET Core
+
+*C# & .NET*
+
+The **.NET Framework** is the original, Windows-only runtime and base class library.
+**.NET Core** (now unified as modern **.NET 5+**) is cross-platform (Windows,
+macOS, Linux), open-source, more modular, and generally faster — built for cloud and
+containerized workloads. New development targets modern .NET; the Framework is
+effectively legacy-maintenance-only at this point.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 58. IEnumerable vs List — deferred execution vs eager loading
+
+*C# & .NET*
+
+`List<T>` is a concrete, fully-materialized collection sitting in memory right now.
+`IEnumerable<T>` is a *sequence* that may not have produced any values yet — LINQ
+methods like `.Where()`/`.Select()` on an `IEnumerable<T>` build up a **query
+definition** that only actually runs when you enumerate it (`foreach`, `.ToList()`,
+`.Count()`, etc.). This is called **deferred execution**, and it causes a genuinely
+surprising bug if you're not expecting it:
+
+```csharp
+List<int> numbers = new List<int> { 1, 2, 3 };
+
+IEnumerable<int> query = numbers.Where(n => n > 1); // NOT executed yet — just a definition
+numbers.Add(4);                                      // mutate the source before enumerating
+
+foreach (var n in query) Console.WriteLine(n);
+// Prints 2, 3, 4 — the "4" is included because the filter only ran just now,
+// during the foreach, against the list's CURRENT contents.
+
+List<int> eager = numbers.Where(n => n > 1).ToList(); // executes immediately, snapshot taken now
+numbers.Add(5);
+// `eager` still only has {2, 3, 4} — it was materialized before the Add(5)
+```
+
+**How to phrase it:** "`IEnumerable` queries are lazy — nothing runs until you
+enumerate them, which is efficient but means the results can change if the
+underlying source changes before you do. Calling `.ToList()` forces immediate,
+eager execution and locks in a snapshot at that exact moment."
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 59. What is middleware, and how do you write a custom one?
+
+*ASP.NET Core & APIs*
+
+Middleware are components chained together in the ASP.NET Core **request
+pipeline** — each one can inspect/modify the request, decide to short-circuit, or
+call the next component and then inspect/modify the response on the way back out.
+
+```csharp
+public class RequestTimingMiddleware
+{
+    private readonly RequestDelegate _next;
+    public RequestTimingMiddleware(RequestDelegate next) => _next = next;
+
+    public async Task InvokeAsync(HttpContext context)
+    {
+        var sw = Stopwatch.StartNew();
+        await _next(context); // call the rest of the pipeline
+        Console.WriteLine($"{context.Request.Path} took {sw.ElapsedMilliseconds}ms");
+    }
+}
+
+// Startup/Program.cs:
+app.UseMiddleware<RequestTimingMiddleware>();
+```
+
+Order matters — middleware registered earlier wraps everything registered after it
+(think nested `try/finally` blocks).
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 60. Middleware vs action filter — when do you use which?
+
+*ASP.NET Core & APIs*
+
+**Middleware** operates on the raw HTTP request/response and runs for *every*
+request regardless of which controller/action (or even whether one exists) —
+good for cross-cutting infrastructure concerns like authentication, logging,
+CORS, exception handling, response compression. **Action filters** run inside
+the MVC pipeline, after routing has already resolved a controller/action, and have
+access to MVC-specific context (model state, action arguments, the
+`ActionDescriptor`) — good for concerns tied to *that specific action*, like
+model validation or auditing a particular endpoint.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 61. `AddSingleton` vs `AddScoped` vs `AddTransient`
+
+*ASP.NET Core & APIs*
+
+| Lifetime | Instance created | Typical use |
+|---|---|---|
+| `AddTransient` | A new instance every time it's requested | Lightweight, stateless services |
+| `AddScoped` | One instance per HTTP request (or per scope) | `DbContext`, per-request unit-of-work services |
+| `AddSingleton` | One instance for the lifetime of the app | Stateless services, in-memory caches, configuration objects |
+
+```csharp
+builder.Services.AddTransient<IEmailValidator, EmailValidator>(); // new one every injection
+builder.Services.AddScoped<IOrderContext, OrderContext>();        // one per HTTP request
+builder.Services.AddSingleton<IAppCache, AppCache>();              // one for the app's whole life
+```
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 62. What is Dependency Injection, and how is it implemented in .NET Core?
+
+*ASP.NET Core & APIs*
+
+DI is a pattern for **Inversion of Control** — a class receives its dependencies
+from the outside instead of constructing them itself, which decouples it from
+concrete implementations and makes it trivially testable (swap in a mock).
+
+```csharp
+public interface IMyService { void DoWork(); }
+public class MyService : IMyService { public void DoWork() { /* ... */ } }
+
+// Program.cs
+builder.Services.AddTransient<IMyService, MyService>();
+
+// consumer — the container resolves IMyService automatically
+public class MyController : Controller
+{
+    private readonly IMyService _myService;
+    public MyController(IMyService myService) => _myService = myService;
+}
+```
+
+.NET Core ships a built-in DI container (`IServiceCollection`/`IServiceProvider`);
+third-party containers like Autofac or Simple Injector plug in when you need more
+advanced features (e.g. property injection, assembly scanning, child containers).
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 63. Code review: Singleton depending on Scoped — what's wrong?
+
+*ASP.NET Core & APIs*
+
+```csharp
+public class B {}
+public class A { public A(B b) {} }
+
+builder.Services.AddSingleton<A>();
+builder.Services.AddScoped<B>();
+```
+
+This is a **captive dependency** bug. `A` is built exactly once, for the whole
+app's lifetime, at which point it captures a single instance of `B`. But `B` is
+`Scoped` — meant to be created fresh per request (or disposed at the end of a
+scope). The result: every request that goes through `A` gets the *same* `B`
+instance forever, frozen at whatever state it had when `A` was first constructed —
+and if `B` holds a `DbContext` or anything disposable, you can end up calling
+methods on an already-disposed object.
+
+**The fix:** either make `B` a singleton too (if it's safe to share), make `A`
+scoped/transient instead, or — if `A` genuinely needs to live for the app's
+lifetime but needs a fresh `B` per operation — inject `IServiceScopeFactory` (or
+`IServiceProvider`) into `A` and create a new scope each time you need `B`, rather
+than injecting `B` directly into the constructor.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 64. What is `HttpClientFactory`, and why use it?
+
+*ASP.NET Core & APIs*
+
+Creating a new `HttpClient` per request and disposing it looks correct but leaks
+sockets under load (`HttpClient` doesn't release the underlying TCP connection
+immediately on `Dispose()`, so heavy churn can exhaust available sockets — the
+well-known "socket exhaustion" problem). Reusing a single static `HttpClient`
+avoids that, but then DNS changes never get picked up. `IHttpClientFactory` solves
+both: it pools and reuses underlying handlers while still letting you get a fresh
+logical `HttpClient` per use, and it integrates with DI, named/typed clients, and
+Polly-based retry policies.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 65. GET vs POST, PUT vs PATCH
+
+*ASP.NET Core & APIs*
+
+- **GET** retrieves a resource; no body, safe (no side effects), cacheable.
+- **POST** creates a resource or triggers a non-idempotent action; has a body, not
+  safe, not idempotent (posting twice usually creates two things).
+- **PUT** replaces a resource entirely at a known URI; idempotent — sending the
+  same PUT twice leaves the resource in the same state.
+- **PATCH** applies a partial update to a resource; not guaranteed idempotent in
+  general, though many implementations make it so.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 66. What makes an HTTP method idempotent?
+
+*ASP.NET Core & APIs*
+
+An idempotent method produces the same result on the server no matter how many
+times you repeat the identical request. `GET`, `PUT`, `DELETE`, `HEAD`, `OPTIONS`
+are idempotent by spec; `POST` and (typically) `PATCH` are not. This matters
+practically for retry logic — it's safe to blindly retry an idempotent request
+after a timeout, but retrying a `POST` risks double-creating a resource unless
+you've added your own idempotency key.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 67. How do you design a RESTful API?
+
+*ASP.NET Core & APIs*
+
+- Model URIs around **resources** (nouns), not actions: `/orders/42`, not
+  `/getOrder?id=42`.
+- Use HTTP verbs to express the operation (GET/POST/PUT/PATCH/DELETE) and
+  status codes to express the outcome (`200`, `201 Created` with a `Location`
+  header, `204 No Content`, `400`, `401`/`403`, `404`, `409 Conflict`, `500`).
+- Version the API (`/api/v2/...` or a header) from day one.
+- Support pagination, filtering, and sorting via query parameters for collection
+  endpoints.
+- Keep responses consistent — a predictable envelope/error shape across every
+  endpoint.
+- Secure it (auth, input validation, rate limiting, HTTPS-only) and document it
+  (OpenAPI/Swagger).
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 68. How does token-based authentication work end to end?
+
+*ASP.NET Core & APIs*
+
+1. Client sends credentials to a login endpoint.
+2. Server validates them and issues a signed token (typically a JWT) containing
+   claims (user id, roles, expiry).
+3. Client stores the token and sends it on every subsequent request, usually as
+   `Authorization: Bearer <token>`.
+4. Server validates the token's signature and expiry on each request — no session
+   state needs to be kept server-side, which is what makes this approach scale
+   horizontally so well.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 69. OAuth vs JWT
+
+*ASP.NET Core & APIs*
+
+They solve different problems and are often confused: **OAuth 2.0** is an
+**authorization framework/protocol** — it defines how a client gets permission
+(and a token) to access a resource on a user's behalf, typically involving a
+redirect-based consent flow with an authorization server. **JWT** is just a
+**token format** — a compact, signed, self-contained way to represent claims. OAuth
+doesn't require JWTs (opaque tokens work too), and JWTs are used plenty outside of
+OAuth flows (e.g. a simple app issuing its own signed session tokens). In practice
+they're often combined: OAuth handles the authorization dance, and the access
+token it hands back happens to be a JWT.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 70. How would you design multi-tenancy into an application?
+
+*ASP.NET Core & APIs*
+
+Three common models, in increasing order of isolation (and cost):
+
+1. **Shared database, shared schema** — every tenant's rows live in the same
+   tables, distinguished by a `TenantId` column present everywhere. Cheapest to
+   run and easiest to patch, but requires discipline (every query must filter by
+   tenant, usually enforced via a global query filter in EF Core).
+2. **Shared database, separate schema** — each tenant gets its own schema in one
+   database. Better isolation, still one database to operate.
+3. **Separate database per tenant** — strongest isolation and easiest per-tenant
+   backup/compliance story, but the most operational overhead (migrations have to
+   run against every tenant database).
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 71. How do you implement global exception handling in ASP.NET Core?
+
+*ASP.NET Core & APIs*
+
+Register exception-handling middleware near the top of the pipeline:
+
+```csharp
+app.UseExceptionHandler(errApp => errApp.Run(async context =>
+{
+    context.Response.StatusCode = 500;
+    var feature = context.Features.Get<IExceptionHandlerFeature>();
+    await context.Response.WriteAsJsonAsync(new { error = "Something went wrong." });
+}));
+```
+
+Alternatively, implement `IExceptionFilter` for MVC-scoped handling, or a custom
+`ProblemDetails` factory to return RFC 7807-style error payloads consistently
+across every endpoint.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 72. How do you implement distributed caching in .NET Core?
+
+*ASP.NET Core & APIs*
+
+Register an `IDistributedCache` implementation (Redis, SQL Server, or NCache) so
+multiple app instances share one cache instead of each keeping its own in-memory
+copy:
+
+```csharp
+builder.Services.AddStackExchangeRedisCache(options =>
+    options.Configuration = "redis-server:6379");
+
+// usage
+await cache.SetStringAsync("key", value, new DistributedCacheEntryOptions
+{
+    AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(10)
+});
+var cached = await cache.GetStringAsync("key");
+```
+
+Use this over `IMemoryCache` whenever the app runs on more than one instance,
+since an in-memory cache would be inconsistent across instances.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 73. Design a secure, scalable Web API — what do you actually check?
+
+*ASP.NET Core & APIs*
+
+- **AuthN/AuthZ:** token-based auth (JWT/OAuth2), least-privilege authorization
+  policies, not relying on obscurity.
+- **Input validation:** validate and sanitize everything at the boundary; never
+  trust client-supplied IDs or roles.
+- **Transport security:** HTTPS everywhere, HSTS, no sensitive data in URLs.
+- **Rate limiting/throttling** to blunt abuse and brute-force attempts.
+- **Consistent error handling** that doesn't leak stack traces or internals.
+- **Scalability:** stateless auth (no server-side session), horizontal scale-out
+  behind a load balancer, distributed cache instead of in-process cache.
+- **Observability:** structured logging, correlation IDs, health checks.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 74. Benefits of `async`/`await` in C#
+
+*ASP.NET Core & APIs*
+
+Frees up threads during I/O-bound waits (DB calls, HTTP calls, file I/O) instead
+of blocking them, which is what lets a web server handle far more concurrent
+requests with the same thread pool. It also keeps asynchronous code readable —
+sequential-looking code instead of nested callbacks — while still giving you
+structured exception handling (a regular `try/catch` around an `await`) and easy
+composition of multiple async operations (`Task.WhenAll`, `Task.WhenAny`).
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 75. IOptions vs IOptionsSnapshot vs IOptionsMonitor — configuration lifetimes
+
+*ASP.NET Core & APIs*
+
+All three give you strongly-typed access to a section of `appsettings.json`, but
+they differ in **when** they read the configuration:
+
+| | Lifetime | Re-reads config? |
+|---|---|---|
+| `IOptions<T>` | Singleton | No — loaded once at startup, never changes for the app's lifetime |
+| `IOptionsSnapshot<T>` | Scoped | Yes — re-reads once per request/scope, so a config file change shows up on the next request |
+| `IOptionsMonitor<T>` | Singleton | Yes — re-reads live, and can notify you via `OnChange` the instant the file changes, even inside a singleton |
+
+```csharp
+builder.Services.Configure<MySettings>(builder.Configuration.GetSection("MySettings"));
+
+public class MyService
+{
+    public MyService(IOptions<MySettings> options)
+    {
+        var value = options.Value.SomeSetting; // fixed for the app's entire lifetime
+    }
+}
+
+public class MyScopedService
+{
+    public MyScopedService(IOptionsSnapshot<MySettings> options)
+    {
+        var value = options.Value.SomeSetting; // fresh on every HTTP request
+    }
+}
+
+public class MyMonitoringService
+{
+    public MyMonitoringService(IOptionsMonitor<MySettings> options)
+    {
+        options.OnChange(updated => Console.WriteLine($"Config changed: {updated.SomeSetting}"));
+    }
+}
+```
+
+**How to phrase it:** "`IOptions` is a singleton snapshot taken once at startup —
+fine for settings that never change while the app runs. `IOptionsSnapshot` is
+scoped, so it's for settings you want to pick up per request without restarting
+the app. `IOptionsMonitor` is for the same live-reload need but from inside a
+singleton, plus it gives you a change notification callback."
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 76. What is Azure Key Vault, and how do you access secrets from it?
+
+*Azure*
+
+A managed service for storing secrets, connection strings, API keys, and
+certificates outside of application code/config files, with fine-grained access
+policies and audit logging. Typical access pattern from a .NET app:
+
+```csharp
+var client = new SecretClient(
+    new Uri("https://myvault.vault.azure.net/"),
+    new DefaultAzureCredential()); // uses Managed Identity when running in Azure
+
+KeyVaultSecret secret = await client.GetSecretAsync("MyConnectionString");
+```
+
+`DefaultAzureCredential` is what lets the same code authenticate via Managed
+Identity in Azure and via developer credentials locally, without hardcoding
+anything.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 77. Why use a Managed Identity instead of stored credentials?
+
+*Azure*
+
+A Managed Identity gives an Azure resource (a Web App, a Function, a VM) an
+identity in Azure AD that it can use to authenticate to other Azure services
+(Key Vault, SQL, Storage) **without any credential ever being stored in code,
+config, or a pipeline variable**. Azure rotates the underlying credential
+automatically and it's scoped to that specific resource, which eliminates an
+entire class of "leaked connection string" incidents.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 78. Azure Service Bus vs Event Hubs
+
+*Azure*
+
+| | Service Bus | Event Hubs |
+|---|---|---|
+| Purpose | Enterprise messaging — queues and pub/sub topics | Big-data event/telemetry streaming |
+| Throughput | Moderate | Very high (millions of events/sec) |
+| Message retention | Typically short-term, consumed then removed | Can retain a stream for a configured window, replayable |
+| Ordering | Can guarantee FIFO within a queue/session | Maintains order within a partition |
+| Consumer model | Competing consumers (each message to one consumer) | Consumer groups (multiple independent readers over the same stream) |
+| Typical use | Order processing, work queues, decoupling services | Telemetry ingestion, log/event streaming, IoT |
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 79. How does Azure Service Bus ensure message durability?
+
+*Azure*
+
+Messages are persisted to storage as soon as they're sent (not held only in
+memory), so a broker failure doesn't lose them. Durability features include
+message locking with a visibility timeout (a consumer must explicitly complete or
+abandon a message, or it becomes available again), dead-lettering for messages
+that repeatedly fail processing, and duplicate detection windows to guard against
+redelivery causing double-processing.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 80. How do you onboard an API into Azure API Management (APIM)?
+
+*Azure*
+
+Import the backend API (from an OpenAPI/Swagger definition, a WSDL, or manually),
+which creates a managed **front door** in front of it. From there you configure
+**policies** (rate limiting, IP filtering, request/response transformation,
+caching), apply **products/subscriptions** to control who can call it and with
+what key, and publish it through a **developer portal** for API consumers to
+discover and self-service subscribe.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 81. What are the key components of an Azure DevOps CI/CD pipeline?
+
+*Azure*
+
+- **Repos** — source control (or an external Git provider).
+- **Build (CI) pipelines** — compile, run tests, produce artifacts on every
+  push/PR.
+- **Artifacts** — the versioned output of a build (a package, a zip, a container
+  image) that release pipelines consume.
+- **Release (CD) pipelines** — take an artifact and deploy it through
+  environments (Dev → QA → Staging → Prod), often with approval gates between
+  stages.
+- **Triggers** — events (a push, a schedule, a successful upstream build) that
+  kick off a pipeline automatically.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 82. App Service vs Azure Functions — when do you choose each?
+
+*Azure*
+
+**App Service** is a fully managed PaaS for hosting a continuously running web
+app/API — predictable load, always-on, full control over the runtime environment.
+**Azure Functions** is serverless/event-driven — code runs in response to a
+trigger (an HTTP call, a queue message, a timer), scales automatically (including
+to zero when idle), and you're billed per execution rather than for an always-on
+instance. Choose Functions for sporadic, event-driven workloads or when you want
+to avoid managing an always-on server; choose App Service for a full web
+application or when you need more control over the hosting environment
+(warm-up behavior, longer-running requests, specific runtime configuration).
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 83. What is Infrastructure as Code (IaC)?
+
+*Azure*
+
+Defining and provisioning infrastructure (VMs, networks, databases, App Services)
+through versioned, declarative configuration files — ARM templates, Bicep, or
+Terraform — rather than clicking through a portal. Benefits: repeatable,
+consistent environments (dev/staging/prod built from the same definition), full
+change history in source control, and infrastructure changes go through the same
+review/PR process as application code.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 84. How would you design a highly available, scalable Azure architecture?
+
+*Azure*
+
+- **Compute:** Azure App Service (or AKS) with auto-scaling rules, running
+  multiple instances behind a load balancer.
+- **Data tier:** Azure SQL Database with geo-replication/failover groups for
+  disaster recovery.
+- **Global routing:** Azure Traffic Manager or Front Door to route traffic across
+  regions and fail over automatically.
+- **Storage:** Blob Storage or Cosmos DB, chosen for the access pattern, with
+  geo-redundant replication.
+- **Caching/CDN:** Azure CDN for static content at the edge; Redis Cache to take
+  load off the database for hot reads.
+- **Resilience patterns:** retries with backoff, circuit breakers, health checks
+  feeding into the load balancer so unhealthy instances get pulled out of
+  rotation automatically.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 85. How do you ensure data consistency across microservices?
+
+*Microservices*
+
+Because each microservice typically owns its own database, you can't rely on a
+single ACID transaction spanning several of them. Approaches, roughly in order of
+how often they come up:
+
+- **Saga pattern** — a sequence of local transactions across services, each
+  publishing an event that triggers the next step; if a step fails, previously
+  completed steps run **compensating transactions** to undo their effect (e.g.
+  "release inventory" if payment fails after inventory was already reserved).
+- **Eventual consistency** — accept that data across services converges over
+  time rather than instantly, communicated via events.
+- **CQRS** — separate the write model from the read model, so reads can be served
+  from a denormalized, eventually-consistent projection built from the events the
+  write side emits.
+- **Idempotent operations** — design consumers so processing the same event twice
+  (which *will* happen in a distributed system) doesn't double-apply an effect.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 86. What strategies do you use for inter-service communication?
+
+*Microservices*
+
+| Style | Good for |
+|---|---|
+| Synchronous REST | Simple request/response, external-facing APIs |
+| gRPC | Low-latency, high-throughput internal service-to-service calls, strongly-typed contracts |
+| Message queues (RabbitMQ, Azure Service Bus) | Decoupled, asynchronous work, reliable delivery, buffering load spikes |
+| Event streaming (Kafka) | High-volume event pipelines, multiple independent consumers, replayable history |
+| GraphQL | Flexible querying, especially aggregating data from several services for a client |
+| Service mesh (Istio, Linkerd) | Cross-cutting networking concerns (retries, mTLS, observability) applied uniformly without changing service code |
+
+**General rule to state out loud:** prefer asynchronous messaging between
+services for anything that doesn't need an immediate response — it's what
+actually gives you the resilience and independent scalability microservices are
+supposed to provide; synchronous chains of calls just recreate a distributed
+monolith with worse latency.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 87. How do you handle failures between two microservices?
+
+*Microservices*
+
+- **Retries with exponential backoff** for transient failures.
+- **Circuit breaker** (e.g. Polly in .NET) — stop calling a downstream service
+  that's clearly failing, fail fast for a cooldown period, and periodically probe
+  whether it's recovered, instead of piling up timeouts and cascading the failure
+  upstream.
+- **Timeouts** on every outbound call — never wait indefinitely.
+- **Fallbacks/graceful degradation** — return cached or default data instead of a
+  hard failure where the business can tolerate it.
+- **Dead-letter queues** for messages that repeatedly fail processing, so they
+  don't block the queue or get silently dropped.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 88. How do you secure microservice-to-microservice communication?
+
+*Microservices*
+
+**TLS everywhere** (including internal traffic, not just the public edge) —
+often via **mutual TLS (mTLS)** so both sides authenticate each other, commonly
+enforced transparently by a service mesh rather than each service implementing it
+itself. Combine with network-level isolation (private VNets/subnets, no direct
+internet exposure for internal services) and short-lived, scoped service
+credentials rather than long-lived shared secrets.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 89. How do you debug a microservice in a containerized environment?
+
+*Microservices*
+
+- **Structured logging** with a **correlation ID** propagated across every
+  service a request touches, aggregated into a central log store (e.g. ELK,
+  Azure Log Analytics) so you can trace one request across service boundaries.
+- **Distributed tracing** (OpenTelemetry, Jaeger, Application Insights) to see
+  the full call graph and where time/errors actually occurred.
+- **`kubectl logs`/`kubectl exec`** (or the equivalent for your orchestrator) to
+  inspect a running container directly, and remote-debugger attach for local
+  reproduction when a log trail alone isn't enough.
+- Reproducing the issue locally with the same container image via Docker Compose
+  where possible, rather than debugging only against the live cluster.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 90. How would you refactor a monolith into microservices?
+
+*Microservices*
+
+1. **Identify seams** along business capability boundaries (bounded contexts, in
+   Domain-Driven Design terms) — not arbitrary technical layers.
+2. **Strangle, don't rewrite** — extract one capability at a time behind a
+   facade/gateway, routing traffic for that capability to the new service while
+   everything else still goes to the monolith (the "Strangler Fig" pattern).
+3. Give the extracted service its **own data store** as soon as practical —
+   sharing a database with the monolith defeats most of the point and just
+   recreates coupling through the schema.
+4. Handle **cross-cutting concerns** (auth, logging) consistently across old and
+   new via a shared gateway/library rather than duplicating ad hoc.
+5. Migrate incrementally, validating each extracted service in production before
+   moving to the next, rather than a single big-bang cutover.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 91. How do you monitor application health and performance?
+
+*Microservices*
+
+- **Health check endpoints** (`/health`) that a load balancer or orchestrator
+  polls to decide whether to route traffic to an instance.
+- **Metrics** (request rate, error rate, latency percentiles, resource
+  utilization) shipped to a monitoring platform (Application Insights, Datadog,
+  Prometheus/Grafana) with alerting thresholds.
+- **Structured logs** with correlation IDs, centrally aggregated.
+- **Distributed tracing** to see where latency actually accumulates across a
+  multi-service call chain.
+- **Dashboards** built around the metrics that actually predict user-facing
+  problems (latency and error rate), not just infrastructure vanity metrics like
+  raw CPU.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 92. Explain the SOLID principles, with a violation and a fix for each
+
+*Design & patterns*
+
+- **S — Single Responsibility Principle:** a class should have one reason to
+  change. *Violation:* an `Order` class that also formats an invoice PDF and
+  sends an email. *Fix:* split into `Order`, `InvoicePdfGenerator`,
+  `OrderNotifier` — each owns one concern and changes for one reason.
+
+- **O — Open/Closed Principle:** open for extension, closed for modification.
+  *Violation:* a `switch` on a `ShapeType` enum inside `CalculateArea()` that you
+  have to edit every time a new shape is added. *Fix:* an `IShape` interface with
+  a `CalculateArea()` method on each concrete shape — adding a new shape means
+  adding a new class, not touching existing code.
+
+- **L — Liskov Substitution Principle:** subtypes must be usable wherever the
+  base type is expected, without breaking correctness. *Violation:* a `Square`
+  that inherits from `Rectangle` and overrides `SetWidth`/`SetHeight` to keep
+  both sides equal — code that sets width and height independently on a
+  `Rectangle` now behaves unexpectedly when handed a `Square`. *Fix:* don't model
+  `Square` as a `Rectangle` subtype at all; have both implement a common `IShape`
+  interface instead.
+
+- **I — Interface Segregation Principle:** don't force a class to implement
+  methods it doesn't need. *Violation:* a fat `IWorker` interface with `Work()`
+  and `Eat()` that a `RobotWorker` is forced to implement `Eat()` for (and throw
+  `NotImplementedException`). *Fix:* split into `IWorkable` and `IFeedable`, and
+  implement only what applies.
+
+- **D — Dependency Inversion Principle:** depend on abstractions, not concrete
+  implementations. *Violation:* a `NotificationService` that directly `new`s up a
+  `SmtpEmailSender` inside it. *Fix:* inject an `INotificationSender` interface
+  via the constructor — the high-level module no longer depends on (or needs to
+  change for) a specific low-level implementation.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 93. What design patterns have you actually used?
+
+*Design & patterns*
+
+Answer this with real examples tied to a project, not a memorized list. A
+credible, common combination for a typical .NET service:
+
+- **Dependency Injection** everywhere via the built-in container.
+- **Repository** (and sometimes Unit of Work) over EF Core for testability.
+- **Strategy** for interchangeable business rules (e.g. different pricing rules
+  per client, selected at runtime behind a common interface).
+- **Factory** for constructing the right handler/strategy based on input.
+- **Decorator** for cross-cutting concerns like caching or logging wrapped around
+  a service without modifying it (`ICachedProductService` wrapping
+  `IProductService`).
+- **Circuit Breaker** (via Polly) for resilient outbound HTTP calls.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 94. `Thread` vs `Task`
+
+*Async & concurrency*
+
+A **`Thread`** is a raw OS-level thread — you manage its lifecycle directly, and
+it's relatively expensive to create. A **`Task`** is a higher-level abstraction
+representing a unit of work that runs on the **thread pool** by default — the
+runtime manages scheduling, reuses pooled threads instead of creating new OS
+threads per task, and `Task` composes cleanly with `async`/`await`,
+continuations (`ContinueWith`), and cancellation. In modern C#, you almost always
+want `Task`, not a raw `Thread` — reach for `Thread` only when you specifically
+need a dedicated, long-lived, foreground/background-controlled thread outside the
+pool.
+
+```csharp
+Thread t = new Thread(() => Console.WriteLine("Raw OS thread"));
+t.Start(); // you manage this thread's lifecycle yourself
+
+Task task = Task.Run(() => Console.WriteLine("Runs on a pooled thread"));
+await task; // the runtime schedules and reuses threads for you
+```
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 95. What is a `ConcurrentDictionary`?
+
+*Async & concurrency*
+
+A thread-safe dictionary implementation designed for high-concurrency scenarios —
+multiple threads can read and write it simultaneously without external locking,
+using fine-grained internal locking (or lock-free techniques) rather than a
+single global lock. Use it instead of wrapping a plain `Dictionary` in your own
+`lock` whenever multiple threads genuinely need concurrent read/write access; for
+single-threaded or externally-synchronized access, a plain `Dictionary` is faster.
+
+```csharp
+var counts = new ConcurrentDictionary<string, int>();
+
+// safe to call from many threads at once, no manual lock needed
+Parallel.For(0, 1000, i =>
+{
+    counts.AddOrUpdate("hits", 1, (key, oldValue) => oldValue + 1);
+});
+
+Console.WriteLine(counts["hits"]); // reliably 1000 — a plain Dictionary here would corrupt or throw
+```
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 96. How do you cancel a running Task?
+
+*Async & concurrency*
+
+Via `CancellationToken`, cooperatively — the task has to check the token itself,
+cancellation doesn't forcibly kill a thread:
+
+```csharp
+var cts = new CancellationTokenSource();
+
+Task task = Task.Run(() =>
+{
+    for (int i = 0; i < 1000; i++)
+    {
+        cts.Token.ThrowIfCancellationRequested();
+        DoWork();
+    }
+}, cts.Token);
+
+cts.Cancel(); // requests cancellation
+```
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 97. What should you consider when writing async code?
+
+*Async & concurrency*
+
+- Use `async` all the way up the call stack — don't mix blocking calls
+  (`.Result`) into an otherwise-async chain.
+- Use `ConfigureAwait(false)` in library code that doesn't need to resume on the
+  original context, to avoid unnecessary context-switching overhead.
+- Don't make a method `async` just because it calls something async — only if it
+  actually needs to `await` and do something with the result/exception.
+- Pass a `CancellationToken` through any long-running async operation.
+- Avoid `async void` except for top-level event handlers — exceptions thrown
+  from `async void` can't be caught by the caller the way `async Task` exceptions
+  can.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 98. What's the actual benefit of `async`/`await` over raw `Task`?
+
+*Async & concurrency*
+
+You *can* compose raw `Task` objects with `.ContinueWith()` chains, but it gets
+unreadable fast, and exception handling across a chain of continuations is
+awkward. `async`/`await` lets you write asynchronous code that **reads like
+sequential code** — normal `try`/`catch`, normal control flow (`if`, loops)
+around `await` points — while the compiler does the equivalent state-machine
+transformation under the hood. The benefit is entirely about *readability and
+correctness of the calling code*, not a different runtime execution model.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 99. What is mocking, and when should you use it?
+
+*Testing*
+
+Mocking replaces a real dependency with a controllable substitute so you can
+test a unit in isolation and verify *how* it interacted with that dependency.
+Use it for dependencies that are slow, non-deterministic, or side-effecting
+(a database, an HTTP call, the system clock, email sending) — not for simple,
+fast, pure value objects, which you can just use directly.
+
+```csharp
+var mockRepo = new Mock<IOrderRepository>();
+mockRepo.Setup(r => r.GetByIdAsync(1)).ReturnsAsync(new Order { Id = 1 });
+
+var service = new OrderService(mockRepo.Object);
+var result = await service.ProcessAsync(1);
+
+mockRepo.Verify(r => r.GetByIdAsync(1), Times.Once);
+```
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 100. What makes a unit test a good one?
+
+*Testing*
+
+- **Fast** — runs in milliseconds; a slow suite stops getting run.
+- **Isolated** — doesn't depend on other tests' order or shared mutable state.
+- **Deterministic** — same result every run; no reliance on the real clock,
+  random values, or network calls.
+- **Tests one behavior** — a failing test should tell you exactly what broke,
+  not require digging through five assertions to find out.
+- **Readable** — the test itself documents the expected behavior; a future
+  reader shouldn't need the implementation open to understand what's being
+  verified.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 101. How do you handle external dependencies in a unit test?
+
+*Testing*
+
+Depend on **interfaces**, not concrete implementations, so a real database/HTTP
+client/file system can be swapped for a mock or fake in the test. For code that's
+hard to restructure this way (legacy code with concrete dependencies baked in),
+wrap the external dependency behind a thin interface first (an "adapter"), which
+is often the very first refactor needed before legacy code becomes testable at
+all.
+
+```csharp
+// 1. Wrap the external call behind an interface
+public interface IExternalApiService { Task<string> GetDataAsync(); }
+
+public class MyService
+{
+    private readonly IExternalApiService _api;
+    public MyService(IExternalApiService api) => _api = api; // injected, not `new`-ed up inside
+
+    public async Task<string> GetGreetingAsync() => "Hello, " + await _api.GetDataAsync();
+}
+
+// 2. Unit test with Moq — no real HTTP call ever happens
+var mockApi = new Mock<IExternalApiService>();
+mockApi.Setup(x => x.GetDataAsync()).ReturnsAsync("Sam");
+
+var service = new MyService(mockApi.Object);
+var result = await service.GetGreetingAsync();
+
+Assert.Equal("Hello, Sam", result);
+mockApi.Verify(x => x.GetDataAsync(), Times.Once); // confirms it was actually called
+```
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 102. Integration tests vs unit tests
+
+*Testing*
+
+**Unit tests** isolate a single unit with all its dependencies faked/mocked —
+fast, pinpoint failures, but don't prove the pieces actually work *together*.
+**Integration tests** exercise real collaborators (a real database, typically via
+a test container or a dedicated test database; a real HTTP call to a downstream
+service, or at least a more realistic stand-in) to verify the wiring between
+components is actually correct. A healthy test suite has many fast unit tests and
+a smaller number of integration tests covering the critical seams — not one
+extreme or the other.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 103. How do you unit test code that uses Dependency Injection?
+
+*Testing*
+
+You don't need the DI **container** at all for a unit test — that's exactly the
+point of constructor injection. Just `new` up the class under test directly,
+passing mocked/faked implementations of its interfaces by hand:
+
+```csharp
+var service = new OrderService(mockRepo.Object, mockLogger.Object);
+```
+
+Reserve spinning up the actual DI container (`WebApplicationFactory` in ASP.NET
+Core) for integration tests that specifically want to verify the wiring itself,
+not for ordinary unit tests.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 104. What are the key components of a CI/CD pipeline?
+
+*DevOps & Agile*
+
+- **Continuous Integration:** every push/PR triggers an automated build and test
+  run, catching integration problems immediately rather than at release time.
+- **Continuous Delivery/Deployment:** a validated build automatically flows
+  through environments (Dev → QA → Staging → Prod), with approval gates where
+  needed for delivery, or fully automated for deployment.
+- **Artifact management:** the exact build that passed CI is the *same* artifact
+  promoted through every environment — never rebuilt per environment, which
+  eliminates "it worked in staging but not prod because it was a different
+  build" class of bugs.
+- **Automated tests** integrated into the pipeline as a gate, not an afterthought.
+- **Rollback strategy** for when a deployment goes wrong in production.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 105. How do you resolve a merge conflict in Git?
+
+*DevOps & Agile*
+
+```bash
+git status                     # see which files conflict
+# open each conflicting file, look for <<<<<<<, =======, >>>>>>> markers
+# manually edit to keep the correct combined result, remove the markers
+git add <resolved-file>
+git commit                     # completes the merge
+```
+
+For a conflict during a `rebase` instead of a `merge`, the flow is the same
+(edit, `git add`), but you continue with `git rebase --continue` instead of
+`git commit`. **Talk through your actual judgment process too:** understanding
+*why* both sides changed the same lines (checking `git log` / `git blame` on the
+conflicting hunk) before blindly picking one side, and running the test suite
+after resolving — a conflict resolving cleanly doesn't guarantee it's
+*semantically* correct.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 106. Describe your experience with Agile/Scrum
+
+*DevOps & Agile*
+
+Structure this around the actual ceremonies and your role in them: daily
+stand-ups (status/blockers, kept short), sprint planning (estimating and
+committing to a sprint's scope), sprint reviews/demos (showing working software
+to stakeholders), and retrospectives (what to keep/stop/start doing next sprint).
+Mention concrete tools (Jira, Azure Boards) and something specific you
+personally contributed to process improvement — a generic "we did stand-ups"
+answer is forgettable; "I pushed for splitting a recurring blocker into its own
+tracked spike after three retros flagged it" is not.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 107. Concurrent update: User A's stale save overwrites User B's edit
+
+*Scenarios*
+
+**What's actually happening:** there's no concurrency control — the system reads
+a row, and blindly writes it back based on what was read, regardless of whether
+another write happened in between ("last write wins" by accident, not by
+design).
+
+**How to answer:**
+1. Diagnose it as a classic **lost update** problem.
+2. Fix it with **optimistic concurrency control** — add a version/timestamp
+   column; on save, the `UPDATE` includes `WHERE Version = @originalVersion`,
+   and if zero rows are affected, that tells you someone else changed it first
+   (see the EF Core example in the [Entity Framework file](03-entity-framework-data-access.md#6-how-do-you-handle-concurrency-conflicts-in-ef-core)).
+3. Decide the UX for the conflict: reject User B's save and ask them to
+   re-review the current data (safest default), attempt a field-level merge if
+   the changes don't overlap, or — for scenarios where losing the latest change
+   is genuinely unacceptable — use **pessimistic locking** instead (lock the row
+   for the duration of the edit), accepting the throughput cost that comes with
+   it.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 108. 1,000+ clients want conflicting business logic changes
+
+*Scenarios*
+
+This is a **configuration/extensibility** design question, not a "just add an
+if statement" question.
+
+- **Feature flags/toggles** scoped per client/tenant, so the new behavior only
+  activates for clients who opted in.
+- **Strategy pattern** — extract the varying logic behind a common interface,
+  with a per-client (or per-plan) implementation resolved at runtime, instead of
+  branching on client ID inline throughout the codebase.
+- **Per-tenant configuration** stored as data, not code, wherever the difference
+  is genuinely just parameters (thresholds, rates) rather than fundamentally
+  different logic.
+- Explicitly avoid the trap of a single codebase riddled with
+  `if (clientId == "Acme") { ... }` scattered across files — that's what makes a
+  system unmaintainable at scale.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 109. An API that used to be fast is now over a minute slow
+
+*Scenarios*
+
+Work this like a real investigation, out loud:
+
+1. **Establish what actually changed** — data volume growth is the single most
+   common cause (a query that was fine against 10K rows can fall over at 50M
+   without a supporting index).
+2. **Profile, don't guess** — get the actual execution plan/APM trace for a slow
+   request; check whether the time is in the database, in application code, or
+   in a downstream call.
+3. **Common suspects for "this used to be fast":** a missing or now-ineffective
+   index as data grew, stale statistics causing a bad query plan, an N+1 query
+   introduced by a later code change, a downstream dependency that's slowed down,
+   or a cache that used to exist and quietly stopped working.
+4. **Fix and verify** — apply the targeted fix (index, query rewrite, caching,
+   pagination) and confirm with the same profiling tool, not just "it feels
+   faster."
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 110. How do you troubleshoot performance issues in a distributed system?
+
+*Scenarios*
+
+1. **Establish where the time is actually going** first — distributed tracing
+   (a correlation ID through every hop) is the single highest-leverage tool
+   here; don't start optimizing a service that isn't actually the bottleneck.
+2. Check for the usual distributed-systems suspects: a downstream service with
+   degraded latency, a lock/contention point shared across instances, a
+   thundering-herd retry storm, or a connection-pool exhaustion issue.
+3. **Reproduce it under load** if possible (a load test against a
+   staging/pre-prod environment) rather than guessing from production metrics
+   alone.
+4. Fix the actual bottleneck, then re-measure with the same tracing/metrics to
+   confirm the fix, not just "the ticket is closed."
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 111. How do you ensure code quality across a team?
+
+*Scenarios*
+
+Code reviews with real substance (not rubber-stamp approvals), automated checks
+enforced in CI (linting, formatting, test coverage gates) so review time is spent
+on design/logic rather than style nits, a shared and written-down set of
+conventions so reviews aren't relitigating personal preference every time, and
+pairing/mentoring junior engineers on trickier changes rather than only
+reviewing after the fact. Mention a concrete practice you've personally driven,
+not just a list of generic best practices.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 112. How do you handle disagreements over technical decisions?
+
+*Scenarios*
+
+Lead with **data over opinion** — a benchmark, a prototype, a concrete trade-off
+comparison beats "I think X is better." State the other person's position back
+to them accurately before countering it, to make sure the disagreement is real
+and not a miscommunication. If it's a genuine judgment call with no clearly
+correct answer, default to whoever owns the long-term maintenance of that code,
+or escalate to a lightweight decision (a time-boxed spike, or a tech lead's
+call) rather than letting it stall the team. And be honest that you've been on
+the losing side of one of these before, and it worked out fine — that's a more
+credible answer than claiming you're always right.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 113. What's the most challenging part of working with microservices?
+
+*Scenarios*
+
+A credible, specific answer usually lands on one of: **debugging across service
+boundaries** (a single user-facing failure can originate several hops away, and
+without good distributed tracing it's genuinely hard to find), **data
+consistency** without a shared database/transaction, or **operational
+complexity** (more deployments, more moving pieces, more places for
+configuration drift). Pick one, give a concrete example of it biting you, and
+say what practice you adopted in response (e.g. correlation IDs everywhere,
+after a specific incident that was painful to trace without them).
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 114. Describe a time you had to meet a tight deadline
+
+*Scenarios*
+
+STAR again, but the interesting part interviewers are listening for is **what
+you cut or triaged**, not that you worked longer hours. A strong answer names a
+specific trade-off you made deliberately (deferred a nice-to-have, shipped
+behind a flag, cut test coverage on a low-risk path *and said so explicitly to
+the team*) rather than implying you simply did everything, faster.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 115. How do you respond to constructive criticism in code review?
+
+*Scenarios*
+
+The strongest answer treats review feedback as a normal, low-stakes part of the
+process — evaluate the feedback on its merits, ask a clarifying question if the
+concern isn't clear rather than assuming you know what they meant, and change
+your approach when they're right without treating it as a loss. If you disagree,
+explain your reasoning rather than either capitulating silently or digging in —
+and if you've ever been wrong and updated your approach based on review
+feedback, that's a genuinely good, concrete example to have ready.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 116. An interviewer keeps probing deeper past your comfort zone
+
+*Scenarios*
+
+This happens in genuinely tough technical rounds — an interviewer asks you to
+explain a concept, then keeps pushing ("what happens at a memory level," "how
+does this compare to that other approach") past where your knowledge is solid.
+
+**How to handle it:**
+- It's completely fine, and more credible than bluffing, to say plainly: "I
+  haven't gone that deep into it — my understanding stops around here, and in
+  practice I'd look that specific detail up rather than rely on memory."
+- Show your reasoning process on the parts you *do* know, rather than going
+  silent — interviewers are often evaluating how you think under pressure at
+  least as much as raw recall.
+- If a term comes up that you can name but not fully explain, say so rather
+  than guessing confidently and being wrong — a wrong confident answer reads
+  worse than an honest "I'd need to check."
+- Afterward, treat it as free diagnostic information: whatever they kept
+  drilling into is exactly what to go deepen before the next interview.
 
 **[⬆ Back to Top](#table-of-contents)**
