@@ -300,3 +300,175 @@ builder.Services.AddHttpClient<CarrierClient>(c => c.BaseAddress = new Uri("http
 > 4. "How is the team using the Thomson model and AI tools in day-to-day development?"
 
 **[⬆ Back to Top](#table-of-contents)**
+
+## 29. What document-processing work have you done?
+
+*Your stories*
+
+> "At Centric, in US insurance, I worked on **Kafka-driven document generation**: a policy event arrives as JSON, we render the **PDF**, store it in **Blob Storage** and notify downstream. It's **idempotent on policy ID + version**, so a replayed event doesn't create a second document. Consumers scale with partitions at renewal peaks, and failures retry, then go to a **dead-letter topic**.
+
+> At Accolite I worked on high-volume **compliance reports** for 100+ clients, and at Staples I generate **legacy fixed-width files** from events. So: documents in, documents out, at volume, reliably."
+
+**Follow-up:** PDF created but the notification failed? The retry sees the PDF already exists, skips regenerating, and only re-sends the notification.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 30. How would you process 10,000 documents with an LLM?
+
+*AI & LLMs*
+
+> "Never in one synchronous request. The client gets **202 Accepted** with a job ID. Each document becomes a **message on a queue** (Service Bus). **Workers on AKS**, scaled by **KEDA** on queue length, process them: extract text (OCR if scanned), chunk, call the LLM.
+
+> The LLM is the bottleneck, so I **throttle to the quota**: cap concurrency with SemaphoreSlim, retry 429s honouring Retry-After. Each result is saved per document, **idempotent on document ID**, so retries don't duplicate. Failures go to a **dead-letter queue** for replay. The client polls the job status and sees progress, like 7,412 of 10,000."
+
+**Follow-up:** Cost control: cache by document content hash, use a smaller model for easy steps, send only the relevant chunks instead of whole documents.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 31. Walk me through a document pipeline: upload to searchable.
+
+*AI & LLMs*
+
+> "1. **Upload** straight to Blob Storage with a short-lived **SAS URL**, so big files don't go through the API. 2. A Blob event puts a message on a **queue**. 3. A worker runs **OCR** if needed and **layout detection**: headings, tables, pages. 4. **Classify** the document type. 5. **Chunk** by structure with metadata (document, page, section). 6. **Embed** and index in **Azure AI Search**. 7. Update the status so the user sees 'ready'.
+
+> Each step is idempotent and retryable, and a poison document goes to dead-letter instead of blocking the queue."
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 32. What do you know about CoCounsel and the Thomson model?
+
+*Behavioural*
+
+> "CoCounsel is TR's AI assistant for legal and tax professionals, now used by over a million people. It's agentic: it plans multi-step work, and there's Deep Research. TR also has its own model, **Thomson**, first used in **Tabular Analysis**: asking many questions across thousands of documents and getting answers **with citations**. That's why the document platform matters so much: if extraction and chunking are wrong, the AI's answers and citations are wrong."
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 33. Which Azure services have you used, and for what?
+
+*Kubernetes & Docker*
+
+> "**AKS** for our microservices; **APIM** as the gateway; **Event Hubs** for events; **Azure SQL / SQL Server** and **Table Storage** for data; **Blob Storage** for documents; **Key Vault** with managed identity for secrets; **Container Registry** for images; **App Insights** for monitoring; **Azure DevOps** for CI/CD. On the AI side, **Azure OpenAI and Azure AI Search**. And **Google Pub/Sub** on GCP for one of our consumers."
+
+**Follow-up:** Event Hubs vs Service Bus: Event Hubs for high-volume streams that many consumers read and can replay. Service Bus for commands and work items: one consumer per message, dead-lettering, sessions for ordering.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 34. Why event-driven? When would you NOT use it?
+
+*Kubernetes & Docker*
+
+> "Event-driven **decouples** systems: the producer doesn't wait for consumers, a slow or down consumer doesn't break the producer, and you can add consumers without changing the producer. The price is **eventual consistency**, harder debugging (correlation IDs help), and handling duplicates and ordering.
+
+> I wouldn't use it when the caller **needs the answer now**, like our carrier call: the customer needs the carrier in the response, so that one is synchronous."
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 35. Tell me about the .NET Framework to .NET Core migration.
+
+*Your stories*
+
+> "At Accolite we migrated **module by module**, not as a big bang. For each module: check the NuGet dependencies, then upgrade them, find alternatives, or wrap the unsupported ones in an internal package. Port the code, run the **existing tests plus new ones** around risky areas, deploy, then move to the next module. Benefits: better performance, cross-platform containers, modern DI and configuration, long-term support."
+
+**Follow-up:** Hardest part: unsupported dependencies and old configuration (web.config to appsettings). Kept risk low with tests and small releases.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 36. Have you worked with Angular? Front end or back end?
+
+*Your stories*
+
+> "Backend is my strength, but I'm comfortable full stack. At Centric I worked on the **ASP.NET to Angular migration** with PrimeNG, and at Accolite I built Angular features for the compliance platform: components, services calling our APIs, RxJS for async data, forms with validation."
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 37. Any experience with Rust, Python, AWS or GCP?
+
+*Your stories*
+
+> "**GCP:** yes, Google Pub/Sub for the warehouse integration. **AWS:** lighter, but the concepts map directly: S3 is Blob, SQS is a storage queue or Service Bus, EKS is AKS, Lambda is Functions. **Python:** scripting and AI tooling. **Rust:** I've started learning it. It fits performance-heavy document processing, and I'd be keen to go deeper here."
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 38. What does MLOps mean to you as a software engineer?
+
+*AI & LLMs*
+
+> "Treating models like any other production dependency: **versioning** models and prompts, **evaluating** before rollout (a test set with known answers), **monitoring** quality, latency and cost in production, handling **quotas and rate limits**, and being able to **roll back** to the previous model or prompt version. My Ollama experiment taught me the serving side: hardware, latency and throughput really matter."
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 39. How do you handle multi-region and data residency?
+
+*Kubernetes & Docker*
+
+> "Data residency means a UK customer's documents stay in UK regions. So we deploy the **same stack per region**: storage, database, queues, processing. Route users to their region (Front Door or by tenant), and **never replicate their data across regions**. For availability within a region, use zone redundancy, and pair regions inside the same geography for failover. Shared things like code and container images can be global."
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 40. How do you work in Agile? Estimates and deadlines?
+
+*Behavioural*
+
+> "Two-week sprints with planning, daily stand-ups, review and retro. I break features into small, shippable tickets so progress is visible. On a tight deadline I split the work into **essentials first** and agreed with the business what could come in a second release. I also helped set up an **upfront integration-ticket process**, so other teams' requests came with payloads and requirements before we started, which cut back-and-forth a lot."
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 41. How do you handle vague or changing requirements?
+
+*Behavioural*
+
+> "I turn conversations into something concrete fast: a **mapping document or example payload**, so people react to a draft instead of an idea. With the carrier integration we built in parallel with the vendor from **example payloads**, including bilingual EN/FR fields, and confirmed edge cases early. When requirements change, I make the impact visible (what moves, what's at risk) and let the product owner decide."
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 42. What is SOLID? Give a real example.
+
+*Quality*
+
+> "**S:** one reason to change, e.g. separate the carrier client from the mapping logic. **O:** add a new downstream format by adding a new class, not editing the old ones. **L:** any implementation of an interface must behave as callers expect. **I:** small focused interfaces. **D:** depend on interfaces and inject implementations, which is what makes our services testable with mocks.
+
+> In our inventory flow each downstream system has its own **formatter behind one interface** (JSON for one, fixed-width for another), so a new consumer is a new class plus a DI registration."
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 43. DRY, and composition vs inheritance?
+
+*Quality*
+
+> "**DRY:** one source of truth for each piece of logic, e.g. one shared mapping helper instead of copying the same SKU mapping into three services. But don't over-DRY: two things that look similar today but change for different reasons should stay separate.
+
+> **Composition over inheritance:** build behaviour by combining small objects (inject a retry policy and a formatter) rather than deep base-class hierarchies, which are rigid and fragile. Inheritance only for a true 'is-a' relationship."
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 44. Which collection keeps items sorted as you insert?
+
+*Quality*
+
+> "**SortedDictionary<TKey,TValue>**: a tree, O(log n) insert and lookup. **SortedList**: arrays, less memory and fast lookups, but O(n) inserts. **SortedSet<T>** for unique sorted values. **PriorityQueue** when you only need the smallest item next. A normal Dictionary has **no order guarantee**."
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 45. How do you handle race conditions in .NET?
+
+*Resilience*
+
+> "A race condition is two threads updating shared state at once, like count++ on a shared field losing updates. Fixes: **lock** for a small critical section, **Interlocked.Increment** for counters, **ConcurrentDictionary** for shared maps, **SemaphoreSlim** for async code (you can't await inside a lock). Best of all is **avoiding shared state**. Across services, use the database: optimistic concurrency with a row version, or a unique constraint."
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 46. Explain Kubernetes architecture at a high level.
+
+*Kubernetes & Docker*
+
+> "The **control plane** (managed by Azure in AKS) has the **API server**, which everything talks to; **etcd**, which stores the cluster state; the **scheduler**, which picks a node for each pod; and **controllers**, which keep the actual state matching the desired state. Each **worker node** runs the **kubelet**, which starts and watches pods, **kube-proxy** for networking, and the container runtime. You declare the desired state in YAML, and Kubernetes keeps making it true."
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 47. How do you secure your APIs and services?
+
+*APIs*
+
+> "Users authenticate with **OAuth2 / OpenID Connect** (Entra ID). The API validates the **JWT** (signature, issuer, audience, expiry), then checks **scopes or roles**. Service to service uses **managed identity**, so there are no secrets in config. APIM in front adds rate limiting. Secrets live in Key Vault, everything is HTTPS, inputs are validated, and SQL is parameterised."
+
+**[⬆ Back to Top](#table-of-contents)**
