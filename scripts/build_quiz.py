@@ -2,6 +2,7 @@
 import re, glob, json, os, html
 
 TOPIC_FILES = [
+    ("bmo",         "BMO Referral",                         "#0079c1"),
     ("tr",          "TR Round 1",                           "#ff8000"),
     ("rbc",         "RBC Final Round",                      "#1d6b58"),
     ("csharp",      "C# & OOP Fundamentals",              "#b5502f"),
@@ -21,6 +22,7 @@ TOPIC_FILES = [
 ]
 
 FILE_ORDER = [
+    "18-bmo-referral.md",
     "15-tr-round-1.md",
     "14-rbc-final-round.md",
     "01-csharp-oop.md",
