@@ -655,7 +655,7 @@ const trades = holdings.map(h => {
 Plain Markdown with requirements and **WHEN / THEN scenarios**:
 
 ```markdown
-## ADDED Requirements
+ ## ADDED Requirements
 
 ### Requirement: Drift threshold
 The system SHALL only propose a trade when a holding's drift exceeds the fund's threshold.
