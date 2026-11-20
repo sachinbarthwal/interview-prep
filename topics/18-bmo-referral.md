@@ -1,8 +1,341 @@
-# BMO Referral: React, Lambda, ETF portfolio tools, OpenSpec
+# BMO Referral: Deloitte full-stack lead (React, Lambda, ETF tools, OpenSpec)
 
-> 30-minute referral meeting. Team builds portfolio-management tools: analysts design ETFs and rebalance them based on stock evaluations. Stack: React + AWS Lambda, TypeScript, Python, Node; bonus: OpenSpec. Say each answer out loud before revealing it.
+> Temporary prep for the Friday interview. Team builds portfolio-management tools for BMO analysts who design and rebalance ETFs. Stack: React + AWS Lambda/ECS, TypeScript, Python, Node; bonus: OpenSpec. Role: hands-on lead who guides juniors. Say each answer out loud before revealing it.
 
-## 1. Tell me about yourself.
+## 1. Tell me about yourself (final version).
+
+*Top answers*
+
+> "I'm a full-stack developer with 10 years' experience: .NET, SQL and Azure, plus React, TypeScript, Node and Python. At Staples I'm on the **integration team**. Every system-to-system connection goes through us, and we build **event-driven microservices** that don't lose data. Before that, 3 years on a **financial reporting product** where every number had to be traceable. I use **AI coding agents** every day, and I enjoy helping teams use them well."
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 2. How would you help the juniors and support Mayukh?
+
+*Top answers*
+
+> "With AI, juniors write code fast, but not always right. I'd make sure it's the **right** code:
+> - **spec first** with OpenSpec,
+> - a **rules file** so the AI follows our patterns,
+> - **small PRs with reviews**,
+> - **tests in CI**,
+> - and pairing, so they can explain what they wrote.
+>
+> Mayukh sets the direction; I make sure the team delivers it, and I bring him only the big decisions, **with options and a recommendation**."
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 3. Design it in one line (5 boxes).
+
+*Top answers*
+
+**React → API Gateway + Lambda → Step Functions → Database → Events out**
+
+Steps: **validate → calculate weights → check rules → human approves → publish**
+
+For a bank: **security, audit, no duplicates or lost messages.** Heavy jobs: **ECS**. Say **"the trade-off is…"**.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 4. If you blank on a React/Node/Python detail.
+
+*Top answers*
+
+Say **"it's like X in .NET"**, then explain the idea. Examples:
+- Node async/await = C# async/await; Promise.all = Task.WhenAll.
+- Express middleware = ASP.NET Core middleware.
+- npm + package.json = NuGet + csproj.
+- TypeScript generics = C# generics; interfaces = C# interfaces/DTOs.
+- pandas = LINQ / SQL GROUP BY over a table in memory.
+- Lambda = Azure Functions; Step Functions = Durable Functions; SQS = Service Bus queue.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 5. React in 60 seconds.
+
+*5-min refresher*
+
+- **Components** are functions that return UI (JSX).
+- **Props** = inputs from the parent; **state** = the component's own data, and changing it redraws.
+- **useState** holds data; **useEffect** runs after render (fetch, timers) with a dependency array and cleanup.
+- **useMemo / useCallback** avoid redoing work; **useRef** keeps a value without redrawing.
+- **Context** shares data without prop drilling; **React Query** for API data with caching.
+- **Virtual DOM:** React diffs old vs new and updates only what changed.
+- Lists need a unique **key** (not the index).
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 6. TypeScript in 60 seconds.
+
+*5-min refresher*
+
+- JavaScript **with types**: mistakes caught before the code runs.
+- **interface / type** describe object shapes; **union** 'BUY' | 'SELL'.
+- **Generics** like C#: Array<T>, Promise<T>.
+- **any** turns checking off; **unknown** is the safe version.
+- Utility types: Partial, Pick, Omit, Record.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 7. Node in 60 seconds.
+
+*5-min refresher*
+
+- JavaScript on the **server**, single thread, **non-blocking I/O**.
+- **Event loop:** finished async work is queued and run next; CPU-heavy work blocks it, so use worker threads.
+- **async/await + Promises** like C#; **Promise.all** runs calls in parallel.
+- **Express:** app.get('/funds', handler) plus **middleware** (auth, logging, errors).
+- **npm + package.json** = NuGet + csproj; config via process.env.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 8. Python in 60 seconds.
+
+*5-min refresher*
+
+- Simple syntax, **indentation** instead of braces.
+- **list** [ ], **dict** { } (key → value), **tuple** ( ), **set**.
+- **Comprehension:** [x * 2 for x in nums].
+- try / except for errors; type hints def f(x: int) -> str.
+- **pandas:** tables in code; merge, groupby, sum, like SQL.
+- Lambda: def handler(event, context): with **boto3** as the AWS SDK.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 9. Lambda in 60 seconds.
+
+*5-min refresher*
+
+- A function that runs **when an event happens**: HTTP (API Gateway), queue message (SQS), file upload (S3), schedule (EventBridge).
+- Max **15 min**: **Step Functions** for multi-step flows, **ECS/Fargate** for long jobs.
+- **Cold start:** first call is slow; create clients outside the handler, keep the package small, provisioned concurrency.
+- **Idempotent** handlers + a **dead-letter queue** for failures; least-privilege **IAM role**; logs in **CloudWatch**.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 10. What does this role really need? (inside info)
+
+*Deloitte & interviewer*
+
+**They need an experienced, hands-on lead**, not just another developer:
+- **Guide juniors architecturally.** The juniors are "vibe coders" who lean on AI.
+- Be technically capable across the stack (React, Lambda/ECS, TS, Python, Node).
+- **Take responsibility off Mayukh** so he can focus on architecture and the client.
+
+**Agenda:** intros → experience and skills → project overview and role → Q&A. A conversation, maybe a design question.
+
+**Your positioning line:**
+> "With AI, juniors can produce a lot of code quickly. My job is making sure it's the **right** code: spec first, clear patterns, code reviews, and tests in CI. That way you set the direction, and I make sure the team delivers it well."
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 11. How would you guide junior developers who rely heavily on AI?
+
+*Leading the team*
+
+> "AI makes juniors fast, but not always right. I'd put a few guardrails in place:
+> 1. **Spec first:** with OpenSpec, they write the proposal and WHEN/THEN scenarios before the AI writes code, and I review the intent, which takes 10 minutes instead of reviewing 500 lines later.
+> 2. **A rules file** (AGENTS.md / CLAUDE.md) in the repo with our patterns, so the AI follows the team's conventions, not random ones.
+> 3. **Small PRs** with a review checklist: tests, error handling, security, idempotency, logging.
+> 4. **CI gates:** type checks, lint, unit tests, so obvious mistakes never reach review.
+> 5. **Pairing and "explain your code":** if they can't explain what the AI wrote, it doesn't merge. That's how they actually learn."
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 12. How would you take load off the architect?
+
+*Leading the team*
+
+> "I'd be the bridge between the architecture and the code. You set the direction and the big decisions; I turn that into **patterns, templates and stories** the team can build, **review the designs and PRs**, unblock people day to day, and only bring you the decisions that really need you, **with options and a recommendation** already worked out. Over time you spend less time in the weeds and more with the client."
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 13. Tell me about a time you mentored someone.
+
+*Leading the team*
+
+**STAR, use a real person (no names):**
+- **Situation:** a newer developer joined the integration team / struggled with a pattern (e.g. outbox, async handling, a stored procedure chain).
+- **Task:** get them productive without doing it for them.
+- **Action:** walked them through one integration end to end, paired on the first one, gave them the next one to lead with me reviewing, explained the *why* (why idempotency, why the outbox).
+- **Result:** they shipped the next integration mostly on their own and started reviewing others.
+
+**Fill in the real details before Friday.**
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 14. Tell me about a time you pushed back on a design or decision.
+
+*Leading the team*
+
+**Shape (use a real example):**
+> "There was a proposal to ___ (e.g. load a partial file / call a downstream system directly without a queue). I was concerned about ___ (lost data, partial financial data, coupling). I didn't just say no: I showed the risk with a concrete scenario and proposed ___ (all-or-nothing load / queue + outbox). We agreed on ___ and it ___."
+
+**Key message:** disagree with **data and options**, then **commit** to the team's decision.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 15. How do you run code reviews? What do you look for?
+
+*Leading the team*
+
+- **Does it do what the spec says?** (the scenarios)
+- **Correctness and edge cases:** nulls, empty lists, duplicates, time zones and date ranges.
+- **Failure handling:** retries, idempotency, timeouts, clear errors.
+- **Security:** no secrets, input validation, least privilege.
+- **Readability:** names, small functions, no dead code.
+- **Tests** for the important paths.
+
+> "I keep reviews kind and specific: suggest, explain why, and approve small PRs fast so the team isn't blocked."
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 16. How do you keep quality high when the team ships fast with AI?
+
+*Leading the team*
+
+> "Make the right way the easy way: **spec first**, a **repo rules file** for the AI, **templates** for common things (a Lambda handler, an API endpoint, a React data screen), **CI gates** (types, lint, tests), **small PRs**, and **monitoring** so we see problems in production quickly. Speed is fine as long as the guardrails are automatic."
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 17. The client changes requirements mid-sprint. What do you do?
+
+*Leading the team*
+
+> "First understand **why**: what changed for the business. Then show the **impact**: what moves, what's at risk, what it costs in time. Offer **options**: swap something out, split the work, or move it to next sprint. Let the product owner decide the trade-off, and **write it down** (in OpenSpec it's a new proposal), so everyone sees what changed and why."
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 18. How would you handle a junior whose AI-generated PR is wrong or messy?
+
+*Leading the team*
+
+> "I wouldn't just reject it. I'd sit with them for 15 minutes: ask them to walk me through it, find the issue together, and point to the pattern or spec they should follow. Then I'd add that lesson to the rules file or checklist, so the AI and the whole team avoid it next time. Fix the system, not just the PR."
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 19. What would you do in your first 30–60–90 days?
+
+*Leading the team*
+
+- **30 days:** learn the domain (how analysts rebalance today), the architecture and the codebase; ship a small change; meet the team and BMO stakeholders.
+- **60 days:** own a feature end to end; set up or tighten review checklists, templates and CI gates; start pairing with juniors.
+- **90 days:** be the go-to person for day-to-day technical decisions, so Mayukh only handles the big ones; propose 1–2 improvements (reliability, cost, dev speed).
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 20. How do you think about cost on AWS?
+
+*Leading the team*
+
+- **Lambda** is cheap for spiky, low-volume work; at steady high volume **containers** (ECS/Fargate) can be cheaper.
+- Right-size Lambda memory (CPU scales with it); avoid chatty calls; use **S3 lifecycle** rules for old files.
+- Tag resources per environment and team; set **budgets and alerts**.
+> "**The trade-off** is usually cost vs ops effort: serverless costs more per unit at scale but saves a lot of team time."
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 21. Who is interviewing me and what do they care about?
+
+*Deloitte & interviewer*
+
+**Mayukh Mukherjee:** senior solution architect at Deloitte with 19 years in banking (Manulife, TD, IBM). MuleSoft certified (**integration**), AWS AI Practitioner (**agentic AI**). Role: **Full Stack Developer for a BMO client**: React, AWS Lambda & ECS, Python, TypeScript, Node; system design + DevOps a bonus.
+
+**Expect big-picture questions:** design, trade-offs, integration, security, AI. Keep saying **"the trade-off is…"**.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 22. Quick intro for the architect (30 sec).
+
+*Deloitte & interviewer*
+
+> "I'm a full-stack developer with 10 years' experience: .NET, SQL, Azure, plus React, TypeScript, Node and Python. At Staples I'm on the **integration team**. Every system-to-system connection goes through us, and we build **event-driven microservices**. Before that, 3 years on a **financial reporting product** where every number had to be traceable. And I use **AI coding agents** every day."
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 23. Design it: the 5 boxes and 3 bank must-haves.
+
+*Deloitte & interviewer*
+
+**React UI → API Gateway + Lambda → Step Functions → Database → Events out (EventBridge/SQS)**
+
+Workflow: **validate → calculate weights → check rules → human approves → publish.** Long or heavy runs → **ECS Fargate**.
+
+**Bank must-haves:**
+- **Security:** least-privilege IAM, encryption (KMS), Secrets Manager, private VPC, data in Canada.
+- **Audit:** every rebalance versioned, who approved, CloudTrail.
+- **Reliability:** retries, idempotency, dead-letter queue, multi-AZ.
+
+**MuleSoft-style layers he will like:** system APIs (holdings, prices) → process APIs (rebalance logic) → experience APIs (what React needs).
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 24. Tell me about your integration work (Staples).
+
+*Stories (stack-neutral)*
+
+> "I'm on the integration team. We build **event-driven microservices**: receive an event, transform it, dispatch it, each step as a **small stateless service** that scales on its own, with queues between the steps, **idempotent** handling, an **outbox pattern** and **dead-letter handling**. That's exactly the shape of a **Lambda + SQS** design; on AWS each step would be a Lambda. Our services are in .NET, but the design doesn't depend on the language. I could build the same thing in **Node or Python**."
+
+**Say "on AWS this would be…", not "we used Lambda".**
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 25. Tell me about a hard problem you solved (Single Pool Inventory).
+
+*Stories (stack-neutral)*
+
+> "Different systems disagreed on stock: transport had 7, the warehouse had 6. We built **one central inventory service** that publishes changes as **events**, so every system reads the same number. For an ETF tool it's the same problem: **holdings and prices need one source of truth**, or the rebalance is wrong."
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 26. Tell me about your finance and front-end experience (Certent).
+
+*Stories (stack-neutral)*
+
+> "Three years on a **financial reporting product**: full stack, with a **TypeScript front end** talking to APIs over SQL. I worked on reports, calculations, and **tracing every number back to its source**. Moving to **React** is the same component and TypeScript thinking. And the finance lesson carries straight over: **accuracy and audit trails come first**."
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 27. Show me your Node and AI experience.
+
+*Stories (stack-neutral)*
+
+> "In my own time I built a **Node/Electron desktop app** that captures audio, transcribes it and calls **AI APIs** to answer in real time. I work **spec-first with AI coding agents** on it, keeping rules and plans in the repo, which is the OpenSpec idea."
+
+**React / Python:** "I've built React front ends with hooks and TypeScript for ___, and used Python for ___." (fill from your real projects)
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 28. You are mostly .NET. Why should we hire you for React + Lambda?
+
+*Stories (stack-neutral)*
+
+> "My production back end has been mostly .NET, yes. But what I bring is **how to design distributed, event-driven systems that don't lose data**, and that's the same on Lambda with Node or Python. I've worked across TypeScript, Node, React and Python, and I'm productive in them quickly."
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 29. How do you prove Lambda depth?
+
+*Stories (stack-neutral)*
+
+> "What matters in production is: **idempotent** handlers because SQS can deliver twice; a **dead-letter queue** for failures; clients created **outside the handler** to cut cold starts; **Step Functions** for multi-step flows; **ECS** when a job runs over 15 minutes."
+
+**If asked "production Lambda?":** "Most of my serverless and event-driven production work is on Azure with the same patterns: functions on events, queues, retries, DLQs. Moving to Lambda is changing service names, not learning a new way of thinking."
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 30. Three quick architect answers.
+
+*Stories (stack-neutral)*
+
+- **Lambda or ECS?** Lambda for short, event-driven work; ECS for long-running or heavy work.
+- **AI for analysts?** AI suggests, the human approves, everything is logged (Bedrock + guardrails).
+- **OpenSpec?** The team agrees the spec first, then the AI codes it. Every change is traceable, which is perfect for a bank.
+- **Ask him:** "Is this a new build for BMO or a modernisation of an existing tool?"
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## 31. Tell me about yourself.
 
 *Intro & fit*
 
@@ -16,7 +349,7 @@
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 2. What is your experience with React, Node, Python and TypeScript?
+## 32. What is your experience with React, Node, Python and TypeScript?
 
 *Intro & fit*
 
@@ -32,7 +365,7 @@
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 3. Why do you want this role?
+## 33. Why do you want this role?
 
 *Intro & fit*
 
@@ -40,7 +373,7 @@
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 4. AWS vs Azure: map the services you know.
+## 34. AWS vs Azure: map the services you know.
 
 *Intro & fit*
 
@@ -63,7 +396,7 @@
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 5. What do you think our team builds day to day?
+## 35. What do you think our team builds day to day?
 
 *What the team does*
 
@@ -81,7 +414,7 @@
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 6. What is React and how does rendering work?
+## 36. What is React and how does rendering work?
 
 *React*
 
@@ -92,7 +425,7 @@
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 7. Props vs state?
+## 37. Props vs state?
 
 *React*
 
@@ -109,7 +442,7 @@ function FundRow({ fund, onSelect }: { fund: Fund; onSelect: (id: string) => voi
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 8. Explain React hooks: useState, useEffect, useMemo, useCallback, useRef.
+## 38. Explain React hooks: useState, useEffect, useMemo, useCallback, useRef.
 
 *React*
 
@@ -123,7 +456,7 @@ function FundRow({ fund, onSelect }: { fund: Fund; onSelect: (id: string) => voi
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 9. How do you fetch data in React? Show loading and error handling.
+## 39. How do you fetch data in React? Show loading and error handling.
 
 *React*
 
@@ -154,7 +487,7 @@ function Holdings({ fundId }: { fundId: string }) {
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 10. useEffect: common mistakes?
+## 40. useEffect: common mistakes?
 
 *React*
 
@@ -166,7 +499,7 @@ function Holdings({ fundId }: { fundId: string }) {
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 11. Why do lists need keys?
+## 41. Why do lists need keys?
 
 *React*
 
@@ -175,7 +508,7 @@ function Holdings({ fundId }: { fundId: string }) {
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 12. Controlled vs uncontrolled components (forms)?
+## 42. Controlled vs uncontrolled components (forms)?
 
 *React*
 
@@ -190,7 +523,7 @@ const [weight, setWeight] = useState('');
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 13. How do you share state across components? Context vs Redux vs React Query.
+## 43. How do you share state across components? Context vs Redux vs React Query.
 
 *React*
 
@@ -203,7 +536,7 @@ const [weight, setWeight] = useState('');
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 14. How do you make a React app fast? (e.g. a big holdings table)
+## 44. How do you make a React app fast? (e.g. a big holdings table)
 
 *React*
 
@@ -216,7 +549,7 @@ const [weight, setWeight] = useState('');
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 15. What are custom hooks? Give an example.
+## 45. What are custom hooks? Give an example.
 
 *React*
 
@@ -236,7 +569,7 @@ const fund = useFund('ZSP');
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 16. What is an error boundary?
+## 46. What is an error boundary?
 
 *React*
 
@@ -246,7 +579,7 @@ const fund = useFund('ZSP');
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 17. How do you test React components?
+## 47. How do you test React components?
 
 *React*
 
@@ -262,7 +595,7 @@ expect(onSelect).toHaveBeenCalledWith('ZSP');
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 18. React vs Angular: you have used both?
+## 48. React vs Angular: you have used both?
 
 *React*
 
@@ -270,7 +603,7 @@ expect(onSelect).toHaveBeenCalledWith('ZSP');
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 19. TypeScript basics: interface vs type, generics, any vs unknown.
+## 49. TypeScript basics: interface vs type, generics, any vs unknown.
 
 *TypeScript*
 
@@ -282,7 +615,7 @@ expect(onSelect).toHaveBeenCalledWith('ZSP');
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 20. TypeScript utility types?
+## 50. TypeScript utility types?
 
 *TypeScript*
 
@@ -300,7 +633,7 @@ const targets: Record<string, number> = { AAPL: 0.05, MSFT: 0.04 };
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 21. What is Node.js and how does the event loop work?
+## 51. What is Node.js and how does the event loop work?
 
 *Node.js*
 
@@ -313,7 +646,7 @@ const targets: Record<string, number> = { AAPL: 0.05, MSFT: 0.04 };
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 22. Promises and async/await in Node: error handling and running in parallel?
+## 52. Promises and async/await in Node: error handling and running in parallel?
 
 *Node.js*
 
@@ -334,7 +667,7 @@ async function loadFund(id: string) {
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 23. Build a simple REST API in Node (Express). What is middleware?
+## 53. Build a simple REST API in Node (Express). What is middleware?
 
 *Node.js*
 
@@ -359,7 +692,7 @@ app.listen(3000);
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 24. Node basics: npm, package.json, CommonJS vs ES modules, env config.
+## 54. Node basics: npm, package.json, CommonJS vs ES modules, env config.
 
 *Node.js*
 
@@ -370,7 +703,7 @@ app.listen(3000);
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 25. Python basics: data structures and comprehensions.
+## 55. Python basics: data structures and comprehensions.
 
 *Python*
 
@@ -386,7 +719,7 @@ big = [t for t, w in weights.items() if w > 0.05]
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 26. Write a Python Lambda handler.
+## 56. Write a Python Lambda handler.
 
 *Python*
 
@@ -409,7 +742,7 @@ def handler(event, context):
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 27. Why Python for portfolio calculations? What is pandas?
+## 57. Why Python for portfolio calculations? What is pandas?
 
 *Python*
 
@@ -427,7 +760,7 @@ sector = df.groupby('sector')['weight'].sum()
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 28. What is AWS Lambda and when would you use it?
+## 58. What is AWS Lambda and when would you use it?
 
 *AWS Lambda*
 
@@ -441,7 +774,7 @@ sector = df.groupby('sector')['weight'].sum()
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 29. Write a Lambda handler in TypeScript/Node behind API Gateway.
+## 59. Write a Lambda handler in TypeScript/Node behind API Gateway.
 
 *AWS Lambda*
 
@@ -463,7 +796,7 @@ export const handler: APIGatewayProxyHandler = async (event) => {
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 30. What are Lambda cold starts and how do you reduce them?
+## 60. What are Lambda cold starts and how do you reduce them?
 
 *AWS Lambda*
 
@@ -476,7 +809,7 @@ export const handler: APIGatewayProxyHandler = async (event) => {
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 31. How do you make a Lambda reliable when processing SQS messages?
+## 61. How do you make a Lambda reliable when processing SQS messages?
 
 *AWS Lambda*
 
@@ -490,7 +823,7 @@ export const handler: APIGatewayProxyHandler = async (event) => {
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 32. What is Step Functions and when would you use it with Lambda?
+## 62. What is Step Functions and when would you use it with Lambda?
 
 *AWS Lambda*
 
@@ -501,7 +834,7 @@ export const handler: APIGatewayProxyHandler = async (event) => {
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 33. How do you deploy and configure Lambdas? (IaC, CI/CD, secrets)
+## 63. How do you deploy and configure Lambdas? (IaC, CI/CD, secrets)
 
 *AWS Lambda*
 
@@ -512,7 +845,7 @@ export const handler: APIGatewayProxyHandler = async (event) => {
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 34. Lambda vs containers: how do you choose?
+## 64. Lambda vs containers: how do you choose?
 
 *AWS Lambda*
 
@@ -523,7 +856,7 @@ export const handler: APIGatewayProxyHandler = async (event) => {
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 35. What is an ETF and what does rebalancing mean?
+## 65. What is an ETF and what does rebalancing mean?
 
 *ETF & portfolio*
 
@@ -535,7 +868,7 @@ export const handler: APIGatewayProxyHandler = async (event) => {
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 36. Portfolio / ETF glossary.
+## 66. Portfolio / ETF glossary.
 
 *ETF & portfolio*
 
@@ -551,7 +884,7 @@ export const handler: APIGatewayProxyHandler = async (event) => {
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 37. Walk me through a rebalance calculation with numbers.
+## 67. Walk me through a rebalance calculation with numbers.
 
 *ETF & portfolio*
 
@@ -579,7 +912,7 @@ const trades = holdings.map(h => {
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 38. Design a tool for analysts to rebalance an ETF based on stock evaluations.
+## 68. Design a tool for analysts to rebalance an ETF based on stock evaluations.
 
 *ETF & portfolio*
 
@@ -603,7 +936,7 @@ const trades = holdings.map(h => {
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 39. How would you make sure portfolio calculations are correct?
+## 69. How would you make sure portfolio calculations are correct?
 
 *ETF & portfolio*
 
@@ -615,7 +948,7 @@ const trades = holdings.map(h => {
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 40. What is OpenSpec?
+## 70. What is OpenSpec?
 
 *OpenSpec & AI*
 
@@ -629,7 +962,7 @@ const trades = holdings.map(h => {
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 41. Walk me through the OpenSpec workflow.
+## 71. Walk me through the OpenSpec workflow.
 
 *OpenSpec & AI*
 
@@ -648,7 +981,7 @@ const trades = holdings.map(h => {
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 42. What does an OpenSpec spec look like?
+## 72. What does an OpenSpec spec look like?
 
 *OpenSpec & AI*
 
@@ -673,7 +1006,7 @@ The system SHALL only propose a trade when a holding's drift exceeds the fund's 
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 43. OpenSpec vs just prompting an AI, or other tools like Spec Kit and Kiro?
+## 73. OpenSpec vs just prompting an AI, or other tools like Spec Kit and Kiro?
 
 *OpenSpec & AI*
 
@@ -685,7 +1018,7 @@ The system SHALL only propose a trade when a holding's drift exceeds the fund's 
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 44. How do you use AI coding tools safely in a team?
+## 74. How do you use AI coding tools safely in a team?
 
 *OpenSpec & AI*
 
@@ -697,7 +1030,7 @@ The system SHALL only propose a trade when a holding's drift exceeds the fund's 
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 45. Tell me about a time you learned a new technology quickly.
+## 75. Tell me about a time you learned a new technology quickly.
 
 *Behavioural*
 
@@ -710,7 +1043,7 @@ The system SHALL only propose a trade when a holding's drift exceeds the fund's 
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 46. Tell me about a time two systems or teams disagreed on data.
+## 76. Tell me about a time two systems or teams disagreed on data.
 
 *Behavioural*
 
@@ -721,7 +1054,7 @@ The system SHALL only propose a trade when a holding's drift exceeds the fund's 
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## 47. What questions do you have for us?
+## 77. What questions do you have for us?
 
 *Behavioural*
 
